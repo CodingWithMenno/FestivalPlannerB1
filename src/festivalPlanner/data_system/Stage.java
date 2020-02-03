@@ -1,7 +1,5 @@
 package festivalPlanner.data_system;
 
-import festivalPlanner.gui.gui_controllers.StageViewController;
-
 public class Stage {
 
     private String name;
@@ -11,5 +9,5 @@ public class Stage {
     private int emergencyExits;
     private int firstAidKits;
 
-    private StageViewController stageViewController;
+
 }
