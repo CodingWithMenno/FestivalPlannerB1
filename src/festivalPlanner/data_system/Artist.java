@@ -16,14 +16,12 @@ public class Artist {
         this.description = description;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
-        return "Artist{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", genre='" + genre + '\'' +
-                ", profilePhoto=" + profilePhoto +
-                ", description='" + description + '\'' +
-                '}';
+        return this.name;
     }
 }
