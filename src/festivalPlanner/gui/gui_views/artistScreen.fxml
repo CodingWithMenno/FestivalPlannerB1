@@ -32,17 +32,17 @@
          </font>
       </Label>
       <TextArea fx:id="ArtistInfo" layoutX="150.0" layoutY="215.0" prefHeight="146.0" prefWidth="187.0" />
-      <Button fx:id="ArtistClearButton" layoutX="35.0" layoutY="393.0" mnemonicParsing="false" opacity="0.78" prefHeight="41.0" prefWidth="93.0" style="-fx-background-color: #505050; -fx-background-radius: 50;" text="Clear" textFill="WHITE">
+      <Button fx:id="ArtistClearButton" layoutX="35.0" layoutY="393.0" mnemonicParsing="false" onAction="#clearButton" opacity="0.78" prefHeight="41.0" prefWidth="93.0" style="-fx-background-color: #505050; -fx-background-radius: 50;" text="Clear" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="ArtistAddButton" layoutX="140.0" layoutY="393.0" mnemonicParsing="false" onAction="#klasse" opacity="0.78" prefHeight="41.0" prefWidth="93.0" style="-fx-background-color: #505050; -fx-background-radius: 50;" text="Add" textFill="WHITE">
+      <Button fx:id="ArtistAddButton" layoutX="140.0" layoutY="393.0" mnemonicParsing="false" onAction="#addButton" opacity="0.78" prefHeight="41.0" prefWidth="93.0" style="-fx-background-color: #505050; -fx-background-radius: 50;" text="Add" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="ArtistDeleteButton" layoutX="244.0" layoutY="393.0" mnemonicParsing="false" opacity="0.78" prefHeight="41.0" prefWidth="93.0" style="-fx-background-color: #505050; -fx-background-radius: 50;" text="Delete" textFill="WHITE">
+      <Button fx:id="ArtistDeleteButton" layoutX="244.0" layoutY="393.0" mnemonicParsing="false" onAction="#deleteButton" opacity="0.78" prefHeight="41.0" prefWidth="93.0" style="-fx-background-color: #505050; -fx-background-radius: 50;" text="Delete" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
