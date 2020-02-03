@@ -11,7 +11,7 @@
 
    <ImageView fitHeight="800.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="@Sources/BackgroundNew.png" />
+         <Image url="@../../../Sources/BackgroundNew.png" />
       </image>
    </ImageView>
    <AnchorPane layoutY="31.0" opacity="0.75" prefHeight="71.0" prefWidth="1280.0" style="-fx-background-color: #501A5D;">

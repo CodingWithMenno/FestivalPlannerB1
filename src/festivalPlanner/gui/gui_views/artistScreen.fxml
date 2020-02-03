@@ -56,7 +56,7 @@
       </Button>
       <ImageView fitHeight="90.0" fitWidth="104.0" layoutX="432.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Sources/avatar.png" />
+            <Image url="@../../../Sources/avatar.png" />
          </image>
       </ImageView>
       <ListView fx:id="ArtistListView" layoutX="586.0" layoutY="104.0" prefHeight="325.0" prefWidth="200.0" />
