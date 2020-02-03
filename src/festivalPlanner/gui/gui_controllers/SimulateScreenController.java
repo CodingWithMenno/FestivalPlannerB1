@@ -1,4 +1,4 @@
 package festivalPlanner.gui.gui_controllers;
 
-public class simulateScreenController {
+public class SimulateScreenController {
 }

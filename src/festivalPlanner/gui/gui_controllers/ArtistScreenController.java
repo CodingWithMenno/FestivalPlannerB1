@@ -3,7 +3,7 @@ package festivalPlanner.gui.gui_controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class artistScreenController {
+public class ArtistScreenController {
     @FXML
     private TextField ArtistName;
 

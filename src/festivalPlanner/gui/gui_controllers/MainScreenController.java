@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class mainScreenController implements Initializable {
+public class MainScreenController implements Initializable {
 
 
     @FXML
