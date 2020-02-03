@@ -3,49 +3,43 @@ package festivalplanner_guiModules.buttons;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 
-/**
- * Festival Planner start simulation button.
- */
-public class FPSimulateButton extends Button implements FPButtons{
+public class FPButton extends Button implements FPButtons {
 
-    public FPSimulateButton() {
+    public FPButton(String buttonText, int Width, int Height) {
 
-        setText("Simulate");
+        setText(buttonText);
 
         defaultStyle();
 
-        setPrefSize(115,45);
-
         //Set Fixed Button Size boundaries
-        setMinSize(115,45);
-        setPrefSize(115,45);
-        setMaxSize(115,45);
+        setMinSize(Width,Height);
+        setPrefSize(Width,Height);
+        setMaxSize(Width,Height);
 
         setOnMousePressed(e -> actionStyle());
         setOnMouseReleased(e -> defaultStyle());
 
         setAlignment(Pos.CENTER);
-
     }
 
     @Override
-    public void actionStyle(){
+    public void actionStyle() {
 
-        setStyle("-fx-background-color: white; " +
-                "-fx-text-fill: #B76F88; " +
+        setStyle("-fx-background-color: #35477D; " +
+                "-fx-text-fill: White; " +
                 "-fx-background-radius: 50; " +
                 "-fx-font-size: 15; " +
                 "-fx-font-family: Helvetica");
     }
 
     @Override
-    public void defaultStyle(){
+    public void defaultStyle() {
 
-        setStyle("-fx-background-color: #B76F88; " +
-                "-fx-text-fill: white; " +
+        setStyle("-fx-background-color: #F0F0F0; " +
+                "-fx-text-fill: #35477D; " +
                 "-fx-background-radius: 50; " +
                 "-fx-font-size: 15; " +
                 "-fx-font-family: Helvetica");
-    }
 
+    }
 }

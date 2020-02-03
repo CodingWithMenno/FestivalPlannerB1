@@ -2,6 +2,7 @@ package festivalplanner_guiModules.buttons;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 
 /**
@@ -23,6 +24,8 @@ public class FPLoginButton extends Button implements FPButtons {
         setOnMousePressed(e -> actionStyle());
         setOnMouseReleased(e -> defaultStyle());
 
+        setAlignment(Pos.CENTER);
+
     }
 
 
@@ -33,7 +36,7 @@ public class FPLoginButton extends Button implements FPButtons {
                 "-fx-text-fill: #B76F88; " +
                 "-fx-background-radius: 50; " +
                 "-fx-font-size: 18; " +
-                "-fx-font-family: trebuchet");
+                "-fx-font-family: Helvetica");
 
     }
 
@@ -44,7 +47,7 @@ public class FPLoginButton extends Button implements FPButtons {
                 "-fx-text-fill: white; " +
                 "-fx-background-radius: 50; " +
                 "-fx-font-size: 18; " +
-                "-fx-font-family: trebuchet");
+                "-fx-font-family: Helvetica");
 
     }
 

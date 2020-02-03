@@ -25,7 +25,7 @@ public class FPUsernameField extends TextField implements FPInputFields {
                 "-fx-text-fill: #B76F88; " +
                 "-fx-background-radius: 50; " +
                 "-fx-font-size: 15; " +
-                "-fx-font-family: trebuchet;");
+                "-fx-font-family: Helvetica;");
     }
 
     @Override
