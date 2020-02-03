@@ -39,6 +39,9 @@ public class ArtistScreenController {
     public void addButton(){
         Artist artist = new Artist(this.ArtistName.getText(), this.ArtistGenre.getText(), this.ArtistInfo.getText());
         this.artists.add(artist);
+        this.ArtistGenre.clear();
+        this.ArtistName.clear();
+        this.ArtistInfo.clear();
     }
 
     public void clearButton(){
