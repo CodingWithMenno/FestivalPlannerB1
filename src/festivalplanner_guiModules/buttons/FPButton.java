@@ -20,6 +20,7 @@ public class FPButton extends Button implements FPButtons {
         setOnMouseReleased(e -> defaultStyle());
 
         setAlignment(Pos.CENTER);
+
     }
 
     @Override
@@ -35,7 +36,7 @@ public class FPButton extends Button implements FPButtons {
     @Override
     public void defaultStyle() {
 
-        setStyle("-fx-background-color: #F0F0F0; " +
+        setStyle("-fx-background-color: #EEEEEE; " +
                 "-fx-text-fill: #35477D; " +
                 "-fx-background-radius: 50; " +
                 "-fx-font-size: 15; " +

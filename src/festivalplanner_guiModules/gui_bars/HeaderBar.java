@@ -15,7 +15,7 @@ public class HeaderBar extends HBox {
         setPrefSize(1280, 40);
         setMaxSize(1280, 40);
 
-        setStyle("-fx-background-color: #F0F0F0;" );
+        setStyle("-fx-background-color: #EEEEEE;" );
 
         getChildren().addAll(logoAndDivision(), festivalName(festivalName));
 

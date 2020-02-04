@@ -2,6 +2,7 @@ package festivalplanner_guiModules.gui_bars;
 
 import festivalplanner_guiModules.buttons.FPButton;
 import festivalplanner_guiModules.buttons.FPSimulateButton;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
@@ -22,6 +23,8 @@ public class ControllerBar extends HBox {
         HBox rightSideContainer = new HBox();
 
         rightSideContainer.setAlignment(Pos.CENTER_RIGHT);
+        rightSideContainer.setSpacing(20);
+        rightSideContainer.setPadding(new Insets(0,30,0,0));
 
         rightSideContainer.setPrefSize(640, 70);
         rightSideContainer.setMinSize(640, 70);
@@ -40,6 +43,8 @@ public class ControllerBar extends HBox {
         HBox leftSideContainer = new HBox();
 
         leftSideContainer.setAlignment(Pos.CENTER_LEFT);
+        leftSideContainer.setSpacing(20);
+        leftSideContainer.setPadding(new Insets(0,0,0,30));
 
         leftSideContainer.setPrefSize(640, 70);
         leftSideContainer.setMinSize(640, 70);
