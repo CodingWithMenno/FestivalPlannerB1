@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import planner_viewer.CanvasDrawer;
+import planner_viewer.TimeLineView;
 
 public class Main extends Application {
 
@@ -22,13 +23,13 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        primaryStage.setHeight(800);
+        //primaryStage.setHeight(800);
         primaryStage.setWidth(1280);
         primaryStage.setResizable(false);
         primaryStage.setTitle("test_page");
 
         VBox blah = new VBox();
-        blah.getChildren().addAll(new HeaderBar("Woohah! Festival"), new ControllerBar(), new CanvasDrawer());
+        blah.getChildren().addAll(new HeaderBar("Woohah! Festival"), new ControllerBar(), new TimeLineView());
 
         Scene testView = new Scene(blah);
 
