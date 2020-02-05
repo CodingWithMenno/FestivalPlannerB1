@@ -10,18 +10,41 @@ public class DatabaseConnection {
 
     private Connection databaseConnection;
 
+    private Boolean connectionStatus;
+
+    private String activeUser;
+
     public DatabaseConnection() throws SQLException {
 
         try {
             this.databaseConnection = DriverManager.getConnection(this.databaseAddress, this.databaseUsername, this.databasePassword);
-
+            this.connectionStatus = true;
         } catch (SQLException e){
+            this.connectionStatus = false;
             printSQLException(e);
         }
 
     }
 
-    public boolean validateUser(String username, String password) throws SQLException{
+    public ResultSet updateStageTable() throws SQLException {
+
+        return null;
+    }
+
+    public String fetchUserOrganization() throws SQLException {
+
+        PreparedStatement userOrganization = this.databaseConnection.prepareStatement("SELECT Organization FROM user WHERE username = ?");
+        userOrganization.setString(1, this.activeUser);
+
+        ResultSet databaseReply = userOrganization.executeQuery();
+        databaseReply.next();
+
+        return databaseReply.getString("Organization");
+    }
+
+    public boolean validateUser(String username, String password) throws SQLException {
+
+        this.activeUser = username;
 
         PreparedStatement userValidationQuery = this.databaseConnection.prepareStatement("SELECT * FROM user WHERE username = ? and password = ?");
         userValidationQuery.setString(1, username);
@@ -33,7 +56,10 @@ public class DatabaseConnection {
 
     }
 
-    
+    public boolean connectionStatus(){
+        return this.connectionStatus;
+    }
+
 
     private static void printSQLException(SQLException ex) {
         for (Throwable e: ex) {

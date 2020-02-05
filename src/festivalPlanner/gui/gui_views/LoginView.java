@@ -19,6 +19,8 @@ import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
 
+import java.sql.SQLException;
+
 public class LoginView extends StackPane {
 
     private SceneHandler sceneHandler;
@@ -78,7 +80,7 @@ public class LoginView extends StackPane {
         return linearGradientFill;
     }
 
-    public void loginSuccessful(){
+    public void loginSuccessful() throws SQLException {
         this.sceneHandler.loginSuccessful(this.sceneHandler);
     }
 }

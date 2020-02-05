@@ -4,6 +4,8 @@ import festivalPlanner.data_system.DatabaseConnection;
 import festivalPlanner.gui.gui_views.MainView;
 import javafx.scene.Parent;
 
+import java.sql.SQLException;
+
 public class SceneHandler {
 
     private SceneManager sceneManager;
@@ -18,7 +20,7 @@ public class SceneHandler {
         this.sceneManager.setStageScene(sceneParent);
     }
 
-    public void loginSuccessful(SceneHandler sceneHandler){
+    public void loginSuccessful(SceneHandler sceneHandler) throws SQLException {
         this.sceneManager.setStageScene(new MainView(sceneHandler, this.databaseConnection));
     }
 }

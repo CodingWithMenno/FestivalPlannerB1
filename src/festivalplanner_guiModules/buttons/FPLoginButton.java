@@ -34,6 +34,12 @@ public class FPLoginButton extends Button implements FPButtons {
 
         setAlignment(Pos.CENTER);
 
+        if(!databaseConnection.connectionStatus()){
+            setDisable(true);
+            username.setDisable(true);
+            password.setDisable(true);
+        }
+
         setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

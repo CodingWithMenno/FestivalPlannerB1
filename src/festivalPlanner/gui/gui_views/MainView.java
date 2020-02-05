@@ -8,6 +8,8 @@ import festivalplanner_guiModules.gui_bars.HeaderBar;
 import javafx.scene.layout.VBox;
 import planner_viewer.TimeLineView;
 
+import java.sql.SQLException;
+
 public class MainView extends VBox {
 
     private ArtistView artistView;
@@ -20,9 +22,9 @@ public class MainView extends VBox {
     private TimeLineView timeLineView;
     private SceneHandler scenehandler;
 
-    public MainView(SceneHandler sceneHandler, DatabaseConnection databaseConnection) {
+    public MainView(SceneHandler sceneHandler, DatabaseConnection databaseConnection) throws SQLException {
 
-        this.headerBar = new HeaderBar("");
+        this.headerBar = new HeaderBar(databaseConnection.fetchUserOrganization());
         this.controllerBar = new ControllerBar();
         this.timeLineView = new TimeLineView();
 
