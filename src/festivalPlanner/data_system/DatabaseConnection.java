@@ -4,6 +4,18 @@ import java.sql.*;
 
 public class DatabaseConnection {
 
+    private String databaseAddress = "jdbc:mysql://167.71.130.2:3306/festplanner_users";
+    private String databaseUsername = "ApplicationAccess";
+    private String databasePassword = "4ed6a481f14b4b9c98b05959e3d29782";
+
+    private Connection databaseConnection;
+
+    public DatabaseConnection() throws SQLException {
+
+        this.databaseConnection = DriverManager.getConnection(databaseAddress, databaseUsername, databasePassword);
+
+    }
+
     public boolean establishConnection(String username, String password) throws SQLException {
 
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://167.71.130.2:3306/festplanner_users", "grant", "7cQ4fpxVM")){
