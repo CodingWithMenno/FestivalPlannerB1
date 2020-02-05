@@ -1,5 +1,6 @@
 package festivalPlanner.gui.gui_views;
 
+import festivalPlanner.data_system.DatabaseConnection;
 import festivalPlanner.gui.SceneHandler;
 import festivalplanner_guiModules.buttons.FPLoginButton;
 import festivalplanner_guiModules.inputfields.FPPasswordField;
@@ -22,7 +23,7 @@ public class LoginView extends StackPane {
 
     private SceneHandler sceneHandler;
 
-    public LoginView(SceneHandler sceneHandler) {
+    public LoginView(SceneHandler sceneHandler, DatabaseConnection databaseConnection) {
 
         this.sceneHandler = sceneHandler;
 
@@ -58,7 +59,7 @@ public class LoginView extends StackPane {
         FPUsernameField username = new FPUsernameField();
         FPPasswordField password = new FPPasswordField();
 
-        FPLoginButton loginButton = new FPLoginButton(this, username, password);
+        FPLoginButton loginButton = new FPLoginButton(this, username, password, databaseConnection);
 
         loginFields.getChildren().addAll(logo, signinText, username, password, loginButton);
 
@@ -71,7 +72,7 @@ public class LoginView extends StackPane {
 
         Rectangle linearGradientFill = new Rectangle(0,0,1280,800);
 
-        Stop[] stops = new Stop[] { new Stop(0, Color.rgb(246,114,128, 0.2)), new Stop(1, Color.rgb(53,71,125))};
+        Stop[] stops = new Stop[] { new Stop(0, Color.rgb(246,114,128, 0.4)), new Stop(1, Color.rgb(53,71,125))};
         linearGradientFill.setFill( new LinearGradient(0, 640, 920, 640, false, CycleMethod.NO_CYCLE, stops));
 
         return linearGradientFill;

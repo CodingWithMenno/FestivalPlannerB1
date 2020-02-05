@@ -1,12 +1,11 @@
 package festivalPlanner.gui;
 
+import festivalPlanner.data_system.DatabaseConnection;
 import festivalPlanner.gui.gui_views.LoginView;
-import festivalPlanner.gui.gui_views.MainView;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import planner_viewer.TimeLineView;
 
 public class SceneManager extends Application {
 
@@ -15,8 +14,9 @@ public class SceneManager extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        SceneHandler sceneHandler = new SceneHandler(this);
-        LoginView loginView = new LoginView(sceneHandler);
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        SceneHandler sceneHandler = new SceneHandler(this, databaseConnection);
+        LoginView loginView = new LoginView(sceneHandler, databaseConnection);
 
         this.stage = primaryStage;
 
@@ -26,11 +26,6 @@ public class SceneManager extends Application {
 
         this.stage.setScene(new Scene(loginView));
         this.stage.show();
-    }
-
-
-    public void loginSuccesful(){
-        this.stage.setScene(new Scene(new TimeLineView()));
     }
 
     public void setStageScene(Parent sceneParent){

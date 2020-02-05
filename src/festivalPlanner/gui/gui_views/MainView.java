@@ -1,7 +1,7 @@
 package festivalPlanner.gui.gui_views;
 
+import festivalPlanner.data_system.DatabaseConnection;
 import festivalPlanner.gui.SceneHandler;
-import festivalPlanner.gui.SceneManager;
 import festivalPlanner.gui.gui_controllers.MainViewController;
 import festivalplanner_guiModules.gui_bars.ControllerBar;
 import festivalplanner_guiModules.gui_bars.HeaderBar;
@@ -20,7 +20,7 @@ public class MainView extends VBox {
     private TimeLineView timeLineView;
     private SceneHandler scenehandler;
 
-    public MainView(SceneHandler sceneHandler) {
+    public MainView(SceneHandler sceneHandler, DatabaseConnection databaseConnection) {
 
         this.headerBar = new HeaderBar("");
         this.controllerBar = new ControllerBar();

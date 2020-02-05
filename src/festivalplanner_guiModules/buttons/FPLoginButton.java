@@ -18,7 +18,7 @@ import java.sql.SQLException;
  */
 public class FPLoginButton extends Button implements FPButtons {
 
-    public FPLoginButton(LoginView parent, FPUsernameField username, FPPasswordField password) {
+    public FPLoginButton(LoginView parent, FPUsernameField username, FPPasswordField password, DatabaseConnection databaseConnection) {
 
         setText("Login");
 
@@ -39,9 +39,8 @@ public class FPLoginButton extends Button implements FPButtons {
             public void handle(ActionEvent event) {
                 System.out.println("login tried");
 
-                DatabaseConnection loginHandle = new DatabaseConnection();
                 try {
-                    if(loginHandle.establishConnection(username.getText(), password.getText())){
+                    if(databaseConnection.validateUser(username.getText(), password.getText())){
                         System.out.println("Success");
 
                         parent.loginSuccessful();

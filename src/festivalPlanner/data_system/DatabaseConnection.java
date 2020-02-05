@@ -12,36 +12,30 @@ public class DatabaseConnection {
 
     public DatabaseConnection() throws SQLException {
 
-        this.databaseConnection = DriverManager.getConnection(databaseAddress, databaseUsername, databasePassword);
+        try {
+            this.databaseConnection = DriverManager.getConnection(this.databaseAddress, this.databaseUsername, this.databasePassword);
 
-    }
-
-    public boolean establishConnection(String username, String password) throws SQLException {
-
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://167.71.130.2:3306/festplanner_users", "grant", "7cQ4fpxVM")){
-
-            System.out.println("Hoi");
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM user WHERE username = ? and password = ?");
-            preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
-
-            System.out.println(preparedStatement);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return true;
-            }
-
-
-        } catch (SQLException e) {
-            // print SQL exception information
+        } catch (SQLException e){
             printSQLException(e);
         }
-        return false;
 
     }
 
-    public static void printSQLException(SQLException ex) {
+    public boolean validateUser(String username, String password) throws SQLException{
+
+        PreparedStatement userValidationQuery = this.databaseConnection.prepareStatement("SELECT * FROM user WHERE username = ? and password = ?");
+        userValidationQuery.setString(1, username);
+        userValidationQuery.setString(2, password);
+
+        ResultSet databaseValidationReply = userValidationQuery.executeQuery();
+
+        return databaseValidationReply.next();
+
+    }
+
+    
+
+    private static void printSQLException(SQLException ex) {
         for (Throwable e: ex) {
             if (e instanceof SQLException) {
                 e.printStackTrace(System.err);
