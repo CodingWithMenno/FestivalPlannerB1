@@ -1,11 +1,10 @@
 package planner_viewer;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
@@ -29,28 +28,33 @@ public class TimeLineView extends StackPane {
         sliderContainer.setStyle("-fx-background-color: blue");
 
         sliderContainer.setAlignment(Pos.TOP_CENTER);
-        sliderContainer.getChildren().addAll(new CanvasDrawer(),makeHboxWithTimeNumber() );
+        sliderContainer.getChildren().addAll(new CanvasDrawer(),makeTimeSeparator() );
 
 
         return sliderContainer;
     }
 
-    public HBox makeHboxWithTimeNumber(){
-        HBox hBox = new HBox();
-        hBox.setLayoutX(50);
-        hBox.setTranslateX(50);
-        hBox.setLayoutY(4);
-        hBox.setTranslateY(4);
-        hBox.setMaxSize(2760,30);
-        hBox.setMinSize(2760,30);
-        hBox.setSpacing(98);
+    private Node makeTimeSeparator(){
+        GridPane timeSeparator = new GridPane();
+//        hBox.setLayoutX(50);
+//        hBox.setTranslateX(50);
+//        hBox.setLayoutY(4);
+//        hBox.setTranslateY(4);
+        timeSeparator.setMaxSize(2760,30);
+        timeSeparator.setMinSize(2760,30);
+
+        timeSeparator.setPadding(new Insets(5,0,0,0));
 
         for(int i = 0; i<10;i++){
             Label label = new Label("0"+i);
             label.setFont(Font.font(15));
             label.setAlignment(Pos.CENTER);
             label.setTextFill(Color.WHITE);
-            hBox.getChildren().add(label);
+            label.setPadding(new Insets(0,0,0,49));
+
+            timeSeparator.addColumn(i,label);
+            timeSeparator.getColumnConstraints().add(new ColumnConstraints(115));
+            //timeSeparator.getChildren().add(label);
 
         }
         for(int i = 10; i<24;i++){
@@ -58,10 +62,13 @@ public class TimeLineView extends StackPane {
             label.setFont(Font.font(15));
             label.setAlignment(Pos.CENTER);
             label.setTextFill(Color.WHITE);
-            hBox.getChildren().add(label);
+
+            timeSeparator.addColumn(i,label);
+            timeSeparator.getColumnConstraints().add(new ColumnConstraints(115));
+            label.setPadding(new Insets(0,0,0,49));
         }
 
-        return hBox;
+        return timeSeparator;
     }
 
 
