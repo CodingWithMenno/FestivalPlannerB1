@@ -1,30 +1,63 @@
 package festivalplanner_guiModules.buttons;
 
+import festivalPlanner.data_system.DatabaseConnection;
+import festivalPlanner.gui.gui_views.LoginView;
+import festivalplanner_guiModules.inputfields.FPPasswordField;
+import festivalplanner_guiModules.inputfields.FPUsernameField;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
+
+import java.sql.SQLException;
 
 /**
  *  Festival Planner login button.
  */
 public class FPLoginButton extends Button implements FPButtons {
 
-    public FPLoginButton() {
+    public FPLoginButton(LoginView parent, FPUsernameField username, FPPasswordField password) {
 
         setText("Login");
 
         defaultStyle();
 
         //Set Fixed Button Size boundaries
-        setMinSize(306,48);
-        setPrefSize(306,48);
-        setMaxSize(306,48);
+        setMinSize(110,48);
+        setPrefSize(110,48);
+        setMaxSize(110,48);
 
         setOnMousePressed(e -> actionStyle());
         setOnMouseReleased(e -> defaultStyle());
 
         setAlignment(Pos.CENTER);
+
+        setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("login tried");
+
+                DatabaseConnection loginHandle = new DatabaseConnection();
+                try {
+                    if(loginHandle.establishConnection(username.getText(), password.getText())){
+                        System.out.println("Success");
+
+                        parent.loginSuccessful();
+                    }
+
+                    else{
+                        System.out.println("Failed");
+                        username.invalidInputStyle();
+                        password.invalidInputStyle();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
 
     }
 

@@ -1,4 +1,4 @@
-package planner_viewer;
+package planner_viewer.planner_modules;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

@@ -1,5 +1,6 @@
 package festivalplanner_guiModules.inputfields;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.PasswordField;
 
@@ -13,9 +14,10 @@ public class FPPasswordField extends PasswordField implements FPInputFields {
 
         setPromptText("Password");
 
-        setMinSize(306,48);
-        setPrefSize(306,48);
-        setMaxSize(306,48);
+        setMinSize(250,48);
+        setPrefSize(250,48);
+        setMaxSize(250,48);
+
     }
 
     @Override
@@ -25,12 +27,20 @@ public class FPPasswordField extends PasswordField implements FPInputFields {
                 "-fx-text-fill: #B76F88; " +
                 "-fx-background-radius: 50; " +
                 "-fx-font-size: 15; " +
-                "-fx-font-family: Helvetica;");
+                "-fx-font-family: Helvetica; ");
     }
 
     @Override
     public void invalidInputStyle() {
 
+        setStyle("-fx-background-color: #FFFFFF; " +
+                "-fx-text-fill: #B76F88; " +
+                "-fx-background-radius: 50; " +
+                "-fx-font-size: 15; " +
+                "-fx-font-family: Helvetica; " +
+                "-fx-border-color: red; " +
+                "-fx-border-width: 2px; " +
+                "-fx-border-radius: 50;" );
 
     }
 }
