@@ -9,22 +9,22 @@ public class TimeLineViewScrollController {
 
     public TimeLineViewScrollController(TimeLineView timeLineView) {
         this.timeLineView = timeLineView;
-        this.xPosition=0;
+        this.xPosition=150;
     }
 
     public void shiftToRight(){
-        if(xPosition < 0) {
+        if(xPosition < 140) {
             xPosition += 115;
-            timeLineView.setLayoutX(xPosition);
-            timeLineView.setTranslateX(xPosition);
+            timeLineView.sliderContainer.setLayoutX(xPosition);
+            timeLineView.sliderContainer.setTranslateX(xPosition);
         }
     }
 
-    public void shiftToLeft(){
-        if(xPosition >= -1380) {
+    public void shiftToLeft(){  //todo fix whitespace
+        if(xPosition >= -1495) {
             xPosition -= 115;
-            timeLineView.setLayoutX(xPosition);
-            timeLineView.setTranslateX(xPosition);
+            timeLineView.sliderContainer.setLayoutX(xPosition);
+            timeLineView.sliderContainer.setTranslateX(xPosition);
         }
     }
 }

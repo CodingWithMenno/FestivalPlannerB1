@@ -20,6 +20,7 @@ public class TimeLineView extends StackPane {
     private DatabaseConnection databaseConnection;
     private ArrayList<Stage> stages;
     private TimeLineViewScrollController timeLineViewScrollController;
+    public StackPane sliderContainer;
 
     public TimeLineView(DatabaseConnection databaseConnection) throws SQLException {
 
@@ -31,13 +32,15 @@ public class TimeLineView extends StackPane {
         setPrefSize(1280, 690);
         setMaxSize( 1280, 690);
 
-        getChildren().addAll(timeLineSlider(), stageModuleContainer(this.stages));
+        getChildren().addAll(timeLineSlider(), stageModuleContainer(this.stages),makeStageHbox());
         setAlignment(Pos.TOP_LEFT);
     }
 
     private Node stageModuleContainer(ArrayList<Stage> stages) {
 
         VBox container = new VBox();
+        container.setLayoutY(42);
+        container.setTranslateY(42);
         container.setMinSize(118,690);
         container.setMaxSize(118,690);
         container.setSpacing(10);
@@ -53,7 +56,9 @@ public class TimeLineView extends StackPane {
     }
 
     private Node timeLineSlider() {
-        StackPane sliderContainer = new StackPane();
+        sliderContainer= new StackPane();
+        sliderContainer.setLayoutX(150);
+        sliderContainer.setTranslateX(150);
         sliderContainer.setPrefSize(2760, 660);
         sliderContainer.setMinSize(2760,660);
         sliderContainer.setMaxSize(2760, 660);
@@ -64,6 +69,21 @@ public class TimeLineView extends StackPane {
 
 
         return sliderContainer;
+    }
+
+    public HBox makeStageHbox(){
+        HBox hBox = new HBox();
+        hBox.setMaxSize(150,30);
+        hBox.setMinSize(150,30);
+        hBox.setStyle("-fx-background-color: #B76F88");
+        Label label = new Label("Stages");
+        label.setStyle(
+                "-fx-text-fill: White;" + "-fx-font-size: 17;" +
+                        "-fx-font-family: Helvetica;");
+        hBox.getChildren().add(label);
+        hBox.setAlignment(Pos.CENTER);
+
+        return hBox;
     }
 
     private Node makeTimeSeparator(){
