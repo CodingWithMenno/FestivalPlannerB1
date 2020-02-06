@@ -81,6 +81,6 @@ public class LoginView extends StackPane {
     }
 
     public void loginSuccessful() throws SQLException {
-        this.sceneHandler.loginSuccessful(this.sceneHandler);
+        this.sceneHandler.loginSuccessful();
     }
 }
