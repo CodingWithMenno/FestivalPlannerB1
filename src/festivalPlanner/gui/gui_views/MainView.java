@@ -25,7 +25,7 @@ public class MainView extends VBox {
     public MainView(SceneHandler sceneHandler, DatabaseConnection databaseConnection) throws SQLException {
 
         this.headerBar = new HeaderBar(databaseConnection.fetchUserOrganization());
-        this.timeLineView = new TimeLineView();
+        this.timeLineView = new TimeLineView(databaseConnection);
 
         this.controllerBar = new ControllerBar(this.timeLineView);
         this.scenehandler = sceneHandler;

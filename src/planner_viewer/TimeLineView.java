@@ -23,7 +23,7 @@ public class TimeLineView extends StackPane {
 
     public TimeLineView(DatabaseConnection databaseConnection) throws SQLException {
 
-        this.timeLineViewScrollController = new TimeLineViewScrollController(timeLineSlider());
+        this.timeLineViewScrollController = new TimeLineViewScrollController(this);
 
         this.stages = databaseConnection.updateStageTable();
 

@@ -35,18 +35,18 @@ public class EventModule extends VBox {
 
     }
 
-    private BackgroundImage backgroundImage(){
-
-        BackgroundImage backgroundImage = new BackgroundImage(
-                new Image(this.backgroundURL, 1600, 1068, true, true),
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                new BackgroundPosition(Side.RIGHT, 30,false, Side.TOP,-75,false),
-                new BackgroundSize(1600,1068,false,false,false, false));
-
-        this.setBackground(new Background(backgroundImage));
-
-    }
+//    private BackgroundImage backgroundImage(){
+//
+//        BackgroundImage backgroundImage = new BackgroundImage(
+//                new Image(this.backgroundURL, 1600, 1068, true, true),
+//                BackgroundRepeat.NO_REPEAT,
+//                BackgroundRepeat.NO_REPEAT,
+//                new BackgroundPosition(Side.RIGHT, 30,false, Side.TOP,-75,false),
+//                new BackgroundSize(1600,1068,false,false,false, false));
+//
+//        this.setBackground(new Background(backgroundImage));
+//
+//    }
 
 }
 
