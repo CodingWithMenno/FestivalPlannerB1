@@ -1,15 +1,23 @@
 package festivalplanner_guiModules.gui_bars;
 
+import festivalPlanner.gui.gui_controllers.TimeLineViewScrollController;
 import festivalplanner_guiModules.buttons.FPButton;
 import festivalplanner_guiModules.buttons.FPSimulateButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import planner_viewer.TimeLineView;
 
 public class ControllerBar extends HBox {
 
-    public ControllerBar() {
+    private TimeLineView timeLineView;
+    private TimeLineViewScrollController timeLineViewScrollController;
+
+    public ControllerBar(TimeLineView timeLineView) {
+        this.timeLineView = timeLineView;
+        this.timeLineViewScrollController = new TimeLineViewScrollController(this.timeLineView);
 
         setMinSize(1280,70);
         setPrefSize(1280, 70);
@@ -49,10 +57,22 @@ public class ControllerBar extends HBox {
         leftSideContainer.setPrefSize(640, 70);
         leftSideContainer.setMinSize(640, 70);
 
+        Button rightButton = new FPButton(">", 45,45);
+        rightButton.setOnAction(event -> {
+            timeLineViewScrollController.shiftToLeft();
+        });
+
+        Button leftButton = new FPButton("<", 45,45);
+        leftButton.setOnAction(event -> {
+            timeLineViewScrollController.shiftToRight();
+
+        });
+
         leftSideContainer.getChildren().addAll(
                 new FPButton("View", 95,45),
-                new FPButton("<", 45,45),
-                new FPButton(">", 45,45)
+                leftButton,
+                rightButton
+//                new FPButton(">", 45,45)
         );
 
         return leftSideContainer;
