@@ -23,7 +23,7 @@ public class ArtistView extends StackPane {
 
     public StackPane createStackPane(){
 
-        StackPane stackPane = new StackPane();
+        StackPane stackPane = new StackPane(); //deze stackpane kun je in bouwen
         stackPane.setMinSize(800,570);
         stackPane.setMaxSize(800,570);
 
