@@ -12,13 +12,17 @@ public class StageModule extends HBox {
 
         this.stageTitle = new Label(stageTitle);
 
+        this.stageTitle.setStyle(
+                "-fx-text-fill: White;" +
+                "-fx-font-size: 17;" +
+                "-fx-font-family: Helvetica;");
+
         setMinSize(150,118);
         setPrefSize(150, 118);
         setMaxSize(150,118);
 
-        setStyle("-fx-background-color: #35477D; " +
-                "-fx-background-radius: 0 20 20 0; " +
-                "-fx-text-fill: white;");
+        setStyle("-fx-background-color: #35477D;" +
+                "-fx-background-radius: 0 20 20 0;");
 
         getChildren().add(this.stageTitle);
 

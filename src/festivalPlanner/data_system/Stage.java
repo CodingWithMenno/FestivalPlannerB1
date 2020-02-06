@@ -1,7 +1,5 @@
 package festivalPlanner.data_system;
 
-import festivalPlanner.gui.gui_controllers.StageViewController;
-
 public class Stage {
 
     private String name;
@@ -11,5 +9,36 @@ public class Stage {
     private int emergencyExits;
     private int firstAidKits;
 
-    private StageViewController stageViewController;
+    public Stage(String name, int capacity, int surface, boolean isIndoor, int emergencyExits, int firstAidKits) {
+        this.name = name;
+        this.capacity = capacity;
+        this.surface = surface;
+        this.isIndoor = isIndoor;
+        this.emergencyExits = emergencyExits;
+        this.firstAidKits = firstAidKits;
+    }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int getSurface() {
+        return surface;
+    }
+
+    public boolean isIndoor() {
+        return isIndoor;
+    }
+
+    public int getEmergencyExits() {
+        return emergencyExits;
+    }
+
+    public int getFirstAidKits() {
+        return firstAidKits;
+    }
 }

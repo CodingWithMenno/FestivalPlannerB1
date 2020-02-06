@@ -1,6 +1,9 @@
 package festivalPlanner.data_system;
 
+import planner_viewer.planner_modules.StageModule;
+
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DatabaseConnection {
 
@@ -26,9 +29,27 @@ public class DatabaseConnection {
 
     }
 
-    public ResultSet updateStageTable() throws SQLException {
+    public ArrayList<Stage> updateStageTable() throws SQLException {
 
-        return null;
+        ArrayList<Stage> stages = new ArrayList<>();
+
+        PreparedStatement fetchStageTable = this.databaseConnection.prepareStatement("SELECT * FROM stages WHERE userRelationship = ?");
+        fetchStageTable.setString(1, this.activeUser);
+
+        ResultSet databaseReply = fetchStageTable.executeQuery();
+
+        while( databaseReply.next() ) {
+
+            stages.add(new Stage(databaseReply.getString(1),
+                    databaseReply.getInt(2),
+                    databaseReply.getInt(3),
+                    databaseReply.getBoolean(4),
+                    databaseReply.getInt(5),
+                    databaseReply.getInt(6)));
+
+        }
+
+        return stages;
     }
 
     public String fetchUserOrganization() throws SQLException {

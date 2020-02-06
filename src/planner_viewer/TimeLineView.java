@@ -1,5 +1,8 @@
 package planner_viewer;
 
+import festivalPlanner.data_system.DatabaseConnection;
+import festivalPlanner.data_system.Stage;
+import festivalPlanner.gui.gui_controllers.TimeLineViewScrollController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -7,17 +10,46 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import planner_viewer.planner_modules.StageModule;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class TimeLineView extends StackPane {
 
-    public TimeLineView() {
+    private DatabaseConnection databaseConnection;
+    private ArrayList<Stage> stages;
+    private TimeLineViewScrollController timeLineViewScrollController;
+
+    public TimeLineView(DatabaseConnection databaseConnection) throws SQLException {
+
+        this.timeLineViewScrollController = new TimeLineViewScrollController(timeLineSlider());
+
+        this.stages = databaseConnection.updateStageTable();
 
         setMinSize(1280, 690);
         setPrefSize(1280, 690);
         setMaxSize( 1280, 690);
 
-        getChildren().addAll(timeLineSlider());
+        getChildren().addAll(timeLineSlider(), stageModuleContainer(this.stages));
         setAlignment(Pos.TOP_LEFT);
+    }
+
+    private Node stageModuleContainer(ArrayList<Stage> stages) {
+
+        VBox container = new VBox();
+        container.setMinSize(118,690);
+        container.setMaxSize(118,690);
+        container.setSpacing(10);
+
+        HBox stageContainerLabel = new HBox();
+
+
+        for (Stage stage : stages){
+            container.getChildren().add(new StageModule(stage.getName()));
+        }
+
+        return container;
     }
 
     private Node timeLineSlider() {
@@ -71,5 +103,12 @@ public class TimeLineView extends StackPane {
         return timeSeparator;
     }
 
+    public void scrollLeft(){
+        this.timeLineViewScrollController.shiftToLeft();
+    }
+
+    public void scrollRight(){
+        this.timeLineViewScrollController.shiftToRight();
+    }
 
 }
