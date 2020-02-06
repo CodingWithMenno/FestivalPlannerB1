@@ -12,11 +12,6 @@ import java.sql.SQLException;
 
 public class MainView extends VBox {
 
-    private ArtistView artistView;
-    private EventView eventView;
-    private StageView stageView;
-    private MainViewController mainViewController;
-
     private HeaderBar headerBar;
     private ControllerBar controllerBar;
     private TimeLineView timeLineView;
@@ -25,10 +20,10 @@ public class MainView extends VBox {
     public MainView(SceneHandler sceneHandler, DatabaseConnection databaseConnection) throws SQLException {
 
         this.headerBar = new HeaderBar(databaseConnection.fetchUserOrganization());
-        this.timeLineView = new TimeLineView();
 
-        this.controllerBar = new ControllerBar(this.timeLineView);
+        this.timeLineView = new TimeLineView();
         this.scenehandler = sceneHandler;
+        this.controllerBar = new ControllerBar(this.timeLineView,this.scenehandler);
 
         getChildren().addAll(this.headerBar, this.controllerBar, this.timeLineView);
 

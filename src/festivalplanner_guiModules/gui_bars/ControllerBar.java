@@ -1,8 +1,11 @@
 package festivalplanner_guiModules.gui_bars;
 
+import festivalPlanner.gui.SceneHandler;
 import festivalPlanner.gui.gui_controllers.TimeLineViewScrollController;
 import festivalplanner_guiModules.buttons.FPButton;
 import festivalplanner_guiModules.buttons.FPSimulateButton;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -10,13 +13,17 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import planner_viewer.TimeLineView;
 
+import java.sql.SQLException;
+
 public class ControllerBar extends HBox {
 
     private TimeLineView timeLineView;
     private TimeLineViewScrollController timeLineViewScrollController;
+    private SceneHandler sceneHandler;
 
-    public ControllerBar(TimeLineView timeLineView) {
+    public ControllerBar(TimeLineView timeLineView,SceneHandler sceneHandler) {
         this.timeLineView = timeLineView;
+        this.sceneHandler = sceneHandler;
         this.timeLineViewScrollController = new TimeLineViewScrollController(this.timeLineView);
 
         setMinSize(1280,70);
@@ -37,10 +44,26 @@ public class ControllerBar extends HBox {
         rightSideContainer.setPrefSize(640, 70);
         rightSideContainer.setMinSize(640, 70);
 
+        Button artistButton = new FPButton("Artists", 95,45);
+        Button stageButton = new FPButton("Stages", 95,45);
+        Button eventButton = new FPButton("Events", 95,45);
+
+        eventButton.setOnAction(event -> {
+            this.sceneHandler.toAddEvent();
+        });
+
+        stageButton.setOnAction(event -> {
+            this.sceneHandler.toAddStage();
+        });
+
+        artistButton.setOnAction(event -> {
+            this.sceneHandler.toAddArtist();
+        });
+
         rightSideContainer.getChildren().addAll(
-                new FPButton("Artists", 95,45),
-                new FPButton("Stages", 95,45),
-                new FPButton("Events", 95,45),
+                artistButton,
+                stageButton,
+                eventButton,
                 new FPSimulateButton()
         );
 

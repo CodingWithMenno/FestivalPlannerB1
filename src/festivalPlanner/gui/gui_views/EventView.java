@@ -1,11 +1,47 @@
 package festivalPlanner.gui.gui_views;
 
-import festivalPlanner.gui.gui_controllers.EventViewController;
+import festivalPlanner.gui.SceneHandler;
 
-public class EventView {
+import festivalplanner_guiModules.buttons.FPButton;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
 
-    private ArtistView artistView;
+public class EventView extends StackPane {
+
+    private SceneHandler sceneHandler;
     private MainView mainView;
-    private StageView stageView;
-    private EventViewController eventViewController;
+
+    public EventView(SceneHandler sceneHandler){
+        this.sceneHandler = sceneHandler;
+        this.mainView = mainView;
+
+        setWidth(1280);
+        setHeight(800);
+        setStyle("-fx-background-color: #35477D");
+        getChildren().add(createStackPane());
+    }
+
+    public StackPane createStackPane(){
+
+        StackPane stackPane = new StackPane();
+        stackPane.setMinSize(800,570);
+        stackPane.setMaxSize(800,570);
+
+        stackPane.setStyle("-fx-background-color: #FFFFFF;" +
+                        "-fx-background-radius: 30; "
+                );
+
+        Button BackButton = new FPButton("Back",95,45);
+        stackPane.getChildren().add(BackButton);
+        BackButton.setOnAction(event -> {
+            this.sceneHandler.toMainView();
+        });
+
+        return stackPane;
+    }
+
+
+
+
 }
+

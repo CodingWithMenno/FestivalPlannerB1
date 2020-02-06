@@ -1,6 +1,6 @@
 package festivalPlanner;
 
-import festivalPlanner.gui.SceneManager;
+import festivalPlanner.gui.StageManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -11,7 +11,7 @@ public class Main extends Application {
 
         //SceneManager sceneManager = new SceneManager();
 
-        launch(SceneManager.class);
+        launch(StageManager.class);
 
     }
 
