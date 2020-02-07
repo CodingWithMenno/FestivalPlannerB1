@@ -7,4 +7,7 @@ public class ArtistViewController {
 
     private Artist artist;
     private ArtistView artistView;
+
+
+
 }
