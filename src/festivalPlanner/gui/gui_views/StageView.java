@@ -3,7 +3,11 @@ package festivalPlanner.gui.gui_views;
 import festivalPlanner.gui.SceneHandler;
 import festivalPlanner.gui.gui_controllers.StageViewController;
 import festivalplanner_guiModules.buttons.FPButton;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
 public class StageView extends StackPane{
@@ -43,7 +47,38 @@ public class StageView extends StackPane{
         BackButton.setTranslateX(370);
         BackButton.setTranslateY(-255);
 
+        Label title = new Label("Stages");
+        stackPane.getChildren().add(title);
+        setCordinate(-280, -175, title);
+
+        HBox horizontalLine = new HBox();
+        stackPane.getChildren().add(horizontalLine);
+        horizontalLine.setStyle("-fx-background-color: #EEEEEE;");
+        horizontalLine.setMinSize(700, 5);
+        horizontalLine.setMaxSize(700, 5);
+        setCordinate(0, -160, horizontalLine);
+
+        Label addStage = new Label("Add Stage");
+        stackPane.getChildren().add(addStage);
+        setCordinate(-280, -135, addStage);
+
+        Label stageName = new Label("Stage Name");
+        setCordinate(-280, -90, stageName);
+        TextField nameField = new TextField();
+        nameField.setMinWidth(200);
+        nameField.setMaxWidth(200);
+        setCordinate(-100, -90, nameField);
+        stackPane.getChildren().addAll(stageName, nameField);
+
+
 
         return stackPane;
+    }
+
+    private void setCordinate(int x, int y, Node node) {
+        node.setLayoutX(x);
+        node.setLayoutY(y);
+        node.setTranslateX(x);
+        node.setTranslateY(y);
     }
 }
