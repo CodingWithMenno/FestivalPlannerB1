@@ -1,5 +1,6 @@
 package festivalPlanner.gui.gui_views;
 
+import festivalPlanner.data_system.Stage;
 import festivalPlanner.gui.SceneHandler;
 import festivalPlanner.gui.gui_controllers.StageViewController;
 import festivalplanner_guiModules.buttons.FPButton;
@@ -12,10 +13,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
+
 public class StageView extends StackPane{
 
     private SceneHandler sceneHandler;
     private MainView mainView;
+    private ArrayList<Stage> stages;
 
     public StageView(SceneHandler sceneHandler){
         this.sceneHandler = sceneHandler;
@@ -117,9 +121,34 @@ public class StageView extends StackPane{
         setCordinate(200, -135, allStages);
         stackPane.getChildren().addAll(allStages);
 
+        Label surfaceLabel = new Label("Surface");
+        setCordinate(-280, 140, surfaceLabel);
+        TextField surfaceField = new TextField();
+        setCordinate(-100, 140, surfaceField);
+        surfaceField.setMinWidth(200);
+        surfaceField.setMaxWidth(200);
+        stackPane.getChildren().addAll(surfaceLabel, surfaceField);
+
         Button removeButton = new Button("Remove");
         setCordinate(200, 225, removeButton);
         stackPane.getChildren().addAll(removeButton);
+
+
+        //Under this comment only : Functionality
+
+        addButton.setOnAction(event -> {
+            try {
+
+                String name = stageName.getText();
+                int capacity = Integer.parseInt(capacityField.getText());
+
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+
+            //this.stages.add(new Stage());
+        });
+
 
         return stackPane;
     }
