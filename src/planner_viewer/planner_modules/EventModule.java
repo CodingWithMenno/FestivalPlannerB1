@@ -56,53 +56,15 @@ public class EventModule extends VBox {
                 "-fx-background-position: right center;" +
                 "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 10, 0.0 , 4 , 4 );");
 
-
-        //ImagePattern pattern = new ImagePattern(new Image( this.backgroundURL , 1024, 800, true, true));
-
-        //rectangle.setFill(pattern);
-
-        //setLayoutX(relativeStartPos);
         setTranslateX(relativeStartPos);
-
-        //setLayoutY(stageYPos);
+        
         setTranslateY(stageYPos);
 
         getChildren().addAll( eventTitleLabel, eventTimeLabel);
 
         setAlignment(Pos.CENTER_LEFT);
         setPadding(new Insets(0,0,0,10));
-//
-//        Image bgPicture = new Image(this.backgroundURL, 1600, 1200,true,true);
 
-
-//        BackgroundImage backgroundImage = new BackgroundImage(
-//                new Image(this.backgroundURL, 1600, 1068, true, true),
-//                BackgroundRepeat.NO_REPEAT,
-//                BackgroundRepeat.NO_REPEAT,
-//                new BackgroundPosition(Side.LEFT, 0,false, Side.TOP,0,false),
-//                new BackgroundSize(100,100,true,true,false, true));
-//
-//        this.setBackground(new Background(backgroundImage));
-//        this.setBackground(new Background(backgroundImage));
-
-
-        //setBackground(new Background(backgroundImage()));
-
-    }
-
-//    private BackgroundImage backgroundImage(){
-//
-//        BackgroundImage backgroundImage = new BackgroundImage(
-//                new Image("/media_resources/loginscreenbg.jpeg", 1600, 1068, true, true),
-//                BackgroundRepeat.NO_REPEAT,
-//                BackgroundRepeat.NO_REPEAT,
-//                new BackgroundPosition(Side.RIGHT, 30,false, Side.TOP,-75,false),
-//                new BackgroundSize(1600,1068,false,false,false, false));
-//
-//        //this.setBackground(new Background(backgroundImage));
-//
-//        return backgroundImage;
-//    }
 
 }
 
