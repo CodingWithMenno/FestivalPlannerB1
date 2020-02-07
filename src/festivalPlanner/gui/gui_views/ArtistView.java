@@ -17,7 +17,7 @@ public class ArtistView extends StackPane {
 
         setWidth(1280);
         setHeight(800);
-        setStyle("-fx-background-color: #35477D");
+        setStyle("-fx-background-color: #35477D;" );
         getChildren().add(createStackPane());
     }
 
@@ -28,7 +28,8 @@ public class ArtistView extends StackPane {
         stackPane.setMaxSize(800,570);
 
         stackPane.setStyle("-fx-background-color: #FFFFFF;" +
-                "-fx-background-radius: 30; "
+                "-fx-background-radius: 30; "+
+                "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 20, 0.0 , 2 , 2 );"
         );
 
         Button BackButton = new FPButton("X",30,30);
