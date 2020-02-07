@@ -66,6 +66,6 @@ public class EventModule extends VBox {
         setPadding(new Insets(0,0,0,10));
 
 
-}
+}}
 
 

@@ -31,11 +31,18 @@ public class StageView extends StackPane{
                 "-fx-background-radius: 30; "
         );
 
-        Button BackButton = new FPButton("Back",95,45);
+        Button BackButton = new FPButton("X",30,30);
         stackPane.getChildren().add(BackButton);
         BackButton.setOnAction(event -> {
             this.sceneHandler.toMainView();
         });
+
+        BackButton.setLayoutX(370);
+        BackButton.setLayoutY(-255);
+        BackButton.setTranslateX(370);
+        BackButton.setTranslateY(-255);
+
+
         return stackPane;
     }
 }
