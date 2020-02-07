@@ -74,7 +74,8 @@ public class FPLoginButton extends Button implements FPButtons {
                 "-fx-text-fill: #B76F88; " +
                 "-fx-background-radius: 50; " +
                 "-fx-font-size: 18; " +
-                "-fx-font-family: Helvetica");
+                "-fx-font-family: Helvetica;" +
+                "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0 , 0 , 1.5 );");
 
     }
 
@@ -85,7 +86,8 @@ public class FPLoginButton extends Button implements FPButtons {
                 "-fx-text-fill: white; " +
                 "-fx-background-radius: 50; " +
                 "-fx-font-size: 18; " +
-                "-fx-font-family: Helvetica");
+                "-fx-font-family: Helvetica;" +
+                "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0 , 0 , 1.5 );");
 
     }
 

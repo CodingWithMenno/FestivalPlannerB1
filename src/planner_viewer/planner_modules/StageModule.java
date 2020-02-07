@@ -21,8 +21,7 @@ public class StageModule extends HBox {
         setPrefSize(150, 118);
         setMaxSize(150,118);
 
-        setStyle("-fx-background-color: #35477D;" +
-                "-fx-background-radius: 0 20 20 0;");
+        setStyle("-fx-background-color: #35477D;");
 
         getChildren().add(this.stageTitle);
 

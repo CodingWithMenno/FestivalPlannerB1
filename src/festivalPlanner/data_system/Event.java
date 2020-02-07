@@ -7,12 +7,48 @@ import java.util.ArrayList;
 
 public class Event {
 
-    private Artist headArtist;
+    private String headArtist;
     private ArrayList<Artist> coArtists;
-    private Stage stage;
-    private String time;
+    private String stage;
+    private double startTime;
+    private double endTime;
     private int popularity;
-    private ImageView photo;
+    private String photoURL;
 
-    private EventViewController eventViewController;
+    public Event(String headArtist, String stage, double startTime, double endTime, int popularity, String photoURL) {
+        this.headArtist = headArtist;
+        this.stage = stage;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.popularity = popularity;
+        this.photoURL = photoURL;
+    }
+
+    public String getHeadArtist() {
+        return headArtist;
+    }
+
+    public ArrayList<Artist> getCoArtists() {
+        return coArtists;
+    }
+
+    public String getStage() {
+        return stage;
+    }
+
+    public double getStartTime() {
+        return startTime;
+    }
+
+    public double getEndTime() {
+        return endTime;
+    }
+
+    public int getPopularity() {
+        return popularity;
+    }
+
+    public String getPhotoURL() {
+        return photoURL;
+    }
 }

@@ -1,6 +1,7 @@
 package planner_viewer;
 
 import festivalPlanner.data_system.DatabaseConnection;
+import festivalPlanner.data_system.Event;
 import festivalPlanner.data_system.Stage;
 import festivalPlanner.gui.gui_controllers.TimeLineViewScrollController;
 import javafx.geometry.Insets;
@@ -10,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import planner_viewer.planner_modules.EventModule;
 import planner_viewer.planner_modules.StageModule;
 
 import java.sql.SQLException;
@@ -19,20 +21,22 @@ public class TimeLineView extends StackPane {
 
     private DatabaseConnection databaseConnection;
     private ArrayList<Stage> stages;
+    private ArrayList<Event> events;
     private TimeLineViewScrollController timeLineViewScrollController;
-    public StackPane sliderContainer;
+    public Pane sliderContainer;
 
     public TimeLineView(DatabaseConnection databaseConnection) throws SQLException {
 
         this.timeLineViewScrollController = new TimeLineViewScrollController(this);
 
         this.stages = databaseConnection.updateStageTable();
+        this.events = databaseConnection.updateEventTable();
 
         setMinSize(1280, 690);
         setPrefSize(1280, 690);
         setMaxSize( 1280, 690);
 
-        getChildren().addAll(timeLineSlider(), stageModuleContainer(this.stages),makeStageHbox());
+        getChildren().addAll(timeLineSlider(this.events), stageModuleContainer(this.stages),makeStageHbox());
         setAlignment(Pos.TOP_LEFT);
     }
 
@@ -55,8 +59,9 @@ public class TimeLineView extends StackPane {
         return container;
     }
 
-    private Node timeLineSlider() {
-        sliderContainer= new StackPane();
+
+    private Node timeLineSlider(ArrayList<Event> events) {
+        sliderContainer= new Pane();
         sliderContainer.setLayoutX(150);
         sliderContainer.setTranslateX(150);
         sliderContainer.setPrefSize(2760, 660);
@@ -64,9 +69,16 @@ public class TimeLineView extends StackPane {
         sliderContainer.setMaxSize(2760, 660);
         sliderContainer.setStyle("-fx-background-color: blue");
 
-        sliderContainer.setAlignment(Pos.TOP_CENTER);
+        //sliderContainer.setAlignment(Pos.TOP_CENTER);
         sliderContainer.getChildren().addAll(new CanvasDrawer(),makeTimeSeparator() );
 
+        for (Event event : events){
+            for (Stage stage : this.stages){
+                if ( event.getStage().equals(stage.getName())){
+                    this.sliderContainer.getChildren().add( new EventModule(event.getHeadArtist(), event.getStartTime(), event.getEndTime(), event.getPhotoURL(), stages.indexOf(stage)));
+                }
+            }
+        }
 
         return sliderContainer;
     }

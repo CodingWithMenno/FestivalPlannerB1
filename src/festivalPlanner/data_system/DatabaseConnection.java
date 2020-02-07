@@ -52,6 +52,29 @@ public class DatabaseConnection {
         return stages;
     }
 
+    public ArrayList<Event> updateEventTable() throws SQLException {
+
+        ArrayList<Event> events = new ArrayList<>();
+
+        PreparedStatement fetchStageTable = this.databaseConnection.prepareStatement("SELECT * FROM events WHERE userRelationship = ?");
+        fetchStageTable.setString(1, this.activeUser);
+
+        ResultSet databaseReply = fetchStageTable.executeQuery();
+
+        while( databaseReply.next() ) {
+
+            events.add(new Event(databaseReply.getString(1),
+                    databaseReply.getString(2),
+                    databaseReply.getDouble(3),
+                    databaseReply.getDouble(4),
+                    databaseReply.getInt(5),
+                    databaseReply.getString(6)));
+
+        }
+
+        return events;
+    }
+
     public String fetchUserOrganization() throws SQLException {
 
         PreparedStatement userOrganization = this.databaseConnection.prepareStatement("SELECT Organization FROM user WHERE username = ?");
