@@ -19,7 +19,7 @@ public class StageView extends StackPane{
 
     private SceneHandler sceneHandler;
     private MainView mainView;
-    private ArrayList<Stage> stages;
+    private ArrayList<Stage> stages = new ArrayList<>();
 
     public StageView(SceneHandler sceneHandler){
         this.sceneHandler = sceneHandler;
@@ -141,12 +141,17 @@ public class StageView extends StackPane{
 
                 String name = stageName.getText();
                 int capacity = Integer.parseInt(capacityField.getText());
+                int surface = Integer.parseInt(surfaceField.getText());
+                boolean isIndoor = indoorButton.isSelected();
+                int emergencyExit = Integer.parseInt(emergencyText.getText());
+                int firstAid = Integer.parseInt(firstAidText.getText());
 
-            } catch (NumberFormatException e) {
+                this.stages.add(new Stage(name, capacity, surface, isIndoor, emergencyExit, firstAid));
+                System.out.println(this.stages);
+
+            } catch (NumberFormatException | NullPointerException e) {
                 e.printStackTrace();
             }
-
-            //this.stages.add(new Stage());
         });
 
 
