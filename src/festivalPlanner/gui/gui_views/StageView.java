@@ -10,6 +10,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 public class StageView extends StackPane{
 
@@ -101,7 +102,16 @@ public class StageView extends StackPane{
         firstAidText.setMaxWidth(200);
         stackPane.getChildren().addAll(firstAidLabel, firstAidText);
 
+        Button addButton = new Button("Add");
+        setCordinate(0, 225, addButton);
+        stackPane.getChildren().addAll(addButton);
 
+        VBox verticalLine = new VBox();
+        stackPane.getChildren().addAll(verticalLine);
+        verticalLine.setStyle("-fx-background-color: #EEEEEE;");
+        verticalLine.setMinSize(5, 350);
+        verticalLine.setMaxSize(5, 350);
+        setCordinate(100, 70, verticalLine);
 
         return stackPane;
     }
