@@ -1,6 +1,7 @@
 package festivalPlanner.gui.gui_views;
 
 import festivalPlanner.data_system.Artist;
+import festivalPlanner.data_system.Event;
 import festivalPlanner.gui.SceneHandler;
 import festivalPlanner.gui.gui_controllers.ArtistViewController;
 import festivalplanner_guiModules.buttons.FPButton;
@@ -18,11 +19,13 @@ public class ArtistView extends StackPane {
     private MainView mainView;
     private FPListView fpListView;
     private  ArtistViewController controller;
+    private EventView eventView;
 
 
-    public ArtistView(SceneHandler sceneHandler) {
+    public ArtistView(SceneHandler sceneHandler, EventView eventView) {
         this.sceneHandler = sceneHandler;
         this.mainView = mainView;
+        this.eventView = eventView;
 
         setWidth(1280);
         setHeight(800);
@@ -168,10 +171,11 @@ public class ArtistView extends StackPane {
         stackPane.getChildren().add(addArtist);
 
         addArtist.setOnAction(event -> {
-            Artist artist = new Artist(name.getText(), Integer.parseInt(age.getText()), genre.getText(), description.getText());
+            this.eventView.addArtistToList(new Artist(name.getText(), Integer.parseInt(age.getText()), genre.getText(), description.getText()));
+//            Artist artist = new Artist(name.getText(), Integer.parseInt(age.getText()), genre.getText(), description.getText());
 
-           this.controller.addArtist(artist);
-            artist.getName();
+//           this.controller.addArtist(artist);
+//            artist.getName();
 
         });
 
@@ -180,6 +184,7 @@ public class ArtistView extends StackPane {
 
 
     }
+
 
 
 //    public void draw(FXGraphics2D graphics){

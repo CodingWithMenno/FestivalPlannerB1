@@ -20,10 +20,12 @@ public class StageView extends StackPane{
     private SceneHandler sceneHandler;
     private MainView mainView;
     private ArrayList<Stage> stages = new ArrayList<>();
+    private EventView eventView;
 
-    public StageView(SceneHandler sceneHandler){
+    public StageView(SceneHandler sceneHandler, EventView eventView){
         this.sceneHandler = sceneHandler;
         this.mainView = mainView;
+        this.eventView = eventView;
 
         setWidth(1280);
         setHeight(800);
@@ -137,21 +139,24 @@ public class StageView extends StackPane{
         //Under this comment only : Functionality
 
         addButton.setOnAction(event -> {
-            try {
 
-                String name = stageName.getText();
-                int capacity = Integer.parseInt(capacityField.getText());
-                int surface = Integer.parseInt(surfaceField.getText());
-                boolean isIndoor = indoorButton.isSelected();
-                int emergencyExit = Integer.parseInt(emergencyText.getText());
-                int firstAid = Integer.parseInt(firstAidText.getText());
+            this.eventView.addStageToList(new Stage(nameField.getText(),Integer.parseInt(capacityField.getText()),Integer.parseInt(surfaceField.getText()),indoorButton.isSelected(),Integer.parseInt(emergencyText.getText()),Integer.parseInt(firstAidText.getText())));
 
-                this.stages.add(new Stage(name, capacity, surface, isIndoor, emergencyExit, firstAid));
-                System.out.println(this.stages);
-
-            } catch (NumberFormatException | NullPointerException e) {
-                e.printStackTrace();
-            }
+//            try {
+//
+//                String name = stageName.getText();
+//                int capacity = Integer.parseInt(capacityField.getText());
+//                int surface = Integer.parseInt(surfaceField.getText());
+//                boolean isIndoor = indoorButton.isSelected();
+//                int emergencyExit = Integer.parseInt(emergencyText.getText());
+//                int firstAid = Integer.parseInt(firstAidText.getText());
+//
+//                this.stages.add(new Stage(name, capacity, surface, isIndoor, emergencyExit, firstAid));
+//                System.out.println(this.stages);
+//
+//            } catch (NumberFormatException | NullPointerException e) {
+//                e.printStackTrace();
+//            }
         });
 
 

@@ -1,12 +1,12 @@
 package festivalplanner_guiModules.inputfields;
 
 import festivalPlanner.data_system.Artist;
-import javafx.geometry.Pos;
+import festivalPlanner.data_system.Stage;
 import javafx.scene.control.ComboBox;
 
-public class FPComboBox extends ComboBox<Artist> {
+public class FPComboBox2 extends ComboBox<Stage> {
 
-    public FPComboBox(String promptText) {
+    public FPComboBox2(String promptText) {
 
         defaultStyle();
 

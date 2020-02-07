@@ -1,15 +1,14 @@
 package festivalPlanner.gui.gui_views;
 
 import festivalPlanner.data_system.Artist;
+import festivalPlanner.data_system.Stage;
 import festivalPlanner.gui.SceneHandler;
 
 import festivalPlanner.gui.gui_controllers.ArtistViewController;
 import festivalplanner_guiModules.buttons.FPButton;
-import festivalplanner_guiModules.inputfields.FPComboBox;
-import festivalplanner_guiModules.inputfields.FPListView;
-import festivalplanner_guiModules.inputfields.FPTextArea;
-import festivalplanner_guiModules.inputfields.FPTextField;
+import festivalplanner_guiModules.inputfields.*;
 import festivalplanner_guiModules.text.titles.DinamicTitle;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -24,12 +23,15 @@ public class EventView extends StackPane {
 
     private SceneHandler sceneHandler;
     private MainView mainView;
-    private ArrayList<Artist> artists;
+    private ObservableList<Artist> artists;
+    private ObservableList<Stage> stages;
+
 
     public EventView(SceneHandler sceneHandler){
         this.sceneHandler = sceneHandler;
         this.mainView = mainView;
-        this.artists = new ArrayList<>();
+        this.artists = FXCollections.observableArrayList();
+        this.stages = FXCollections.observableArrayList();
 
         setWidth(1280);
         setHeight(800);
@@ -84,14 +86,17 @@ public class EventView extends StackPane {
 
         //Fields
 
-        ComboBox<String> mainArtistField = new FPComboBox("Main Artist");
+        ComboBox<Artist> mainArtistField = new FPComboBox("Main Artist");
         place(mainArtistField,-153,-90);
+        mainArtistField.setItems(artists);
 
-        ComboBox<String> coArtistField = new FPComboBox("Co Artist");
+        ComboBox<Artist> coArtistField = new FPComboBox("Co Artist");
         place(coArtistField,-153,-30);
+        coArtistField.setItems(artists);
 
-        ComboBox<String> stageField = new FPComboBox("Stage");
+        ComboBox<Stage> stageField = new FPComboBox2("Stage");
         place(stageField,-153,30);
+        stageField.setItems(stages);
 
         FPTextField popularityField = new FPTextField("Popularity");
         place(popularityField,-153,90);
@@ -111,12 +116,10 @@ public class EventView extends StackPane {
         stackPane.getChildren().addAll(title,secondTitle,thirdTitle,mainArtist,coArtist,stage,popularity,coverImage,mainArtistField,coArtistField,stageField,popularityField,open,addArtist,RemoveArtist,makeLine(),makeLine2());
 
 
-//        addArtist.setOnAction(event -> {
-//            Artist artist = new Artist(name.getText(), Integer.parseInt(age.getText()), genre.getText(), description.getText());
-//
-//            artist.getName();
-//
-//        });
+        addArtist.setOnAction(event -> {
+            this.artists.add(new Artist("Dave",5,"A","B"));
+
+        });
 
 
         return stackPane;
@@ -148,6 +151,14 @@ public class EventView extends StackPane {
         hBox.setStyle("-fx-background-color: #EEEEEE;");
 
         return hBox;
+    }
+
+    public void addArtistToList(Artist artist){
+        artists.add(artist);
+    }
+
+    public void addStageToList(Stage stage){
+        stages.add(stage);
     }
 
 

@@ -22,6 +22,11 @@ public class Stage {
         return this.name;
     }
 
+    @Override
+    public String toString() {
+      return this.name;
+    }
+
     public int getCapacity() {
         return capacity;
     }

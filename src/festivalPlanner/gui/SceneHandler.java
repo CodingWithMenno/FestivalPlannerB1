@@ -28,9 +28,10 @@ public class SceneHandler {
         this.stageManager = stageManager;
         this.databaseConnection = databaseConnection;
 
-        this.artistView = new ArtistView(this);
         this.eventView = new EventView(this);
-        this.stageView = new StageView(this);
+        this.stageView = new StageView(this,this.eventView);
+        this.artistView = new ArtistView(this,this.eventView);
+
         this.ArtistScene = new Scene(artistView);
         this.EventScene = new Scene(eventView);
         this.StageScene = new Scene(stageView);
