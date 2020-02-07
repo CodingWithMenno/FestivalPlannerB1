@@ -6,6 +6,7 @@ import festivalplanner_guiModules.buttons.FPButton;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -63,12 +64,42 @@ public class StageView extends StackPane{
         setCordinate(-280, -135, addStage);
 
         Label stageName = new Label("Stage Name");
-        setCordinate(-280, -90, stageName);
+        setCordinate(-280, -60, stageName);
         TextField nameField = new TextField();
         nameField.setMinWidth(200);
         nameField.setMaxWidth(200);
-        setCordinate(-100, -90, nameField);
+        setCordinate(-100, -60, nameField);
         stackPane.getChildren().addAll(stageName, nameField);
+
+        Label capacityLabel = new Label("Capacity");
+        setCordinate(-280, -20, capacityLabel);
+        TextField capacityField = new TextField();
+        setCordinate(-100, -20, capacityField);
+        capacityField.setMinWidth(200);
+        capacityField.setMaxWidth(200);
+        stackPane.getChildren().addAll(capacityLabel, capacityField);
+
+        Label indoorLabel = new Label("Indoor");
+        setCordinate(-280, 20, indoorLabel);
+        RadioButton indoorButton = new RadioButton();
+        setCordinate(-185, 20, indoorButton);
+        stackPane.getChildren().addAll(indoorLabel, indoorButton);
+
+        Label emergencyLabel = new Label("Emergency Exits");
+        setCordinate(-280, 60, emergencyLabel);
+        TextField emergencyText = new TextField();
+        setCordinate(-100, 60, emergencyText);
+        emergencyText.setMinWidth(200);
+        emergencyText.setMaxWidth(200);
+        stackPane.getChildren().addAll(emergencyLabel, emergencyText);
+
+        Label firstAidLabel = new Label("First Aid Kits");
+        setCordinate(-280, 100, firstAidLabel);
+        TextField firstAidText = new TextField();
+        setCordinate(-100, 100, firstAidText);
+        firstAidText.setMinWidth(200);
+        firstAidText.setMaxWidth(200);
+        stackPane.getChildren().addAll(firstAidLabel, firstAidText);
 
 
 
