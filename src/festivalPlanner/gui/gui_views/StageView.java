@@ -113,6 +113,14 @@ public class StageView extends StackPane{
         verticalLine.setMaxSize(5, 350);
         setCordinate(100, 70, verticalLine);
 
+        Label allStages = new Label("All Stages");
+        setCordinate(200, -135, allStages);
+        stackPane.getChildren().addAll(allStages);
+
+        Button removeButton = new Button("Remove");
+        setCordinate(200, 225, removeButton);
+        stackPane.getChildren().addAll(removeButton);
+
         return stackPane;
     }
 
