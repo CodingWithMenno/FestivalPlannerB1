@@ -9,7 +9,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
-import static com.sun.javafx.scene.control.skin.Utils.getResource;
+//import static com.sun.javafx.scene.control.skin.Utils.getResource;
 
 public class EventModule extends VBox {
 
