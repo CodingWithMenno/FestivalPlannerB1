@@ -1,47 +1,55 @@
 package festivalPlanner.gui.gui_views;
 
+import festivalPlanner.data_system.Artist;
 import festivalPlanner.gui.SceneHandler;
 import festivalPlanner.gui.gui_controllers.ArtistViewController;
 import festivalplanner_guiModules.buttons.FPButton;
-import festivalplanner_guiModules.inputfields.FPInputFields;
+import festivalplanner_guiModules.inputfields.FPListView;
+import festivalplanner_guiModules.inputfields.FPTextArea;
 import festivalplanner_guiModules.inputfields.FPTextField;
-import festivalplanner_guiModules.inputfields.FPUsernameField;
 import festivalplanner_guiModules.text.titles.DinamicTitle;
-import festivalplanner_guiModules.text.titles.SubTitleBold;
-import festivalplanner_guiModules.text.titles.TitleTextStyle;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
-import org.jfree.fx.FXGraphics2D;
-
-import java.awt.*;
 
 public class ArtistView extends StackPane {
 
     private SceneHandler sceneHandler;
     private MainView mainView;
+    private FPListView fpListView;
+    private  ArtistViewController controller;
 
-    public ArtistView(SceneHandler sceneHandler){
+
+    public ArtistView(SceneHandler sceneHandler) {
         this.sceneHandler = sceneHandler;
         this.mainView = mainView;
 
         setWidth(1280);
         setHeight(800);
-        setStyle("-fx-background-color: #35477D;" );
+        setStyle("-fx-background-color: #35477D;");
         getChildren().add(createStackPane());
     }
 
-    public StackPane createStackPane(){
+    public FPListView getFpListView() {
+        return fpListView;
+    }
+
+    public void setListView(ObservableList list) {
+        this.fpListView.setItems(list);
+    }
+
+    public StackPane createStackPane() {
 
         StackPane stackPane = new StackPane(); //deze stackpane kun je in bouwen
-        stackPane.setMinSize(800,570);
-        stackPane.setMaxSize(800,570);
+        stackPane.setMinSize(800, 570);
+        stackPane.setMaxSize(800, 570);
 
         stackPane.setStyle("-fx-background-color: #FFFFFF;" +
-                "-fx-background-radius: 30; "+
+                "-fx-background-radius: 30; " +
                 "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 20, 0.0 , 2 , 2 );"
         );
 
-        Button BackButton = new FPButton("X",30,30);
+        Button BackButton = new FPButton("X", 30, 30);
         stackPane.getChildren().add(BackButton);
         BackButton.setOnAction(event -> {
             this.sceneHandler.toMainView();
@@ -60,15 +68,8 @@ public class ArtistView extends StackPane {
         title.setTranslateY(-200);
         stackPane.getChildren().add(title);
 
-        DinamicTitle addArtist = new DinamicTitle("Add Artist", 20);
 
-        addArtist.setLayoutX(-303);
-        addArtist.setLayoutY(-130);
-        addArtist.setTranslateX(-303);
-        addArtist.setTranslateY(-130);
-        stackPane.getChildren().add(addArtist);
-
-        DinamicTitle  artistName= new DinamicTitle("Artist Name", 17);
+        DinamicTitle artistName = new DinamicTitle("Artist Name", 17);
 
         artistName.setLayoutX(-303);
         artistName.setLayoutY(-70);
@@ -76,7 +77,7 @@ public class ArtistView extends StackPane {
         artistName.setTranslateY(-70);
         stackPane.getChildren().add(artistName);
 
-        DinamicTitle  artistAge = new DinamicTitle("Age", 17);
+        DinamicTitle artistAge = new DinamicTitle("Age", 17);
 
         artistAge.setLayoutX(-303);
         artistAge.setLayoutY(-10);
@@ -107,6 +108,7 @@ public class ArtistView extends StackPane {
         description.setTranslateX(-303);
         description.setTranslateY(180);
         stackPane.getChildren().add(description);
+
 
         FPTextField name = new FPTextField("Artist Name");
 
@@ -140,11 +142,45 @@ public class ArtistView extends StackPane {
         open.setTranslateY(110);
         stackPane.getChildren().add(open);
 
+        FPTextArea ArtistDescription = new FPTextArea("Description");
+        ArtistDescription.setLayoutX(-153);
+        ArtistDescription.setLayoutY(220);
+        ArtistDescription.setTranslateX(-153);
+        ArtistDescription.setTranslateY(220);
+        stackPane.getChildren().add(ArtistDescription);
 
+        FPListView fpListView = new FPListView("Artist list");
+
+        fpListView.setLayoutX(250);
+        fpListView.setLayoutY(50);
+        fpListView.setTranslateX(250);
+        fpListView.setTranslateY(50);
+        stackPane.getChildren().add(fpListView);
+
+        this.controller = new ArtistViewController(fpListView);
+
+        FPButton addArtist = new FPButton("Add Artist", 120, 48);
+
+        addArtist.setLayoutX(-303);
+        addArtist.setLayoutY(-130);
+        addArtist.setTranslateX(-303);
+        addArtist.setTranslateY(-130);
+        stackPane.getChildren().add(addArtist);
+
+        addArtist.setOnAction(event -> {
+            Artist artist = new Artist(name.getText(), Integer.parseInt(age.getText()), genre.getText(), description.getText());
+
+           this.controller.addArtist(artist);
+            artist.getName();
+
+        });
 
 
         return stackPane;
+
+
     }
+
 
 //    public void draw(FXGraphics2D graphics){
 //

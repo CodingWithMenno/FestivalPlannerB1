@@ -8,8 +8,22 @@ public class Artist {
     private String name;
     private int age;
     private String genre;
-    private ImageView profilePhoto;
     private String description;
 
-    private ArtistViewController artistViewController;
+    public Artist(String name, int age, String genre, String description) {
+        this.name = name;
+        this.age = age;
+        this.genre = genre;
+        this.description = description;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
