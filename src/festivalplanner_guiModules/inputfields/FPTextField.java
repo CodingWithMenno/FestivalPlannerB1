@@ -20,6 +20,20 @@ public class FPTextField extends TextField implements FPInputFields {
 
     }
 
+    public FPTextField(String promptText,int width, int height) {
+
+        defaultStyle();
+
+        setAlignment(Pos.CENTER);
+
+        setPromptText(promptText);
+
+        setMinSize(width,height);
+        setPrefSize(width,height);
+        setMaxSize(width,height);
+
+    }
+
     @Override
     public void invalidInputStyle() {
 

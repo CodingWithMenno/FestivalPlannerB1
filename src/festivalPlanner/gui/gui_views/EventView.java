@@ -81,8 +81,8 @@ public class EventView extends StackPane {
         DinamicTitle popularity = new DinamicTitle("Popularity", 17);
         place(popularity,-300,90);
 
-        DinamicTitle coverImage = new DinamicTitle("Cover Image", 17);
-        place(coverImage,-300,155);
+        DinamicTitle Time = new DinamicTitle("Time", 17);
+        place(Time,-300,155);
 
         //Fields
 
@@ -101,8 +101,11 @@ public class EventView extends StackPane {
         FPTextField popularityField = new FPTextField("Popularity");
         place(popularityField,-153,90);
 
-        Button open = new FPButton("Open", 100, 48);
-        place(open,-153,155);
+        FPTextField beginTime = new FPTextField("Begin Time",90,40);
+        place(beginTime,-183,155);
+
+        FPTextField endTime = new FPTextField("End Time",90,40);
+        place(endTime,-90,155);
 
         FPListView fpListView = new FPListView("Artist list");
         place(fpListView,250,30);
@@ -113,7 +116,7 @@ public class EventView extends StackPane {
         FPButton RemoveArtist = new FPButton("Remove ", 90, 35);
         place(RemoveArtist,310,230);
 
-        stackPane.getChildren().addAll(title,secondTitle,thirdTitle,mainArtist,coArtist,stage,popularity,coverImage,mainArtistField,coArtistField,stageField,popularityField,open,addArtist,RemoveArtist,makeLine(),makeLine2());
+        stackPane.getChildren().addAll(title,secondTitle,thirdTitle,mainArtist,coArtist,stage,popularity,Time,mainArtistField,coArtistField,stageField,popularityField,beginTime,endTime,addArtist,RemoveArtist,makeLine(),makeLine2());
 
 
         addArtist.setOnAction(event -> {

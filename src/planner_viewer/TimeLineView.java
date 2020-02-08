@@ -88,7 +88,7 @@ public class TimeLineView extends StackPane {
         hBox.setMaxSize(150,30);
         hBox.setMinSize(150,30);
         hBox.setStyle("-fx-background-color: #B76F88");
-        Label label = new Label("Stages");
+        Label label = new Label("Stages / Time");
         label.setStyle(
                 "-fx-text-fill: White;" + "-fx-font-size: 17;" +
                         "-fx-font-family: Helvetica;");
