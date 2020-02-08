@@ -122,16 +122,17 @@ public class EventView extends StackPane {
         FPButton addArtist = new FPButton("Add ", 90, 35);
         place(addArtist,-50,230);
 
+        FPButton clearButton = new FPButton("Clear All ", 90, 35);
+        place(clearButton,-170,230);
+
         FPButton RemoveArtist = new FPButton("Remove ", 90, 35);
         place(RemoveArtist,310,230);
 
-        stackPane.getChildren().addAll(title,secondTitle,thirdTitle,mainArtist,coArtist,stage,popularity,Time,mainArtistField,coArtistField,stageField,popularityField,beginTime,endTime,addArtist,RemoveArtist,makeLine(),makeLine2());
+        stackPane.getChildren().addAll(title,secondTitle,thirdTitle,mainArtist,coArtist,stage,popularity,Time,mainArtistField,coArtistField,stageField,popularityField,beginTime,endTime,addArtist,RemoveArtist,clearButton,makeLine(),makeLine2());
 
 //        addArtist.setOnAction(event -> {
 //            this.events.add(new Event(mainArtistField.getValue(),stageField.getValue(),beginTime.getValue(),endTime.getValue(),popularityField.getValue()));
 //        });
-
-
         return stackPane;
     }
     public void place(Node node, int x, int y){

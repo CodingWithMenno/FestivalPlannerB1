@@ -1,14 +1,14 @@
 package festivalPlanner.gui.gui_views;
 
+import festivalPlanner.data_system.Artist;
 import festivalPlanner.data_system.Stage;
 import festivalPlanner.gui.SceneHandler;
 import festivalPlanner.gui.gui_controllers.StageViewController;
 import festivalplanner_guiModules.buttons.FPButton;
+import festivalplanner_guiModules.inputfields.*;
+import festivalplanner_guiModules.text.titles.DinamicTitle;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -55,92 +55,103 @@ public class StageView extends StackPane{
         BackButton.setTranslateX(370);
         BackButton.setTranslateY(-255);
 
-        Label title = new Label("Stages");
-        stackPane.getChildren().add(title);
-        setCordinate(-280, -175, title);
+        DinamicTitle title = new DinamicTitle("Stage", 40);
+        place(title,-300,-220);
 
-        HBox horizontalLine = new HBox();
-        stackPane.getChildren().add(horizontalLine);
-        horizontalLine.setStyle("-fx-background-color: #EEEEEE;");
-        horizontalLine.setMinSize(700, 5);
-        horizontalLine.setMaxSize(700, 5);
-        setCordinate(0, -160, horizontalLine);
+        DinamicTitle secondTitle = new DinamicTitle("Add Stage", 21);
+        place(secondTitle,-300,-150);
 
-        Label addStage = new Label("Add Stage");
-        stackPane.getChildren().add(addStage);
-        setCordinate(-280, -135, addStage);
+        DinamicTitle thirdTitle = new DinamicTitle("All Stages", 21);
+        place(thirdTitle,110,-150);
 
-        Label stageName = new Label("Stage Name");
-        setCordinate(-280, -60, stageName);
-        TextField nameField = new TextField();
-        nameField.setMinWidth(200);
-        nameField.setMaxWidth(200);
-        setCordinate(-100, -60, nameField);
-        stackPane.getChildren().addAll(stageName, nameField);
+        DinamicTitle stageName = new DinamicTitle("Stage Name", 17);
+        place(stageName,-300,-90);
 
-        Label capacityLabel = new Label("Capacity");
-        setCordinate(-280, -20, capacityLabel);
-        TextField capacityField = new TextField();
-        setCordinate(-100, -20, capacityField);
-        capacityField.setMinWidth(200);
-        capacityField.setMaxWidth(200);
-        stackPane.getChildren().addAll(capacityLabel, capacityField);
+        DinamicTitle Capacity = new DinamicTitle("Capacity",17);
+        place(Capacity,-300,-30);
 
-        Label indoorLabel = new Label("Indoor");
-        setCordinate(-280, 20, indoorLabel);
-        RadioButton indoorButton = new RadioButton();
-        setCordinate(-185, 20, indoorButton);
-        stackPane.getChildren().addAll(indoorLabel, indoorButton);
+        DinamicTitle indoor = new DinamicTitle("Indoor", 17);
+        place(indoor,-300,30);
 
-        Label emergencyLabel = new Label("Emergency Exits");
-        setCordinate(-280, 60, emergencyLabel);
-        TextField emergencyText = new TextField();
-        setCordinate(-100, 60, emergencyText);
-        emergencyText.setMinWidth(200);
-        emergencyText.setMaxWidth(200);
-        stackPane.getChildren().addAll(emergencyLabel, emergencyText);
+        DinamicTitle emergencyExits = new DinamicTitle("Emergency Exits", 17);
+        place(emergencyExits,-300,90);
 
-        Label firstAidLabel = new Label("First Aid Kits");
-        setCordinate(-280, 100, firstAidLabel);
-        TextField firstAidText = new TextField();
-        setCordinate(-100, 100, firstAidText);
-        firstAidText.setMinWidth(200);
-        firstAidText.setMaxWidth(200);
-        stackPane.getChildren().addAll(firstAidLabel, firstAidText);
+        DinamicTitle firstAidKits = new DinamicTitle("First Aid Kits", 17);
+        place(firstAidKits,-300,155);
 
-        Button addButton = new Button("Add");
-        setCordinate(0, 225, addButton);
-        stackPane.getChildren().addAll(addButton);
+        //Fields
 
-        VBox verticalLine = new VBox();
-        stackPane.getChildren().addAll(verticalLine);
-        verticalLine.setStyle("-fx-background-color: #EEEEEE;");
-        verticalLine.setMinSize(5, 350);
-        verticalLine.setMaxSize(5, 350);
-        setCordinate(100, 70, verticalLine);
+        TextField stageNameField = new FPTextField("Stage Name");
+        place(stageNameField,-153,-90);
 
-        Label allStages = new Label("All Stages");
-        setCordinate(200, -135, allStages);
-        stackPane.getChildren().addAll(allStages);
+        TextField CapacityField = new FPTextField("Amount",80,40);
+        place(CapacityField,-153,-30);
 
-        Label surfaceLabel = new Label("Surface");
-        setCordinate(-280, 140, surfaceLabel);
-        TextField surfaceField = new TextField();
-        setCordinate(-100, 140, surfaceField);
-        surfaceField.setMinWidth(200);
-        surfaceField.setMaxWidth(200);
-        stackPane.getChildren().addAll(surfaceLabel, surfaceField);
+        CheckBox indoorField = new FPCheckBox("Indoor");
+        place(indoorField,-153,30);
 
-        Button removeButton = new Button("Remove");
-        setCordinate(200, 225, removeButton);
-        stackPane.getChildren().addAll(removeButton);
+        TextField emergencyExitsField = new FPTextField("Amount",80,40);
+        place(emergencyExitsField,-153,90);
 
+        TextField firstAidKitsField = new FPTextField("Amount",80,40);
+        place(firstAidKitsField,-153,155);
+
+        FPButton addStage = new FPButton("Add ", 90, 35);
+        place(addStage,-50,230);
+
+        FPButton clearButton = new FPButton("Clear All ", 90, 35);
+        place(clearButton,-170,230);
+
+        FPButton removeStage = new FPButton("Remove ", 90, 35);
+        place(removeStage,310,230);
+
+        stackPane.getChildren().addAll(title,secondTitle,thirdTitle,stageName,Capacity,indoor,emergencyExits,firstAidKits,stageNameField,CapacityField,indoorField,emergencyExitsField,firstAidKitsField,addStage,clearButton,removeStage,makeLine(),makeLine2());
+
+
+
+        addStage.setOnAction(event -> {
+
+            int capacityAmount = 0;
+            int emergencyExitsAmount =0;
+            int firstAidKitsAmount =0;
+
+            try {
+                capacityAmount = Integer.parseInt(CapacityField.getText());
+                emergencyExitsAmount = Integer.parseInt(emergencyExitsField.getText());
+                firstAidKitsAmount = Integer.parseInt(firstAidKitsField.getText());
+
+                this.eventView.addStageToList(new Stage(
+                        stageNameField.getText(),
+                        capacityAmount,
+                        indoorField.isSelected(),
+                        emergencyExitsAmount,
+                        firstAidKitsAmount));
+
+            }
+            catch(Exception e) {
+                CapacityField.setText("Error");
+                emergencyExitsField.setText("Error");
+                firstAidKitsField.setText("Error");
+            }
+
+
+
+        });
+
+        clearButton.setOnAction(event -> {
+            stageNameField.setText("");
+            CapacityField.setText("");
+            indoorField.setSelected(false);
+            emergencyExitsField.setText("");
+            firstAidKitsField.setText("");
+
+        });
 
         //Under this comment only : Functionality
 
-        addButton.setOnAction(event -> {
-
-            this.eventView.addStageToList(new Stage(nameField.getText(),Integer.parseInt(capacityField.getText()),Integer.parseInt(surfaceField.getText()),indoorButton.isSelected(),Integer.parseInt(emergencyText.getText()),Integer.parseInt(firstAidText.getText())));
+//        addButton.setOnAction(event -> {
+//
+//            this.eventView.addStageToList(new Stage(nameField.getText(),Integer.parseInt(capacityField.getText()),Integer.parseInt(surfaceField.getText()),indoorButton.isSelected(),Integer.parseInt(emergencyText.getText()),Integer.parseInt(firstAidText.getText())));
 
 //            try {
 //
@@ -157,16 +168,37 @@ public class StageView extends StackPane{
 //            } catch (NumberFormatException | NullPointerException e) {
 //                e.printStackTrace();
 //            }
-        });
-
+//        });
 
         return stackPane;
     }
 
-    private void setCordinate(int x, int y, Node node) {
+    private void place(Node node,int x, int y) {
         node.setLayoutX(x);
         node.setLayoutY(y);
         node.setTranslateX(x);
         node.setTranslateY(y);
+    }
+
+    public HBox makeLine(){
+
+        HBox hBox = new HBox();
+        hBox.setMinSize(700, 2);
+        hBox.setMaxSize(700, 2);
+        place(hBox,0,-170);
+        hBox.setStyle("-fx-background-color: #EEEEEE;");
+
+        return hBox;
+    }
+
+    public HBox makeLine2(){
+
+        HBox hBox = new HBox();
+        hBox.setMinSize(2, 400);
+        hBox.setMaxSize(2, 400);
+        place(hBox,40,50);
+        hBox.setStyle("-fx-background-color: #EEEEEE;");
+
+        return hBox;
     }
 }

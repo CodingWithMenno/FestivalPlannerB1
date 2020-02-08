@@ -18,6 +18,14 @@ public class Stage {
         this.firstAidKits = firstAidKits;
     }
 
+    public Stage(String name, int capacity, boolean isIndoor, int emergencyExits, int firstAidKits) {
+        this.name = name;
+        this.capacity = capacity;
+        this.isIndoor = isIndoor;
+        this.emergencyExits = emergencyExits;
+        this.firstAidKits = firstAidKits;
+    }
+
     public String getName(){
         return this.name;
     }
