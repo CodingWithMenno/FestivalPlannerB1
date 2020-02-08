@@ -2,15 +2,22 @@ package festivalPlanner.gui.gui_views;
 
 import festivalPlanner.data_system.Artist;
 import festivalPlanner.data_system.Event;
+import festivalPlanner.data_system.Stage;
 import festivalPlanner.gui.SceneHandler;
 import festivalPlanner.gui.gui_controllers.ArtistViewController;
 import festivalplanner_guiModules.buttons.FPButton;
+import festivalplanner_guiModules.inputfields.FPCheckBox;
 import festivalplanner_guiModules.inputfields.FPListView;
 import festivalplanner_guiModules.inputfields.FPTextArea;
 import festivalplanner_guiModules.inputfields.FPTextField;
 import festivalplanner_guiModules.text.titles.DinamicTitle;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
 public class ArtistView extends StackPane {
@@ -63,138 +70,119 @@ public class ArtistView extends StackPane {
         BackButton.setTranslateX(370);
         BackButton.setTranslateY(-255);
 
+        //labels
+
         DinamicTitle title = new DinamicTitle("Artist", 40);
+        place(title,-300,-220);
 
-        title.setLayoutX(-300);
-        title.setLayoutY(-200);
-        title.setTranslateX(-300);
-        title.setTranslateY(-200);
-        stackPane.getChildren().add(title);
+        DinamicTitle secondTitle = new DinamicTitle("Add Artist", 21);
+        place(secondTitle,-300,-150);
 
+        DinamicTitle thirdTitle = new DinamicTitle("All Artists", 21);
+        place(thirdTitle,110,-150);
 
         DinamicTitle artistName = new DinamicTitle("Artist Name", 17);
+        place(artistName,-300,-90);
 
-        artistName.setLayoutX(-303);
-        artistName.setLayoutY(-70);
-        artistName.setTranslateX(-303);
-        artistName.setTranslateY(-70);
-        stackPane.getChildren().add(artistName);
+        DinamicTitle Age = new DinamicTitle("Age",17);
+        place(Age,-300,-30);
 
-        DinamicTitle artistAge = new DinamicTitle("Age", 17);
-
-        artistAge.setLayoutX(-303);
-        artistAge.setLayoutY(-10);
-        artistAge.setTranslateX(-303);
-        artistAge.setTranslateY(-10);
-        stackPane.getChildren().add(artistAge);
-
-        DinamicTitle artistGenre = new DinamicTitle("Genre", 17);
-
-        artistGenre.setLayoutX(-303);
-        artistGenre.setLayoutY(50);
-        artistGenre.setTranslateX(-303);
-        artistGenre.setTranslateY(50);
-        stackPane.getChildren().add(artistGenre);
+        DinamicTitle Genre = new DinamicTitle("Genre", 17);
+        place(Genre,-300,30);
 
         DinamicTitle profileImage = new DinamicTitle("Profile Image", 17);
+        place(profileImage,-300,90);
 
-        profileImage.setLayoutX(-303);
-        profileImage.setLayoutY(110);
-        profileImage.setTranslateX(-303);
-        profileImage.setTranslateY(110);
-        stackPane.getChildren().add(profileImage);
+        DinamicTitle biography = new DinamicTitle("Biography", 17);
+        place(biography,-300,155);
 
-        DinamicTitle description = new DinamicTitle("Description", 17);
+        //Fields
 
-        description.setLayoutX(-303);
-        description.setLayoutY(180);
-        description.setTranslateX(-303);
-        description.setTranslateY(180);
-        stackPane.getChildren().add(description);
+        TextField artistNameField = new FPTextField("Artist Name");
+        place(artistNameField,-153,-90);
 
+        TextField ageField = new FPTextField("Age",80,40);
+        place(ageField,-153,-30);
 
-        FPTextField name = new FPTextField("Artist Name");
+        TextField genreField = new FPTextField("Genre");
+        place(genreField,-153,30);
 
-        name.setLayoutX(-153);
-        name.setLayoutY(-70);
-        name.setTranslateX(-153);
-        name.setTranslateY(-70);
-        stackPane.getChildren().add(name);
+        Button open = new FPButton("Open",80,40);
+        place(open,-153,90);
 
-        FPTextField age = new FPTextField("Age");
+        TextArea biographyField = new FPTextArea("Biography",160,80);
+        place(biographyField,-153,165);
 
-        age.setLayoutX(-153);
-        age.setLayoutY(-10);
-        age.setTranslateX(-153);
-        age.setTranslateY(-10);
-        stackPane.getChildren().add(age);
+        FPButton addArtist = new FPButton("Add ", 90, 35);
+        place(addArtist,-50,230);
 
-        FPTextField genre = new FPTextField("Genre");
+        FPButton clearButton = new FPButton("Clear All ", 90, 35);
+        place(clearButton,-170,230);
 
-        genre.setLayoutX(-153);
-        genre.setLayoutY(50);
-        genre.setTranslateX(-153);
-        genre.setTranslateY(50);
-        stackPane.getChildren().add(genre);
+        FPButton removeArtist = new FPButton("Remove ", 90, 35);
+        place(removeArtist,310,230);
 
-        FPButton open = new FPButton("Open", 100, 48);
-
-        open.setLayoutX(-153);
-        open.setLayoutY(110);
-        open.setTranslateX(-153);
-        open.setTranslateY(110);
-        stackPane.getChildren().add(open);
-
-        FPTextArea ArtistDescription = new FPTextArea("Description");
-        ArtistDescription.setLayoutX(-153);
-        ArtistDescription.setLayoutY(220);
-        ArtistDescription.setTranslateX(-153);
-        ArtistDescription.setTranslateY(220);
-        stackPane.getChildren().add(ArtistDescription);
-
-        FPListView fpListView = new FPListView("Artist list");
-
-        fpListView.setLayoutX(250);
-        fpListView.setLayoutY(50);
-        fpListView.setTranslateX(250);
-        fpListView.setTranslateY(50);
-        stackPane.getChildren().add(fpListView);
-
-        this.controller = new ArtistViewController(fpListView);
-
-        FPButton addArtist = new FPButton("Add Artist", 120, 48);
-
-        addArtist.setLayoutX(-303);
-        addArtist.setLayoutY(-130);
-        addArtist.setTranslateX(-303);
-        addArtist.setTranslateY(-130);
-        stackPane.getChildren().add(addArtist);
+        stackPane.getChildren().addAll(title,secondTitle,thirdTitle,artistName,artistNameField,Age,ageField,Genre,genreField,profileImage,biography,biographyField,open,addArtist,clearButton,removeArtist,makeLine(),makeLine2());
 
         addArtist.setOnAction(event -> {
-            this.eventView.addArtistToList(new Artist(name.getText(), Integer.parseInt(age.getText()), genre.getText(), description.getText()));
-//            Artist artist = new Artist(name.getText(), Integer.parseInt(age.getText()), genre.getText(), description.getText());
 
-//           this.controller.addArtist(artist);
-//            artist.getName();
+            int age = 0;
+
+            try {
+                age = Integer.parseInt(ageField.getText());
+
+                this.eventView.addArtistToList(new Artist(
+                        artistNameField.getText(),
+                        age,
+                        genreField.getText(),
+                        biographyField.getText()));
+
+            }
+            catch(Exception e) {
+                ageField.setText("Error");
+            }
 
         });
 
+        clearButton.setOnAction(event -> {
+            artistNameField.setText("");
+            ageField.setText("");
+            biographyField.setText("");
+            genreField.setText("");
+
+        });
 
         return stackPane;
-
-
     }
 
+    private void place(Node node, int x, int y) {
+        node.setLayoutX(x);
+        node.setLayoutY(y);
+        node.setTranslateX(x);
+        node.setTranslateY(y);
+    }
 
+    public HBox makeLine(){
 
-//    public void draw(FXGraphics2D graphics){
-//
-//        FXGraphics2D graphics = new FXGraphics2D();
-//        graphics.setColor(Color.black);
-//        graphics.fillRect(0, 0, 700, 5);
-//
-//        draw(graphics);
-//
-//
-//    }
+        HBox hBox = new HBox();
+        hBox.setMinSize(700, 2);
+        hBox.setMaxSize(700, 2);
+        place(hBox,0,-170);
+        hBox.setStyle("-fx-background-color: #EEEEEE;");
+
+        return hBox;
+    }
+
+    public HBox makeLine2(){
+
+        HBox hBox = new HBox();
+        hBox.setMinSize(2, 400);
+        hBox.setMaxSize(2, 400);
+        place(hBox,40,50);
+        hBox.setStyle("-fx-background-color: #EEEEEE;");
+
+        return hBox;
+    }
+
 }
+

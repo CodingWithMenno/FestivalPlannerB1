@@ -16,6 +16,17 @@ public class FPTextArea extends TextArea implements FPInputFields {
 
     }
 
+    public FPTextArea(String promptText,int width, int height) {
+
+        defaultStyle();
+        setPromptText(promptText);
+
+        setMinSize(width, height);
+        setPrefSize(width, height);
+        setMaxSize(width, height);
+
+    }
+
     @Override
     public void invalidInputStyle() {
 
@@ -23,6 +34,12 @@ public class FPTextArea extends TextArea implements FPInputFields {
 
     @Override
     public void defaultStyle() {
+        setStyle("-fx-background-color: #EEEEEE; " +
+                "-fx-text-fill: #B76F88; " +
+                "-fx-background-radius: 50; " +
+                "-fx-font-size: 15; " +
+                "-fx-font-family: Helvetica; " +
+                "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0 , 0 , 1.5 );");
 
     }
 }

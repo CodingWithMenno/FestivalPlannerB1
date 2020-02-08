@@ -36,8 +36,8 @@ public class EventView extends StackPane {
         this.stages = FXCollections.observableArrayList();
         this.controller = new EventViewController();
         this.events = new ArrayList<>();
-        controller.setTimes();
-        controller.setPopularity();
+        this.controller.setTimes();
+        this.controller.setPopularity();
 
         setWidth(1280);
         setHeight(800);
@@ -171,12 +171,6 @@ public class EventView extends StackPane {
     public void addStageToList(Stage stage){
         stages.add(stage);
     }
-
-
-
-
-
-
 
 }
 
