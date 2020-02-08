@@ -4,9 +4,9 @@ import festivalPlanner.data_system.Artist;
 import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
 
-public class FPComboBox extends ComboBox<Artist> {
+public class FPComboBoxArtist extends ComboBox<Artist> {
 
-    public FPComboBox(String promptText) {
+    public FPComboBoxArtist(String promptText) {
 
         defaultStyle();
 

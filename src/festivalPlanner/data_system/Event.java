@@ -1,5 +1,6 @@
 package festivalPlanner.data_system;
 
+import festivalPlanner.gui.StageManager;
 import festivalPlanner.gui.gui_controllers.EventViewController;
 import javafx.scene.image.ImageView;
 
@@ -22,6 +23,14 @@ public class Event {
         this.endTime = endTime;
         this.popularity = popularity;
         this.photoURL = photoURL;
+    }
+
+    public Event(String headArtist, String stage, double startTime, double endTime, int popularity) {
+        this.headArtist = headArtist;
+        this.stage = stage;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.popularity = popularity;
     }
 
     public String getHeadArtist() {
@@ -50,5 +59,9 @@ public class Event {
 
     public String getPhotoURL() {
         return photoURL;
+    }
+
+    public String toString(){
+        return this.headArtist;
     }
 }
