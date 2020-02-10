@@ -34,6 +34,7 @@ public class ArtistView extends StackPane {
         this.eventView = eventView;
         this.artists = FXCollections.observableArrayList();
 
+
         setWidth(1280);
         setHeight(800);
         setStyle("-fx-background-color: #35477D;");
@@ -122,8 +123,10 @@ public class ArtistView extends StackPane {
         FPButton removeArtist = new FPButton("Remove ", 90, 35);
         place(removeArtist,310,230);
 
-        FPListView fpListView = new FPListView("Artist list");
+        this.fpListView = new FPListView("Artist list");
         place(fpListView,250,50);
+
+        this.controller = new ArtistViewController(this.fpListView);
 
         stackPane.getChildren().addAll(title,secondTitle,thirdTitle,artistName,artistNameField,Age,fpListView,ageField,Genre,genreField,profileImage,biography,biographyField,open,addArtist,clearButton,removeArtist,makeLine(),makeLine2());
 
@@ -140,7 +143,7 @@ public class ArtistView extends StackPane {
                         biographyField.getText());
 
                 this.eventView.addArtistToList(artist);
-                this.artists.add(artist);
+                this.controller.addArtist(artist);
 
             }
             catch(Exception e) {
@@ -157,6 +160,7 @@ public class ArtistView extends StackPane {
 
         });
 
+        removeArtist.setOnAction(event -> this.controller.deleteArtist(fpListView.getSelectionModel().getSelectedItem()));
         return stackPane;
     }
 

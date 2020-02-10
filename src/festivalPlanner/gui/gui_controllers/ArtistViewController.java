@@ -22,10 +22,16 @@ public class ArtistViewController {
     }
 
     public void addArtist(Artist artist) {
+        for (Artist artist1 : this.artists) {
+            if (artist1.getName().equals(artist.getName())){
+                return;
+            }
+        }
         this.artists.add(artist);
-        System.out.println(this.artists);
+    }
 
-
+    public void deleteArtist(Artist artist){
+        this.artists.remove(artist);
     }
 
 
