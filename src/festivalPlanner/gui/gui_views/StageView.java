@@ -7,6 +7,8 @@ import festivalPlanner.gui.gui_controllers.StageViewController;
 import festivalplanner_guiModules.buttons.FPButton;
 import festivalplanner_guiModules.inputfields.*;
 import festivalplanner_guiModules.text.titles.DinamicTitle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -14,12 +16,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class StageView extends StackPane{
 
     private SceneHandler sceneHandler;
     private MainView mainView;
-    private ArrayList<Stage> stages = new ArrayList<>();
+    private ObservableList<Stage> stages = FXCollections.observableArrayList();
     private EventView eventView;
 
     public StageView(SceneHandler sceneHandler, EventView eventView){
@@ -105,7 +108,13 @@ public class StageView extends StackPane{
         FPButton removeStage = new FPButton("Remove ", 90, 35);
         place(removeStage,310,230);
 
-        stackPane.getChildren().addAll(title,secondTitle,thirdTitle,stageName,Capacity,indoor,emergencyExits,firstAidKits,stageNameField,CapacityField,indoorField,emergencyExitsField,firstAidKitsField,addStage,clearButton,removeStage,makeLine(),makeLine2());
+        ListView<Stage> listViewStages = new ListView<>();
+        listViewStages.setItems(this.stages);
+        place(listViewStages,100,0);
+        listViewStages.setMinSize(200,400);
+        listViewStages.setMaxSize(200,400);
+
+        stackPane.getChildren().addAll(title,secondTitle,thirdTitle,stageName,Capacity,indoor,emergencyExits,firstAidKits,stageNameField,listViewStages,CapacityField,indoorField,emergencyExitsField,firstAidKitsField,addStage,clearButton,removeStage,makeLine(),makeLine2());
 
 
 
@@ -120,12 +129,14 @@ public class StageView extends StackPane{
                 emergencyExitsAmount = Integer.parseInt(emergencyExitsField.getText());
                 firstAidKitsAmount = Integer.parseInt(firstAidKitsField.getText());
 
-                this.eventView.addStageToList(new Stage(
-                        stageNameField.getText(),
+                Stage stage = new Stage(stageNameField.getText(),
                         capacityAmount,
                         indoorField.isSelected(),
                         emergencyExitsAmount,
-                        firstAidKitsAmount));
+                        firstAidKitsAmount);
+
+                this.eventView.addStageToList(stage);
+                this.stages.add(stage);
 
             }
             catch(Exception e) {
