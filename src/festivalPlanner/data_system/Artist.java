@@ -18,6 +18,8 @@ public class Artist {
     }
 
 
+
+
     public String getName() {
         return name;
     }
@@ -26,4 +28,6 @@ public class Artist {
     public String toString() {
         return this.name;
     }
+
+
 }

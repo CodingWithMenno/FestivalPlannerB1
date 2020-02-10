@@ -17,7 +17,7 @@ public class ArtistView extends StackPane {
     private SceneHandler sceneHandler;
     private MainView mainView;
     private FPListView fpListView;
-    private  ArtistViewController controller;
+    private ArtistViewController controller;
 
 
     public ArtistView(SceneHandler sceneHandler) {
@@ -169,12 +169,37 @@ public class ArtistView extends StackPane {
 
         addArtist.setOnAction(event -> {
             Artist artist = new Artist(name.getText(), Integer.parseInt(age.getText()), genre.getText(), description.getText());
+            this.controller.addArtist(artist);
 
-           this.controller.addArtist(artist);
-            artist.getName();
+//            for (int i = 0; i < this.controller.getArtists().size(); i++) {
+//                if (this.controller.getArtists().get(i).getName().equals(name.getText())) {
+//                    System.out.println("Dubbel :)");
+//
+//                }
+//
+//                else {
+//                    this.controller.addArtist(artist);
+//                    break;
+//                }
+//            }
+
+
+
+
 
         });
 
+        FPButton deleteArtist = new FPButton("Delete", 120, 48);
+
+        deleteArtist.setLayoutX(260);
+        deleteArtist.setLayoutY(240);
+        deleteArtist.setTranslateX(260);
+        deleteArtist.setTranslateY(240);
+        stackPane.getChildren().add(deleteArtist);
+
+//        deleteArtist.setOnAction(event -> {
+//            this.controller.removeArtist(this.fpListView.getSelectionModel().getSelectedItem());
+//        });
 
         return stackPane;
 
