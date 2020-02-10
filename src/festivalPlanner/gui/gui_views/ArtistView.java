@@ -11,6 +11,7 @@ import festivalplanner_guiModules.inputfields.FPListView;
 import festivalplanner_guiModules.inputfields.FPTextArea;
 import festivalplanner_guiModules.inputfields.FPTextField;
 import festivalplanner_guiModules.text.titles.DinamicTitle;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -24,12 +25,14 @@ public class ArtistView extends StackPane {
     private FPListView fpListView;
     private  ArtistViewController controller;
     private EventView eventView;
+    private ObservableList<Artist> artists;
 
 
     public ArtistView(SceneHandler sceneHandler, EventView eventView) {
         this.sceneHandler = sceneHandler;
         this.mainView = mainView;
         this.eventView = eventView;
+        this.artists = FXCollections.observableArrayList();
 
         setWidth(1280);
         setHeight(800);
@@ -119,7 +122,12 @@ public class ArtistView extends StackPane {
         FPButton removeArtist = new FPButton("Remove ", 90, 35);
         place(removeArtist,310,230);
 
-        stackPane.getChildren().addAll(title,secondTitle,thirdTitle,artistName,artistNameField,Age,ageField,Genre,genreField,profileImage,biography,biographyField,open,addArtist,clearButton,removeArtist,makeLine(),makeLine2());
+        ListView<Artist> listViewStages = new ListView<>();
+        place(listViewStages,100,0);
+        listViewStages.setMinSize(200,400);
+        listViewStages.setMaxSize(200,400);
+
+        stackPane.getChildren().addAll(title,secondTitle,thirdTitle,artistName,artistNameField,Age,listViewStages,ageField,Genre,genreField,profileImage,biography,biographyField,open,addArtist,clearButton,removeArtist,makeLine(),makeLine2());
 
         addArtist.setOnAction(event -> {
 
@@ -128,11 +136,13 @@ public class ArtistView extends StackPane {
             try {
                 age = Integer.parseInt(ageField.getText());
 
-                this.eventView.addArtistToList(new Artist(
-                        artistNameField.getText(),
+                Artist artist = new Artist(artistNameField.getText(),
                         age,
                         genreField.getText(),
-                        biographyField.getText()));
+                        biographyField.getText());
+
+                this.eventView.addArtistToList(artist);
+                this.artists.add(artist);
 
             }
             catch(Exception e) {
