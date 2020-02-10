@@ -11,26 +11,26 @@ public class HeaderBar extends HBox {
 
     public HeaderBar(String festivalName) {
 
-        setMinSize(1280,40);
+        setMinSize(1280, 40);
         setPrefSize(1280, 40);
         setMaxSize(1280, 40);
 
-        setStyle("-fx-background-color: #EEEEEE;" );
+        setStyle("-fx-background-color: #EEEEEE;");
 
         getChildren().addAll(logoAndDivision(), festivalName(festivalName));
 
         setAlignment(Pos.CENTER_LEFT);
 
-        setPadding(new Insets(0,0,0,30));
+        setPadding(new Insets(0, 0, 0, 30));
     }
 
-    private Node logoAndDivision(){
+    private Node logoAndDivision() {
 
         return new TitleTextStyle("FP | ");
 
     }
 
-    public Node festivalName(String festivalName){
+    public Node festivalName(String festivalName) {
 
         return new SubTitleStyle(festivalName);
     }

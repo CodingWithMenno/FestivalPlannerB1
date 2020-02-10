@@ -14,9 +14,9 @@ public class FPPasswordField extends PasswordField implements FPInputFields {
 
         setPromptText("Password");
 
-        setMinSize(250,48);
-        setPrefSize(250,48);
-        setMaxSize(250,48);
+        setMinSize(250, 48);
+        setPrefSize(250, 48);
+        setMaxSize(250, 48);
 
     }
 
@@ -40,7 +40,7 @@ public class FPPasswordField extends PasswordField implements FPInputFields {
                 "-fx-font-family: Helvetica; " +
                 "-fx-border-color: red; " +
                 "-fx-border-width: 2px; " +
-                "-fx-border-radius: 50;" );
+                "-fx-border-radius: 50;");
 
     }
 }

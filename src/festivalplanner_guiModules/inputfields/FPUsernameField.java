@@ -14,9 +14,9 @@ public class FPUsernameField extends TextField implements FPInputFields {
 
         setPromptText("Username");
 
-        setMinSize(250,48);
-        setPrefSize(250,48);
-        setMaxSize(250,48);
+        setMinSize(250, 48);
+        setPrefSize(250, 48);
+        setMaxSize(250, 48);
 
     }
 

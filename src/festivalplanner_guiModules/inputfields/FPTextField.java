@@ -14,13 +14,13 @@ public class FPTextField extends TextField implements FPInputFields {
 
         setPromptText(promptText);
 
-        setMinSize(150,40);
-        setPrefSize(150,40);
-        setMaxSize(150,40);
+        setMinSize(150, 40);
+        setPrefSize(150, 40);
+        setMaxSize(150, 40);
 
     }
 
-    public FPTextField(String promptText,int width, int height) {
+    public FPTextField(String promptText, int width, int height) {
 
         defaultStyle();
 
@@ -28,9 +28,9 @@ public class FPTextField extends TextField implements FPInputFields {
 
         setPromptText(promptText);
 
-        setMinSize(width,height);
-        setPrefSize(width,height);
-        setMaxSize(width,height);
+        setMinSize(width, height);
+        setPrefSize(width, height);
+        setMaxSize(width, height);
 
     }
 
@@ -48,5 +48,5 @@ public class FPTextField extends TextField implements FPInputFields {
                 "-fx-font-family: Helvetica; " +
                 "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0 , 0 , 1.5 );");
     }
-    }
+}
 

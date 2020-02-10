@@ -14,7 +14,7 @@ import javafx.scene.control.Button;
 import java.sql.SQLException;
 
 /**
- *  Festival Planner login button.
+ * Custom Festival Planner login button.
  */
 public class FPLoginButton extends Button implements FPButtons {
 
@@ -25,16 +25,16 @@ public class FPLoginButton extends Button implements FPButtons {
         defaultStyle();
 
         //Set Fixed Button Size boundaries
-        setMinSize(110,48);
-        setPrefSize(110,48);
-        setMaxSize(110,48);
+        setMinSize(110, 48);
+        setPrefSize(110, 48);
+        setMaxSize(110, 48);
 
         setOnMousePressed(e -> actionStyle());
         setOnMouseReleased(e -> defaultStyle());
 
         setAlignment(Pos.CENTER);
 
-        if(!databaseConnection.connectionStatus()){
+        if (!databaseConnection.connectionStatus()) {
             setDisable(true);
             username.setDisable(true);
             password.setDisable(true);
@@ -46,13 +46,11 @@ public class FPLoginButton extends Button implements FPButtons {
                 System.out.println("login tried");
 
                 try {
-                    if(databaseConnection.validateUser(username.getText(), password.getText())){
+                    if (databaseConnection.validateUser(username.getText(), password.getText())) {
                         System.out.println("Success");
 
                         parent.loginSuccessful();
-                    }
-
-                    else{
+                    } else {
                         System.out.println("Failed");
                         username.invalidInputStyle();
                         password.invalidInputStyle();
@@ -68,7 +66,7 @@ public class FPLoginButton extends Button implements FPButtons {
 
 
     @Override
-    public void actionStyle(){
+    public void actionStyle() {
 
         setStyle("-fx-background-color: white; " +
                 "-fx-text-fill: #B76F88; " +
@@ -80,7 +78,7 @@ public class FPLoginButton extends Button implements FPButtons {
     }
 
     @Override
-    public void defaultStyle(){
+    public void defaultStyle() {
 
         setStyle("-fx-background-color: #B76F88; " +
                 "-fx-text-fill: white; " +
