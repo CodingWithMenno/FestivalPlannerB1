@@ -1,14 +1,11 @@
 package festivalPlanner.gui.gui_controllers;
 
 import festivalPlanner.data_system.Artist;
-import festivalPlanner.gui.gui_views.ArtistView;
 import festivalplanner_guiModules.inputfields.FPListView;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.ListView;
 
-import java.util.Observable;
 
 public class ArtistViewController {
 
@@ -28,11 +25,6 @@ public class ArtistViewController {
         }
         this.artists.add(artist);
     }
-
-    public ObservableList<Artist> getArtists(){
-        return this.artists;
-    }
-
 
     public void deleteArtist(Artist artist){
         this.artists.remove(artist);
