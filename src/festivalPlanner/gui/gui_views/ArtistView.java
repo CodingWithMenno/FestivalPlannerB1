@@ -122,12 +122,10 @@ public class ArtistView extends StackPane {
         FPButton removeArtist = new FPButton("Remove ", 90, 35);
         place(removeArtist,310,230);
 
-        ListView<Artist> listViewStages = new ListView<>();
-        place(listViewStages,100,0);
-        listViewStages.setMinSize(200,400);
-        listViewStages.setMaxSize(200,400);
+        FPListView fpListView = new FPListView("Artist list");
+        place(fpListView,250,50);
 
-        stackPane.getChildren().addAll(title,secondTitle,thirdTitle,artistName,artistNameField,Age,listViewStages,ageField,Genre,genreField,profileImage,biography,biographyField,open,addArtist,clearButton,removeArtist,makeLine(),makeLine2());
+        stackPane.getChildren().addAll(title,secondTitle,thirdTitle,artistName,artistNameField,Age,fpListView,ageField,Genre,genreField,profileImage,biography,biographyField,open,addArtist,clearButton,removeArtist,makeLine(),makeLine2());
 
         addArtist.setOnAction(event -> {
 
