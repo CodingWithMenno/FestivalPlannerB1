@@ -8,7 +8,7 @@ import festivalPlanner.gui.SceneHandler;
 import festivalPlanner.gui.gui_controllers.EventViewController;
 import festivalplanner_guiModules.buttons.FPButton;
 import festivalplanner_guiModules.inputfields.*;
-import festivalplanner_guiModules.text.titles.DinamicTitle;
+import festivalplanner_guiModules.text.titles.DynamicTitle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -66,28 +66,28 @@ public class EventView extends StackPane {
 
         //Labels
 
-        DinamicTitle title = new DinamicTitle("Event", 40);
+        DynamicTitle title = new DynamicTitle("Event", 40);
         place(title,-300,-220);
 
-        DinamicTitle secondTitle = new DinamicTitle("Add Event", 21);
+        DynamicTitle secondTitle = new DynamicTitle("Add Event", 21);
         place(secondTitle,-300,-150);
 
-        DinamicTitle thirdTitle = new DinamicTitle("All Events", 21);
+        DynamicTitle thirdTitle = new DynamicTitle("All Events", 21);
         place(thirdTitle,110,-150);
 
-        DinamicTitle mainArtist = new DinamicTitle("Main Artist", 17);
+        DynamicTitle mainArtist = new DynamicTitle("Main Artist", 17);
         place(mainArtist,-300,-90);
 
-        DinamicTitle coArtist = new DinamicTitle("Co Artist",17);
+        DynamicTitle coArtist = new DynamicTitle("Co Artist",17);
         place(coArtist,-300,-30);
 
-        DinamicTitle stage = new DinamicTitle("Stage", 17);
+        DynamicTitle stage = new DynamicTitle("Stage", 17);
         place(stage,-300,30);
 
-        DinamicTitle popularity = new DinamicTitle("Popularity", 17);
+        DynamicTitle popularity = new DynamicTitle("Popularity", 17);
         place(popularity,-300,90);
 
-        DinamicTitle Time = new DinamicTitle("Time", 17);
+        DynamicTitle Time = new DynamicTitle("Time", 17);
         place(Time,-300,155);
 
         //Fields
@@ -122,6 +122,26 @@ public class EventView extends StackPane {
         FPButton addArtist = new FPButton("Add ", 90, 35);
         place(addArtist,-50,230);
 
+//        addArtist.setOnAction( e -> {
+//
+//            int age = 0;
+//
+//            try {
+//                age = Integer.parseInt(ageField.getText());
+//
+//                Event event = new Event(mainArtistField.getSelectionModel().isSelected());
+//
+//                this.eventView.addArtistToList(artist);
+//                this.artists.add(artist);
+//
+//            }
+//            catch(Exception e) {
+//                ageField.setText("Error");
+//            }
+//
+//
+//        });
+
         FPButton clearButton = new FPButton("Clear All ", 90, 35);
         place(clearButton,-170,230);
 
@@ -130,9 +150,7 @@ public class EventView extends StackPane {
 
         stackPane.getChildren().addAll(title,secondTitle,thirdTitle,mainArtist,coArtist,stage,popularity,Time,mainArtistField,coArtistField,stageField,popularityField,beginTime,endTime,addArtist,RemoveArtist,clearButton,makeLine(),makeLine2());
 
-//        addArtist.setOnAction(event -> {
-//            this.events.add(new Event(mainArtistField.getValue(),stageField.getValue(),beginTime.getValue(),endTime.getValue(),popularityField.getValue()));
-//        });
+
         return stackPane;
     }
     public void place(Node node, int x, int y){

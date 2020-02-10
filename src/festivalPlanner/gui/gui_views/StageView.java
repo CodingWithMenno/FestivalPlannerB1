@@ -1,22 +1,16 @@
 package festivalPlanner.gui.gui_views;
 
-import festivalPlanner.data_system.Artist;
 import festivalPlanner.data_system.Stage;
 import festivalPlanner.gui.SceneHandler;
-import festivalPlanner.gui.gui_controllers.StageViewController;
 import festivalplanner_guiModules.buttons.FPButton;
 import festivalplanner_guiModules.inputfields.*;
-import festivalplanner_guiModules.text.titles.DinamicTitle;
+import festivalplanner_guiModules.text.titles.DynamicTitle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class StageView extends StackPane{
 
@@ -58,28 +52,28 @@ public class StageView extends StackPane{
         BackButton.setTranslateX(370);
         BackButton.setTranslateY(-255);
 
-        DinamicTitle title = new DinamicTitle("Stage", 40);
+        DynamicTitle title = new DynamicTitle("Stage", 40);
         place(title,-300,-220);
 
-        DinamicTitle secondTitle = new DinamicTitle("Add Stage", 21);
+        DynamicTitle secondTitle = new DynamicTitle("Add Stage", 21);
         place(secondTitle,-300,-150);
 
-        DinamicTitle thirdTitle = new DinamicTitle("All Stages", 21);
+        DynamicTitle thirdTitle = new DynamicTitle("All Stages", 21);
         place(thirdTitle,110,-150);
 
-        DinamicTitle stageName = new DinamicTitle("Stage Name", 17);
+        DynamicTitle stageName = new DynamicTitle("Stage Name", 17);
         place(stageName,-300,-90);
 
-        DinamicTitle Capacity = new DinamicTitle("Capacity",17);
+        DynamicTitle Capacity = new DynamicTitle("Capacity",17);
         place(Capacity,-300,-30);
 
-        DinamicTitle indoor = new DinamicTitle("Indoor", 17);
+        DynamicTitle indoor = new DynamicTitle("Indoor", 17);
         place(indoor,-300,30);
 
-        DinamicTitle emergencyExits = new DinamicTitle("Emergency Exits", 17);
+        DynamicTitle emergencyExits = new DynamicTitle("Emergency Exits", 17);
         place(emergencyExits,-300,90);
 
-        DinamicTitle firstAidKits = new DinamicTitle("First Aid Kits", 17);
+        DynamicTitle firstAidKits = new DynamicTitle("First Aid Kits", 17);
         place(firstAidKits,-300,155);
 
         //Fields

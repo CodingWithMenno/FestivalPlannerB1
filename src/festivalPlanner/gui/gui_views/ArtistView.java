@@ -1,16 +1,13 @@
 package festivalPlanner.gui.gui_views;
 
 import festivalPlanner.data_system.Artist;
-import festivalPlanner.data_system.Event;
-import festivalPlanner.data_system.Stage;
 import festivalPlanner.gui.SceneHandler;
 import festivalPlanner.gui.gui_controllers.ArtistViewController;
 import festivalplanner_guiModules.buttons.FPButton;
-import festivalplanner_guiModules.inputfields.FPCheckBox;
 import festivalplanner_guiModules.inputfields.FPListView;
 import festivalplanner_guiModules.inputfields.FPTextArea;
 import festivalplanner_guiModules.inputfields.FPTextField;
-import festivalplanner_guiModules.text.titles.DinamicTitle;
+import festivalplanner_guiModules.text.titles.DynamicTitle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -72,28 +69,28 @@ public class ArtistView extends StackPane {
 
         //labels
 
-        DinamicTitle title = new DinamicTitle("Artist", 40);
+        DynamicTitle title = new DynamicTitle("Artist", 40);
         place(title,-300,-220);
 
-        DinamicTitle secondTitle = new DinamicTitle("Add Artist", 21);
+        DynamicTitle secondTitle = new DynamicTitle("Add Artist", 21);
         place(secondTitle,-300,-150);
 
-        DinamicTitle thirdTitle = new DinamicTitle("All Artists", 21);
+        DynamicTitle thirdTitle = new DynamicTitle("All Artists", 21);
         place(thirdTitle,110,-150);
 
-        DinamicTitle artistName = new DinamicTitle("Artist Name", 17);
+        DynamicTitle artistName = new DynamicTitle("Artist Name", 17);
         place(artistName,-300,-90);
 
-        DinamicTitle Age = new DinamicTitle("Age",17);
+        DynamicTitle Age = new DynamicTitle("Age",17);
         place(Age,-300,-30);
 
-        DinamicTitle Genre = new DinamicTitle("Genre", 17);
+        DynamicTitle Genre = new DynamicTitle("Genre", 17);
         place(Genre,-300,30);
 
-        DinamicTitle profileImage = new DinamicTitle("Profile Image", 17);
+        DynamicTitle profileImage = new DynamicTitle("Profile Image", 17);
         place(profileImage,-300,90);
 
-        DinamicTitle biography = new DinamicTitle("Biography", 17);
+        DynamicTitle biography = new DynamicTitle("Biography", 17);
         place(biography,-300,155);
 
         //Fields

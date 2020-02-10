@@ -73,11 +73,15 @@ public class TimeLineView extends StackPane {
         sliderContainer.getChildren().addAll(new CanvasDrawer(),makeTimeSeparator() );
 
         for (Event event : events){
+
             for (Stage stage : this.stages){
+
                 if ( event.getStage().equals(stage.getName())){
                     this.sliderContainer.getChildren().add( new EventModule(event.getHeadArtist(), event.getStartTime(), event.getEndTime(), event.getPhotoURL(), stages.indexOf(stage)));
                 }
+
             }
+
         }
 
         return sliderContainer;
