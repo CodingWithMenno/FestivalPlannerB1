@@ -28,6 +28,7 @@ public class TimeLineView extends StackPane {
     public Pane sliderContainer;
     private Data data;
 
+
     public TimeLineView(DatabaseConnection databaseConnection,Data data) throws SQLException {
 
         this.data = data;
@@ -53,7 +54,6 @@ public class TimeLineView extends StackPane {
         container.setMaxSize(118,690);
         container.setSpacing(10);
 
-        HBox stageContainerLabel = new HBox();
 
 
         for (Stage stage : stages){
