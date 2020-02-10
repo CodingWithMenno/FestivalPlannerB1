@@ -1,6 +1,7 @@
 package festivalPlanner.gui.gui_views;
 
 import festivalPlanner.data_system.Artist;
+import festivalPlanner.data_system.Data;
 import festivalPlanner.gui.SceneHandler;
 import festivalPlanner.gui.gui_controllers.ArtistViewController;
 import festivalplanner_guiModules.buttons.FPButton;
@@ -15,6 +16,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
+import java.sql.SQLException;
+
 public class ArtistView extends StackPane {
 
     private SceneHandler sceneHandler;
@@ -23,13 +26,16 @@ public class ArtistView extends StackPane {
     private  ArtistViewController controller;
     private EventView eventView;
     private ObservableList<Artist> artists;
+    private Data data;
 
 
-    public ArtistView(SceneHandler sceneHandler, EventView eventView) {
+
+    public ArtistView(SceneHandler sceneHandler, EventView eventView, Data data) {
         this.sceneHandler = sceneHandler;
         this.mainView = mainView;
         this.eventView = eventView;
         this.artists = FXCollections.observableArrayList();
+        this.data = data;
 
         setWidth(1280);
         setHeight(800);
@@ -37,13 +43,6 @@ public class ArtistView extends StackPane {
         getChildren().add(createStackPane());
     }
 
-    public FPListView getFpListView() {
-        return fpListView;
-    }
-
-    public void setListView(ObservableList list) {
-        this.fpListView.setItems(list);
-    }
 
     public StackPane createStackPane() {
 
@@ -59,7 +58,11 @@ public class ArtistView extends StackPane {
         Button BackButton = new FPButton("X", 30, 30);
         stackPane.getChildren().add(BackButton);
         BackButton.setOnAction(event -> {
-            this.sceneHandler.toMainView();
+            try {
+                this.sceneHandler.toMainView();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         });
 
         BackButton.setLayoutX(370);
@@ -120,6 +123,7 @@ public class ArtistView extends StackPane {
         place(removeArtist,310,230);
 
         FPListView fpListView = new FPListView("Artist list");
+        fpListView.setItems(data.getArtists());
         place(fpListView,250,50);
 
         stackPane.getChildren().addAll(title,secondTitle,thirdTitle,artistName,artistNameField,Age,fpListView,ageField,Genre,genreField,profileImage,biography,biographyField,open,addArtist,clearButton,removeArtist,makeLine(),makeLine2());
@@ -136,8 +140,7 @@ public class ArtistView extends StackPane {
                         genreField.getText(),
                         biographyField.getText());
 
-                this.eventView.addArtistToList(artist);
-                this.artists.add(artist);
+                this.data.addToArtists(artist);
 
             }
             catch(Exception e) {

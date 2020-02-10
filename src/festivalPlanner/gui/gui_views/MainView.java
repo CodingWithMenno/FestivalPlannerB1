@@ -1,5 +1,6 @@
 package festivalPlanner.gui.gui_views;
 
+import festivalPlanner.data_system.Data;
 import festivalPlanner.data_system.DatabaseConnection;
 import festivalPlanner.gui.SceneHandler;
 import festivalPlanner.gui.gui_controllers.MainViewController;
@@ -17,11 +18,11 @@ public class MainView extends VBox {
     private TimeLineView timeLineView;
     private SceneHandler scenehandler;
 
-    public MainView(SceneHandler sceneHandler, DatabaseConnection databaseConnection) throws SQLException {
+    public MainView(SceneHandler sceneHandler, DatabaseConnection databaseConnection, Data data) throws SQLException {
 
         this.headerBar = new HeaderBar(databaseConnection.fetchUserOrganization());
 
-        this.timeLineView = new TimeLineView(databaseConnection);
+        this.timeLineView = new TimeLineView(databaseConnection,data);
         this.scenehandler = sceneHandler;
         this.controllerBar = new ControllerBar(this.timeLineView,this.scenehandler);
 

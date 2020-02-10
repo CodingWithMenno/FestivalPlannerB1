@@ -13,10 +13,10 @@ public class Event {
     private String stage;
     private double startTime;
     private double endTime;
-    private int popularity;
+    private String popularity;
     private String photoURL;
 
-    public Event(String headArtist, String stage, double startTime, double endTime, int popularity, String photoURL) {
+    public Event(String headArtist, String stage, double startTime, double endTime, String popularity, String photoURL) {
         this.headArtist = headArtist;
         this.stage = stage;
         this.startTime = startTime;
@@ -25,7 +25,7 @@ public class Event {
         this.photoURL = photoURL;
     }
 
-    public Event(String headArtist, String stage, double startTime, double endTime, int popularity) {
+    public Event(String headArtist, String stage, double startTime, double endTime, String popularity) {
         this.headArtist = headArtist;
         this.stage = stage;
         this.startTime = startTime;
@@ -53,7 +53,7 @@ public class Event {
         return endTime;
     }
 
-    public int getPopularity() {
+    public String getPopularity() {
         return popularity;
     }
 

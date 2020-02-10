@@ -1,6 +1,7 @@
 package festivalPlanner.gui.gui_views;
 
 import festivalPlanner.data_system.Artist;
+import festivalPlanner.data_system.Data;
 import festivalPlanner.data_system.Event;
 import festivalPlanner.data_system.Stage;
 import festivalPlanner.gui.SceneHandler;
@@ -14,30 +15,28 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class EventView extends StackPane {
 
     private SceneHandler sceneHandler;
     private MainView mainView;
-    private ObservableList<Artist> artists;
-    private ObservableList<Stage> stages;
     private EventViewController controller;
-    private ArrayList<Event> events;
+    private Data data;
 
 
-    public EventView(SceneHandler sceneHandler){
+    public EventView(SceneHandler sceneHandler, Data data){
         this.sceneHandler = sceneHandler;
         this.mainView = mainView;
-        this.artists = FXCollections.observableArrayList();
-        this.stages = FXCollections.observableArrayList();
         this.controller = new EventViewController();
-        this.events = new ArrayList<>();
         this.controller.setTimes();
         this.controller.setPopularity();
+        this.data = data;
 
         setWidth(1280);
         setHeight(800);
@@ -59,7 +58,11 @@ public class EventView extends StackPane {
         Button BackButton = new FPButton("X",30,30);
         stackPane.getChildren().add(BackButton);
         BackButton.setOnAction(event -> {
-            this.sceneHandler.toMainView();
+            try {
+                this.sceneHandler.toMainView();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         });
 
         place(BackButton,370,-255);
@@ -94,15 +97,15 @@ public class EventView extends StackPane {
 
         ComboBox<Artist> mainArtistField = new FPComboBoxArtist("Main Artist");
         place(mainArtistField,-153,-90);
-        mainArtistField.setItems(artists);
+        mainArtistField.setItems(data.getArtists());
 
         ComboBox<Artist> coArtistField = new FPComboBoxArtist("Co Artist");
         place(coArtistField,-153,-30);
-        coArtistField.setItems(artists);
+        coArtistField.setItems(data.getArtists());
 
         ComboBox<Stage> stageField = new FPComboBoxStage("Stage");
         place(stageField,-153,30);
-        stageField.setItems(stages);
+        stageField.setItems(data.getStages());
 
         ComboBox<String> popularityField = new FPComboBoxString("Popularity %");
         place(popularityField,-153,90);
@@ -116,31 +119,24 @@ public class EventView extends StackPane {
         place(endTime,-80,155);
         endTime.setItems(controller.getTimes());
 
-        FPListView fpListView = new FPListView("Artist list");
-        place(fpListView,250,30);
+        FPButton addEvent = new FPButton("Add ", 90, 35);
+        place(addEvent,-50,230);
 
-        FPButton addArtist = new FPButton("Add ", 90, 35);
-        place(addArtist,-50,230);
+        ListView<Event> listViewStages = new FPListView("Events");
+        listViewStages.setItems(data.getEvents());
+        place(listViewStages,200,45);
+        listViewStages.setMinSize(200,320);
+        listViewStages.setMaxSize(200,320);
 
-//        addArtist.setOnAction( e -> {
-//
-//            int age = 0;
-//
-//            try {
-//                age = Integer.parseInt(ageField.getText());
-//
-//                Event event = new Event(mainArtistField.getSelectionModel().isSelected());
-//
-//                this.eventView.addArtistToList(artist);
-//                this.artists.add(artist);
-//
-//            }
-//            catch(Exception e) {
-//                ageField.setText("Error");
-//            }
-//
-//
-//        });
+        addEvent.setOnAction(event -> {
+
+            data.addToEvents(new Event(mainArtistField.getSelectionModel().getSelectedItem().getName(),
+                    stageField.getSelectionModel().getSelectedItem().getName(),
+                    beginTime.getSelectionModel().getSelectedItem(),
+                    endTime.getSelectionModel().getSelectedItem(),
+                    popularityField.getSelectionModel().getSelectedItem()));
+
+        });
 
         FPButton clearButton = new FPButton("Clear All ", 90, 35);
         place(clearButton,-170,230);
@@ -148,7 +144,11 @@ public class EventView extends StackPane {
         FPButton RemoveArtist = new FPButton("Remove ", 90, 35);
         place(RemoveArtist,310,230);
 
-        stackPane.getChildren().addAll(title,secondTitle,thirdTitle,mainArtist,coArtist,stage,popularity,Time,mainArtistField,coArtistField,stageField,popularityField,beginTime,endTime,addArtist,RemoveArtist,clearButton,makeLine(),makeLine2());
+        RemoveArtist.setOnAction(event -> {
+          data.removeEvent(listViewStages.getSelectionModel().getSelectedItem());
+        });
+
+        stackPane.getChildren().addAll(title,secondTitle,thirdTitle,mainArtist,coArtist,stage,popularity,listViewStages,Time,mainArtistField,coArtistField,stageField,popularityField,beginTime,endTime,addEvent,RemoveArtist,clearButton,makeLine(),makeLine2());
 
 
         return stackPane;
@@ -182,13 +182,7 @@ public class EventView extends StackPane {
         return hBox;
     }
 
-    public void addArtistToList(Artist artist){
-        artists.add(artist);
-    }
 
-    public void addStageToList(Stage stage){
-        stages.add(stage);
-    }
 
 }
 

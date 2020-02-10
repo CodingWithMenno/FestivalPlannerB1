@@ -1,9 +1,11 @@
 package planner_viewer;
 
+import festivalPlanner.data_system.Data;
 import festivalPlanner.data_system.DatabaseConnection;
 import festivalPlanner.data_system.Event;
 import festivalPlanner.data_system.Stage;
 import festivalPlanner.gui.gui_controllers.TimeLineViewScrollController;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -24,23 +26,25 @@ public class TimeLineView extends StackPane {
     private ArrayList<Event> events;
     private TimeLineViewScrollController timeLineViewScrollController;
     public Pane sliderContainer;
+    private Data data;
 
-    public TimeLineView(DatabaseConnection databaseConnection) throws SQLException {
+    public TimeLineView(DatabaseConnection databaseConnection,Data data) throws SQLException {
+
+        this.data = data;
 
         this.timeLineViewScrollController = new TimeLineViewScrollController(this);
 
         this.stages = databaseConnection.updateStageTable();
-        this.events = databaseConnection.updateEventTable();
 
         setMinSize(1280, 690);
         setPrefSize(1280, 690);
         setMaxSize( 1280, 690);
 
-        getChildren().addAll(timeLineSlider(this.events), stageModuleContainer(this.stages),makeStageHbox());
+        getChildren().addAll(timeLineSlider(data.getEvents()), stageModuleContainer(data.getStages()),makeStageHbox());
         setAlignment(Pos.TOP_LEFT);
     }
 
-    private Node stageModuleContainer(ArrayList<Stage> stages) {
+    private Node stageModuleContainer(ObservableList<Stage> stages) {
 
         VBox container = new VBox();
         container.setLayoutY(42);
@@ -60,7 +64,7 @@ public class TimeLineView extends StackPane {
     }
 
 
-    private Node timeLineSlider(ArrayList<Event> events) {
+    private Node timeLineSlider(ObservableList<Event> events) {
         sliderContainer= new Pane();
         sliderContainer.setLayoutX(150);
         sliderContainer.setTranslateX(150);
@@ -74,10 +78,10 @@ public class TimeLineView extends StackPane {
 
         for (Event event : events){
 
-            for (Stage stage : this.stages){
+            for (Stage stage : data.getStages()){
 
                 if ( event.getStage().equals(stage.getName())){
-                    this.sliderContainer.getChildren().add( new EventModule(event.getHeadArtist(), event.getStartTime(), event.getEndTime(), event.getPhotoURL(), stages.indexOf(stage)));
+                    this.sliderContainer.getChildren().add( new EventModule(event.getHeadArtist(), event.getStartTime(), event.getEndTime(), event.getPhotoURL(), data.getStages().indexOf(stage)));
                 }
 
             }
@@ -86,6 +90,7 @@ public class TimeLineView extends StackPane {
 
         return sliderContainer;
     }
+
 
     public HBox makeStageHbox(){
         HBox hBox = new HBox();

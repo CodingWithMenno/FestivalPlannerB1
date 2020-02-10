@@ -1,5 +1,6 @@
 package festivalPlanner.gui.gui_views;
 
+import festivalPlanner.data_system.Data;
 import festivalPlanner.data_system.Stage;
 import festivalPlanner.gui.SceneHandler;
 import festivalplanner_guiModules.buttons.FPButton;
@@ -12,17 +13,22 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
+import java.sql.SQLException;
+
 public class StageView extends StackPane{
 
     private SceneHandler sceneHandler;
     private MainView mainView;
-    private ObservableList<Stage> stages = FXCollections.observableArrayList();
     private EventView eventView;
+    private Data data;
 
-    public StageView(SceneHandler sceneHandler, EventView eventView){
+
+    public StageView(SceneHandler sceneHandler, EventView eventView, Data data){
         this.sceneHandler = sceneHandler;
         this.mainView = mainView;
         this.eventView = eventView;
+        this.data = data;
+
 
         setWidth(1280);
         setHeight(800);
@@ -44,7 +50,11 @@ public class StageView extends StackPane{
         Button BackButton = new FPButton("X",30,30);
         stackPane.getChildren().add(BackButton);
         BackButton.setOnAction(event -> {
-            this.sceneHandler.toMainView();
+            try {
+                this.sceneHandler.toMainView();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         });
 
         BackButton.setLayoutX(370);
@@ -103,7 +113,7 @@ public class StageView extends StackPane{
         place(removeStage,310,230);
 
         ListView<Stage> listViewStages = new ListView<>();
-        listViewStages.setItems(this.stages);
+        listViewStages.setItems(data.getStages());
         place(listViewStages,100,0);
         listViewStages.setMinSize(200,400);
         listViewStages.setMaxSize(200,400);
@@ -129,8 +139,7 @@ public class StageView extends StackPane{
                         emergencyExitsAmount,
                         firstAidKitsAmount);
 
-                this.eventView.addStageToList(stage);
-                this.stages.add(stage);
+                this.data.addToStages(stage);
 
             }
             catch(Exception e) {
