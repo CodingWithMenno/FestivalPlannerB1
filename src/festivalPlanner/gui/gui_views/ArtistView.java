@@ -10,6 +10,7 @@ import festivalplanner_guiModules.inputfields.FPTextField;
 import festivalplanner_guiModules.text.titles.DinamicTitle;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.StackPane;
 
 public class ArtistView extends StackPane {
@@ -34,9 +35,9 @@ public class ArtistView extends StackPane {
         return fpListView;
     }
 
-    public void setListView(ObservableList list) {
-        this.fpListView.setItems(list);
-    }
+//    public void setListView(ObservableList list) {
+//        this.fpListView.setItems(list);
+//    }
 
     public StackPane createStackPane() {
 
@@ -149,7 +150,7 @@ public class ArtistView extends StackPane {
         ArtistDescription.setTranslateY(220);
         stackPane.getChildren().add(ArtistDescription);
 
-        FPListView fpListView = new FPListView("Artist list");
+        FPListView fpListView = new FPListView("Artist List");
 
         fpListView.setLayoutX(250);
         fpListView.setLayoutY(50);
@@ -171,22 +172,6 @@ public class ArtistView extends StackPane {
             Artist artist = new Artist(name.getText(), Integer.parseInt(age.getText()), genre.getText(), description.getText());
             this.controller.addArtist(artist);
 
-//            for (int i = 0; i < this.controller.getArtists().size(); i++) {
-//                if (this.controller.getArtists().get(i).getName().equals(name.getText())) {
-//                    System.out.println("Dubbel :)");
-//
-//                }
-//
-//                else {
-//                    this.controller.addArtist(artist);
-//                    break;
-//                }
-//            }
-
-
-
-
-
         });
 
         FPButton deleteArtist = new FPButton("Delete", 120, 48);
@@ -197,9 +182,9 @@ public class ArtistView extends StackPane {
         deleteArtist.setTranslateY(240);
         stackPane.getChildren().add(deleteArtist);
 
-//        deleteArtist.setOnAction(event -> {
-//            this.controller.removeArtist(this.fpListView.getSelectionModel().getSelectedItem());
-//        });
+        deleteArtist.setOnAction(event -> {
+            this.controller.deleteArtist(fpListView.getSelectionModel().getSelectedItem());
+        });
 
         return stackPane;
 

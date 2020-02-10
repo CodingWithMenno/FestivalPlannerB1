@@ -16,48 +16,25 @@ public class ArtistViewController {
 
 
     public ArtistViewController(FPListView fpListView) {
-        Platform.runLater(() -> fpListView.setItems(this.artists));
+        Platform.runLater(() ->
+                fpListView.setItems(this.artists));
     }
 
     public void addArtist(Artist artist) {
-//        if (artists.size() == 0) {
-//            this.artists.add(artist);
-//        }
-//
-//
-//        for (int i = 0; i < artists.size(); i++) {
-//            if (!this.artists.get(i).getName().equals(artist.getName())){
-//                System.out.println("Ik voeg hem toe!");
-//                this.artists.add(artist);
-//                break;
-//
-//            }
-//
-//            else {
-//                System.out.println("Staat er al in");
-//                break;
-//            }
-//
-//        }
-
-        while(true){
-            for (Artist art : this.artists) {
-                if (art.getName() == artist.getName()){
-                    break;
-                }
+        for (Artist artist1 : this.artists) {
+            if (artist1.getName().equals(artist.getName())){
+                return;
             }
-            this.artists.add(artist);
-            break;
         }
-
-
+        this.artists.add(artist);
     }
 
     public ObservableList<Artist> getArtists(){
         return this.artists;
     }
 
-    public void removeArtist(Artist artist){
+
+    public void deleteArtist(Artist artist){
         this.artists.remove(artist);
     }
 
