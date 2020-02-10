@@ -24,7 +24,6 @@ public class ArtistViewController {
     public void addArtist(Artist artist) {
         this.artists.add(artist);
         System.out.println(this.artists);
-        System.out.println(this.artists.get(0));
 
 
     }
