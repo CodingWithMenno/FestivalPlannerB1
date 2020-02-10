@@ -22,6 +22,20 @@ public class EventModule extends VBox {
         String eventStartStr = String.valueOf(eventStart);
         String eventEndStr = String.valueOf(eventEnd);
 
+        if(eventStartStr.length() == 3){
+            eventStartStr = "0"+eventStartStr.charAt(0)+":00";
+        }
+        else if(eventStartStr.length() == 4){
+            eventStartStr = eventStartStr.charAt(0) +""+ eventStartStr.charAt(1)+":00";
+        }
+
+        if(eventEndStr.length() == 3){
+            eventEndStr = "0"+eventEndStr.charAt(0)+":00";
+        }
+        else if(eventEndStr.length() == 4){
+            eventEndStr = eventEndStr.charAt(0) +""+ eventEndStr.charAt(1)+":00";
+        }
+
         double relativeTimePos = ((eventEnd - eventStart)) * 115.0;
         setMinWidth(relativeTimePos);
         setMaxWidth( relativeTimePos);
