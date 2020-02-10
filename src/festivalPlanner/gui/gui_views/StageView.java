@@ -113,6 +113,11 @@ public class StageView extends StackPane {
         place(removeStage, 310, 230);
 
         ListView<Stage> listViewStages = new ListView<>();
+        listViewStages.setStyle("-fx-background-color: #FFFFFF; " +
+                "-fx-text-fill: #B76F88; " +
+                "-fx-font-size: 15; " +
+                "-fx-font-family: Helvetica; ");
+
         listViewStages.setItems(data.getStages());
         place(listViewStages,200,45);
         listViewStages.setMinSize(200,320);

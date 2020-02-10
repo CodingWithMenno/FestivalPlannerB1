@@ -112,14 +112,22 @@ public class ArtistView extends StackPane {
         TextField genreField = new FPTextField("Genre");
         place(genreField,-153,30);
 
-        ListView<Artist> fpListView = new FPListView("Artist list");
+        ListView<Artist> fpListView = new ListView();
+
+        fpListView.setStyle("-fx-background-color: #FFFFFF; " +
+                "-fx-text-fill: #B76F88; " +
+                "-fx-font-size: 15; " +
+                "-fx-font-family: Helvetica; ");
+
         fpListView.setItems(data.getArtists());
-        place(fpListView,250,50);
+        place(fpListView,200,50);
 
 //        this.controller = new ArtistViewController();
 
         Button open = new FPButton("Open",80,40);
         place(open,-153,90);
+        fpListView.setMinSize(200,320);
+        fpListView.setMaxSize(200,320);
 
         open.setOnAction(event -> this.controller.uploadPhoto()
         );
