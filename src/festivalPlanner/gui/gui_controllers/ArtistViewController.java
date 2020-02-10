@@ -21,6 +21,14 @@ public class ArtistViewController {
         });
     }
 
+    public ArtistViewController(){
+
+    }
+
+    public ObservableList<Artist> getArtists() {
+        return this.artists;
+    }
+
     public void addArtist(Artist artist) {
         for (Artist artist1 : this.artists) {
             if (artist1.getName().equals(artist.getName())){
