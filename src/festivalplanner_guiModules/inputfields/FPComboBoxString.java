@@ -10,12 +10,11 @@ public class FPComboBoxString extends ComboBox<String> {
         defaultStyle();
 
 
-
         setPromptText(promptText);
 
-        setMinSize(150,40);
-        setPrefSize(150,40);
-        setMaxSize(150,40);
+        setMinSize(150, 40);
+        setPrefSize(150, 40);
+        setMaxSize(150, 40);
 
 
     }
@@ -25,16 +24,14 @@ public class FPComboBoxString extends ComboBox<String> {
         defaultStyle();
 
 
-
         setPromptText(promptText);
 
-        setMinSize(width,height);
-        setPrefSize(width,height);
-        setMaxSize(width,height);
+        setMinSize(width, height);
+        setPrefSize(width, height);
+        setMaxSize(width, height);
 
 
     }
-
 
 
     public void defaultStyle() {

@@ -3,6 +3,10 @@ package festivalplanner_guiModules.buttons;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 
+/**
+ * Custom Festival Planner button
+ */
+
 public class FPButton extends Button implements FPButtons {
 
     public FPButton(String buttonText, int Width, int Height) {
@@ -12,9 +16,9 @@ public class FPButton extends Button implements FPButtons {
         defaultStyle();
 
         //Set Fixed Button Size boundaries
-        setMinSize(Width,Height);
-        setPrefSize(Width,Height);
-        setMaxSize(Width,Height);
+        setMinSize(Width, Height);
+        setPrefSize(Width, Height);
+        setMaxSize(Width, Height);
 
         setOnMousePressed(e -> actionStyle());
         setOnMouseReleased(e -> defaultStyle());

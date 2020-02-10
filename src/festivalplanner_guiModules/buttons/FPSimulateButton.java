@@ -4,9 +4,9 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 
 /**
- * Festival Planner start simulation button.
+ * Custom Festival Planner start simulation button.
  */
-public class FPSimulateButton extends Button implements FPButtons{
+public class FPSimulateButton extends Button implements FPButtons {
 
     public FPSimulateButton() {
 
@@ -14,12 +14,12 @@ public class FPSimulateButton extends Button implements FPButtons{
 
         defaultStyle();
 
-        setPrefSize(115,45);
+        setPrefSize(115, 45);
 
         //Set Fixed Button Size boundaries
-        setMinSize(115,45);
-        setPrefSize(115,45);
-        setMaxSize(115,45);
+        setMinSize(115, 45);
+        setPrefSize(115, 45);
+        setMaxSize(115, 45);
 
         setOnMousePressed(e -> actionStyle());
         setOnMouseReleased(e -> defaultStyle());
@@ -29,7 +29,7 @@ public class FPSimulateButton extends Button implements FPButtons{
     }
 
     @Override
-    public void actionStyle(){
+    public void actionStyle() {
 
         setStyle("-fx-background-color: white; " +
                 "-fx-text-fill: #B76F88; " +
@@ -40,7 +40,7 @@ public class FPSimulateButton extends Button implements FPButtons{
     }
 
     @Override
-    public void defaultStyle(){
+    public void defaultStyle() {
 
         setStyle("-fx-background-color: #B76F88; " +
                 "-fx-text-fill: white; " +

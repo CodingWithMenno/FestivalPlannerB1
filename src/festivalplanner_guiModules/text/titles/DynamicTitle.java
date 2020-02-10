@@ -10,7 +10,7 @@ public class DynamicTitle extends Label {
         setText(titleText);
         setStyle("-fx-text-fill: #35477D; " +
                 "-fx-font-family: Helvetica; " +
-                "-fx-font-size: "+fontSize+"; " +
+                "-fx-font-size: " + fontSize + "; " +
                 "-fx-font-weight: 800");
     }
 }

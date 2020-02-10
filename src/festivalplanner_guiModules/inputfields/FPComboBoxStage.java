@@ -11,16 +11,14 @@ public class FPComboBoxStage extends ComboBox<Stage> {
         defaultStyle();
 
 
-
         setPromptText(promptText);
 
-        setMinSize(150,40);
-        setPrefSize(150,40);
-        setMaxSize(150,40);
+        setMinSize(150, 40);
+        setPrefSize(150, 40);
+        setMaxSize(150, 40);
 
 
     }
-
 
 
     public void defaultStyle() {

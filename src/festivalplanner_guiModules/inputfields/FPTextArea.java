@@ -16,7 +16,7 @@ public class FPTextArea extends TextArea implements FPInputFields {
 
     }
 
-    public FPTextArea(String promptText,int width, int height) {
+    public FPTextArea(String promptText, int width, int height) {
 
         defaultStyle();
         setPromptText(promptText);
