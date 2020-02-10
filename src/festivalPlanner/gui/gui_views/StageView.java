@@ -15,7 +15,7 @@ import javafx.scene.layout.StackPane;
 
 import java.sql.SQLException;
 
-public class StageView extends StackPane{
+public class StageView extends StackPane {
 
     private SceneHandler sceneHandler;
     private MainView mainView;
@@ -32,22 +32,22 @@ public class StageView extends StackPane{
 
         setWidth(1280);
         setHeight(800);
-        setStyle("-fx-background-color: #35477D;" );
+        setStyle("-fx-background-color: #35477D;");
         getChildren().add(createStackPane());
     }
 
-    public StackPane createStackPane(){
+    public StackPane createStackPane() {
 
         StackPane stackPane = new StackPane(); //deze stackpane kun je in bouwen
-        stackPane.setMinSize(800,570);
-        stackPane.setMaxSize(800,570);
+        stackPane.setMinSize(800, 570);
+        stackPane.setMaxSize(800, 570);
 
         stackPane.setStyle("-fx-background-color: #FFFFFF;" +
                 "-fx-background-radius: 30; " +
                 "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 20, 0.0 , 2 , 2 );"
         );
 
-        Button BackButton = new FPButton("X",30,30);
+        Button BackButton = new FPButton("X", 30, 30);
         stackPane.getChildren().add(BackButton);
         BackButton.setOnAction(event -> {
             try {
@@ -89,28 +89,28 @@ public class StageView extends StackPane{
         //Fields
 
         TextField stageNameField = new FPTextField("Stage Name");
-        place(stageNameField,-153,-90);
+        place(stageNameField, -153, -90);
 
-        TextField CapacityField = new FPTextField("Amount",80,40);
-        place(CapacityField,-153,-30);
+        TextField CapacityField = new FPTextField("Amount", 80, 40);
+        place(CapacityField, -153, -30);
 
         CheckBox indoorField = new FPCheckBox("Indoor");
-        place(indoorField,-153,30);
+        place(indoorField, -153, 30);
 
-        TextField emergencyExitsField = new FPTextField("Amount",80,40);
-        place(emergencyExitsField,-153,90);
+        TextField emergencyExitsField = new FPTextField("Amount", 80, 40);
+        place(emergencyExitsField, -153, 90);
 
-        TextField firstAidKitsField = new FPTextField("Amount",80,40);
-        place(firstAidKitsField,-153,155);
+        TextField firstAidKitsField = new FPTextField("Amount", 80, 40);
+        place(firstAidKitsField, -153, 155);
 
         FPButton addStage = new FPButton("Add ", 90, 35);
-        place(addStage,-50,230);
+        place(addStage, -50, 230);
 
         FPButton clearButton = new FPButton("Clear All ", 90, 35);
-        place(clearButton,-170,230);
+        place(clearButton, -170, 230);
 
         FPButton removeStage = new FPButton("Remove ", 90, 35);
-        place(removeStage,310,230);
+        place(removeStage, 310, 230);
 
         ListView<Stage> listViewStages = new ListView<>();
         listViewStages.setItems(data.getStages());
@@ -118,15 +118,17 @@ public class StageView extends StackPane{
         listViewStages.setMinSize(200,400);
         listViewStages.setMaxSize(200,400);
 
-        stackPane.getChildren().addAll(title,secondTitle,thirdTitle,stageName,Capacity,indoor,emergencyExits,firstAidKits,stageNameField,listViewStages,CapacityField,indoorField,emergencyExitsField,firstAidKitsField,addStage,clearButton,removeStage,makeLine(),makeLine2());
+        FPButton show = new FPButton("Show", 90, 35);
+        place(show, 190, 230);
 
+        stackPane.getChildren().addAll(title, secondTitle, thirdTitle, show, stageName, Capacity, indoor, emergencyExits, firstAidKits, stageNameField, listViewStages, CapacityField, indoorField, emergencyExitsField, firstAidKitsField, addStage , clearButton, removeStage, makeLine(), makeLine2());
 
 
         addStage.setOnAction(event -> {
 
             int capacityAmount = 0;
-            int emergencyExitsAmount =0;
-            int firstAidKitsAmount =0;
+            int emergencyExitsAmount = 0;
+            int firstAidKitsAmount = 0;
 
             try {
                 capacityAmount = Integer.parseInt(CapacityField.getText());
@@ -141,13 +143,52 @@ public class StageView extends StackPane{
 
                 this.data.addToStages(stage);
 
-            }
-            catch(Exception e) {
+                if (stages.size() != 0) {
+
+                    for (int i = 0; i < stages.size() - 1; i++) {
+                        if (stages.get(i).getName().equals(stage.getName())) {
+                            alreadyExist = 1;
+                            place = i;
+
+                        }
+
+                    }
+
+                    if (alreadyExist == 1) {
+
+                        System.out.println("jaman");
+
+                        stages.get(place).setName(stage.getName());
+                        stages.get(place).setCapacity(stage.getCapacity());
+                        stages.get(place).setEmergencyExits(stage.getEmergencyExits());
+                        stages.get(place).setFirstAidKits(stage.getFirstAidKits());
+                        stages.get(place).setIndoor(stage.isIndoor());
+                        stages.get(place).setSurface(stage.getSurface());
+
+
+                    } else {
+//                        this.eventView.addStageToList(stage);
+                        this.stages.add(stage);
+                    }
+                } else {
+//                    this.eventView.addStageToList(stage);
+                    this.stages.add(stage);
+                }
+
+//                this.stages.add(stage);
+
+                stageNameField.setText("");
+                CapacityField.setText("");
+                indoorField.setSelected(false);
+                emergencyExitsField.setText("");
+                firstAidKitsField.setText("");
+
+
+            } catch (Exception e) {
                 CapacityField.setText("Error");
                 emergencyExitsField.setText("Error");
                 firstAidKitsField.setText("Error");
             }
-
 
 
         });
@@ -158,6 +199,26 @@ public class StageView extends StackPane{
             indoorField.setSelected(false);
             emergencyExitsField.setText("");
             firstAidKitsField.setText("");
+
+        });
+
+        removeStage.setOnAction(event -> {
+
+            stages.remove(listViewStages.getSelectionModel().getSelectedItem());
+
+
+        });
+
+        show.setOnAction(event -> {
+
+            Stage selected = listViewStages.getSelectionModel().getSelectedItem();
+
+            stageNameField.setText(selected.getName());
+            CapacityField.setText(String.valueOf(selected.getCapacity()));
+            indoorField.setSelected(selected.isIndoor());
+            emergencyExitsField.setText(String.valueOf(selected.getEmergencyExits()));
+            firstAidKitsField.setText(String.valueOf(selected.getFirstAidKits()));
+
 
         });
 
@@ -187,30 +248,30 @@ public class StageView extends StackPane{
         return stackPane;
     }
 
-    private void place(Node node,int x, int y) {
+    private void place(Node node, int x, int y) {
         node.setLayoutX(x);
         node.setLayoutY(y);
         node.setTranslateX(x);
         node.setTranslateY(y);
     }
 
-    public HBox makeLine(){
+    public HBox makeLine() {
 
         HBox hBox = new HBox();
         hBox.setMinSize(700, 2);
         hBox.setMaxSize(700, 2);
-        place(hBox,0,-170);
+        place(hBox, 0, -170);
         hBox.setStyle("-fx-background-color: #EEEEEE;");
 
         return hBox;
     }
 
-    public HBox makeLine2(){
+    public HBox makeLine2() {
 
         HBox hBox = new HBox();
         hBox.setMinSize(2, 400);
         hBox.setMaxSize(2, 400);
-        place(hBox,40,50);
+        place(hBox, 40, 50);
         hBox.setStyle("-fx-background-color: #EEEEEE;");
 
         return hBox;
