@@ -27,7 +27,6 @@ public class ArtistView extends StackPane {
 
     private SceneHandler sceneHandler;
     private MainView mainView;
-    private FPListView fpListView;
     private  ArtistViewController controller;
     private EventView eventView;
     private ObservableList<Artist> artists;
@@ -113,10 +112,11 @@ public class ArtistView extends StackPane {
         TextField genreField = new FPTextField("Genre");
         place(genreField,-153,30);
 
-        this.fpListView = new FPListView("Artist list");
+        ListView<Artist> fpListView = new FPListView("Artist list");
+        fpListView.setItems(data.getArtists());
         place(fpListView,250,50);
 
-        this.controller = new ArtistViewController(this.fpListView);
+//        this.controller = new ArtistViewController();
 
         Button open = new FPButton("Open",80,40);
         place(open,-153,90);
@@ -184,7 +184,6 @@ public class ArtistView extends StackPane {
 
         });
 
-        removeArtist.setOnAction(event -> this.controller.deleteArtist(fpListView.getSelectionModel().getSelectedItem()));
 
         return stackPane;
     }

@@ -125,7 +125,7 @@ public class EventView extends StackPane {
         FPButton addEvent = new FPButton("Add ", 90, 35);
         place(addEvent,-50,230);
 
-        ListView<Event> listViewStages = new FPListView("Events");
+        ListView<Event> listViewStages = new ListView();
         listViewStages.setItems(data.getEvents());
         place(listViewStages,200,45);
         listViewStages.setMinSize(200,320);

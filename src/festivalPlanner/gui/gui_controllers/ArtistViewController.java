@@ -13,18 +13,13 @@ public class ArtistViewController {
 
     private ObservableList<Artist> artists = FXCollections.observableArrayList();
     private String file;
-    private BufferedImage test;
 
-
-    public ArtistViewController(FPListView fpListView) {
-        Platform.runLater(() -> {
-            fpListView.setItems(this.artists);
-        });
-    }
 
     public ArtistViewController() {
 
     }
+
+
 
     public String getFile() {
         return file;
@@ -45,32 +40,13 @@ public class ArtistViewController {
 
     public void deleteArtist(Artist artist) {
         this.artists.remove(artist);
-        System.out.println(this.file);
     }
 
     public void uploadPhoto() {
-        FileDialog dialog = new FileDialog((Frame) null, "Select File to Open");
-        dialog.setMode(FileDialog.LOAD);
-        dialog.setVisible(true);
-        this.file = dialog.getDirectory() + dialog.getFile();
-        File file = new File(this.file);
-        String newString = String.valueOf(file.toURI());
-        newString = newString.substring(5, newString.length());
-        System.out.println(newString);
-        this.test = loadImage( newString);
+
     }
 
-    public static BufferedImage loadImage (String path) {
-        try {
-            return ImageIO.read(ImageLoader.class.getResourceAsStream(path));
-        } catch (IOException e) {
-            System.out.println("Er gaat iets mis bij het laden!!");
-            e.printStackTrace();
-            System.exit(1);
 
-        }
-        return null;
-    }
 
 }
 
