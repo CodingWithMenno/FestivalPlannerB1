@@ -6,6 +6,7 @@ import festivalPlanner.data_system.Event;
 import festivalPlanner.data_system.Stage;
 import festivalPlanner.gui.SceneHandler;
 
+import festivalPlanner.gui.gui_controllers.ArtistViewController;
 import festivalPlanner.gui.gui_controllers.EventViewController;
 import festivalplanner_guiModules.buttons.FPButton;
 import festivalplanner_guiModules.inputfields.*;
@@ -37,6 +38,8 @@ public class EventView extends StackPane {
         this.controller.setTimes();
         this.controller.setPopularity();
         this.data = data;
+
+
 
         setWidth(1280);
         setHeight(800);
@@ -94,10 +97,10 @@ public class EventView extends StackPane {
         place(Time,-300,155);
 
         //Fields
-
         ComboBox<Artist> mainArtistField = new FPComboBoxArtist("Main Artist");
         place(mainArtistField,-153,-90);
         mainArtistField.setItems(data.getArtists());
+
 
         ComboBox<Artist> coArtistField = new FPComboBoxArtist("Co Artist");
         place(coArtistField,-153,-30);

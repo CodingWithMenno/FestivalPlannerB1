@@ -9,6 +9,7 @@ public class Artist {
     private int age;
     private String genre;
     private String description;
+    private ImageView artistPhoto;
 
     public Artist(String name, int age, String genre, String description) {
         this.name = name;
@@ -17,6 +18,9 @@ public class Artist {
         this.description = description;
     }
 
+    public void setArtistPhoto(ImageView artistPhoto) {
+        this.artistPhoto = artistPhoto;
+    }
     public void setName(String name) {
         this.name = name;
     }
