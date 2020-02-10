@@ -114,15 +114,19 @@ public class StageView extends StackPane {
 
         ListView<Stage> listViewStages = new ListView<>();
         listViewStages.setItems(data.getStages());
-        place(listViewStages,100,0);
-        listViewStages.setMinSize(200,400);
-        listViewStages.setMaxSize(200,400);
+        place(listViewStages,200,45);
+        listViewStages.setMinSize(200,320);
+        listViewStages.setMaxSize(200,320);
 
         FPButton show = new FPButton("Show", 90, 35);
         place(show, 190, 230);
 
         stackPane.getChildren().addAll(title, secondTitle, thirdTitle, show, stageName, Capacity, indoor, emergencyExits, firstAidKits, stageNameField, listViewStages, CapacityField, indoorField, emergencyExitsField, firstAidKitsField, addStage , clearButton, removeStage, makeLine(), makeLine2());
 
+
+        removeStage.setOnAction(event -> {
+            data.removeStage(listViewStages.getSelectionModel().getSelectedItem());
+        });
 
         addStage.setOnAction(event -> {
 
@@ -141,41 +145,38 @@ public class StageView extends StackPane {
                         emergencyExitsAmount,
                         firstAidKitsAmount);
 
-                this.data.addToStages(stage);
 
-                if (stages.size() != 0) {
+                if (data.getStages().size() != 0) {
 
-                    for (int i = 0; i < stages.size() - 1; i++) {
-                        if (stages.get(i).getName().equals(stage.getName())) {
+                    int alreadyExist = 0;
+                    int place = 0;
+                    for (int i = 0; i < data.getStages().size() - 1; i++) {
+                        if (data.getStages().get(i).getName().equals(stage.getName())) {
                             alreadyExist = 1;
                             place = i;
 
                         }
-
                     }
 
                     if (alreadyExist == 1) {
 
                         System.out.println("jaman");
 
-                        stages.get(place).setName(stage.getName());
-                        stages.get(place).setCapacity(stage.getCapacity());
-                        stages.get(place).setEmergencyExits(stage.getEmergencyExits());
-                        stages.get(place).setFirstAidKits(stage.getFirstAidKits());
-                        stages.get(place).setIndoor(stage.isIndoor());
-                        stages.get(place).setSurface(stage.getSurface());
+                        data.getStages().get(place).setName(stage.getName());
+                        data.getStages().get(place).setCapacity(stage.getCapacity());
+                        data.getStages().get(place).setEmergencyExits(stage.getEmergencyExits());
+                        data.getStages().get(place).setFirstAidKits(stage.getFirstAidKits());
+                        data.getStages().get(place).setIndoor(stage.isIndoor());
+                        data.getStages().get(place).setSurface(stage.getSurface());
 
 
                     } else {
-//                        this.eventView.addStageToList(stage);
-                        this.stages.add(stage);
+                        this.data.getStages().add(stage);
                     }
                 } else {
-//                    this.eventView.addStageToList(stage);
-                    this.stages.add(stage);
+                    this.data.getStages().add(stage);
                 }
 
-//                this.stages.add(stage);
 
                 stageNameField.setText("");
                 CapacityField.setText("");
@@ -204,7 +205,7 @@ public class StageView extends StackPane {
 
         removeStage.setOnAction(event -> {
 
-            stages.remove(listViewStages.getSelectionModel().getSelectedItem());
+            data.removeStage(listViewStages.getSelectionModel().getSelectedItem());
 
 
         });
@@ -222,28 +223,7 @@ public class StageView extends StackPane {
 
         });
 
-        //Under this comment only : Functionality
 
-//        addButton.setOnAction(event -> {
-//
-//            this.eventView.addStageToList(new Stage(nameField.getText(),Integer.parseInt(capacityField.getText()),Integer.parseInt(surfaceField.getText()),indoorButton.isSelected(),Integer.parseInt(emergencyText.getText()),Integer.parseInt(firstAidText.getText())));
-
-//            try {
-//
-//                String name = stageName.getText();
-//                int capacity = Integer.parseInt(capacityField.getText());
-//                int surface = Integer.parseInt(surfaceField.getText());
-//                boolean isIndoor = indoorButton.isSelected();
-//                int emergencyExit = Integer.parseInt(emergencyText.getText());
-//                int firstAid = Integer.parseInt(firstAidText.getText());
-//
-//                this.stages.add(new Stage(name, capacity, surface, isIndoor, emergencyExit, firstAid));
-//                System.out.println(this.stages);
-//
-//            } catch (NumberFormatException | NullPointerException e) {
-//                e.printStackTrace();
-//            }
-//        });
 
         return stackPane;
     }

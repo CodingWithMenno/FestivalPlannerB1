@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class ArtistView extends StackPane {
 
@@ -122,11 +123,17 @@ public class ArtistView extends StackPane {
         FPButton removeArtist = new FPButton("Remove ", 90, 35);
         place(removeArtist,310,230);
 
-        FPListView fpListView = new FPListView("Artist list");
+        ListView<Artist> fpListView = new FPListView("Artist list");
         fpListView.setItems(data.getArtists());
-        place(fpListView,250,50);
+        place(fpListView,200,45);
+        fpListView.setMinSize(200,320);
+        fpListView.setMaxSize(200,320);
 
         stackPane.getChildren().addAll(title,secondTitle,thirdTitle,artistName,artistNameField,Age,fpListView,ageField,Genre,genreField,profileImage,biography,biographyField,open,addArtist,clearButton,removeArtist,makeLine(),makeLine2());
+
+        removeArtist.setOnAction(event -> {
+            data.removeArtist(fpListView.getSelectionModel().getSelectedItem());
+        });
 
         addArtist.setOnAction(event -> {
 
@@ -146,6 +153,11 @@ public class ArtistView extends StackPane {
             catch(Exception e) {
                 ageField.setText("Error");
             }
+            artistNameField.setText("");
+            ageField.setText("");
+            genreField.setText("");
+            biographyField.setText("");
+
 
         });
 
