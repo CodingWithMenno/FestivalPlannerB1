@@ -55,7 +55,6 @@ public class ArtistViewController {
 
     public void deleteArtist(Artist artist) {
         this.artists.remove(artist);
-        System.out.println(this.file);
     }
 
     public void uploadPhoto() {
