@@ -123,7 +123,6 @@ public class EventView extends StackPane {
         endTime.setItems(controller.getTimes());
         beginTime.setOnAction( e -> {
             endTime.setItems(controller.getEndTimes(beginTime.getSelectionModel().getSelectedItem()));
-            mainArtistField.setItems(data.getAvailableArtists(beginTime.getSelectionModel().getSelectedItem(), endTime.getSelectionModel().getSelectedItem()));
         });
 
 
@@ -145,11 +144,11 @@ public class EventView extends StackPane {
         addEvent.setOnAction(event -> {
 
             try {
-                data.addToEvents(mainArtistField.getSelectionModel().getSelectedItem(),
+                data.addToEvents(new Event(mainArtistField.getSelectionModel().getSelectedItem(),
                         stageField.getSelectionModel().getSelectedItem().getName(),
                         beginTime.getSelectionModel().getSelectedItem(),
                         endTime.getSelectionModel().getSelectedItem(),
-                        popularityField.getSelectionModel().getSelectedItem());
+                        popularityField.getSelectionModel().getSelectedItem()));
             } catch (Exception e){
                 ((FPComboBoxArtist) mainArtistField).invalidInputStyle();
                 ((FPComboBoxStage) stageField).invalidInputStyle();
