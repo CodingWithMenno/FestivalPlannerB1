@@ -5,15 +5,19 @@ import festivalPlanner.gui.gui_views.EventView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class EventViewController {
+public class  EventViewController {
 
     private ObservableList<Double> times;
+    private ObservableList<Double> endTimes;
     private ObservableList<String> popularity;
 
 
     public EventViewController() {
         this.times = FXCollections.observableArrayList();
+        //this.endTimes = FXCollections.observableArrayList();
+        //this.endTimes.add(0.0);
         this.popularity = FXCollections.observableArrayList();
+        setTimes();
     }
 
     public void setTimes(){
@@ -25,6 +29,16 @@ public class EventViewController {
 
     public ObservableList<Double> getTimes(){
         return this.times;
+    }
+
+    public ObservableList<Double> getEndTimes(Double startTime){
+        this.endTimes = FXCollections.observableArrayList();
+        for (Double time : this.times){
+            if ( startTime < time ){
+                this.endTimes.add(time);
+            }
+        }
+        return this.endTimes;
     }
 
     public void setPopularity(){

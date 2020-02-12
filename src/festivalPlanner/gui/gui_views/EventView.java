@@ -35,7 +35,7 @@ public class EventView extends StackPane {
         this.sceneHandler = sceneHandler;
         this.mainView = mainView;
         this.controller = new EventViewController();
-        this.controller.setTimes();
+        //this.controller.setTimes();
         this.controller.setPopularity();
         this.data = data;
 
@@ -101,7 +101,6 @@ public class EventView extends StackPane {
         place(mainArtistField,-153,-90);
         mainArtistField.setItems(data.getArtists());
 
-
         ComboBox<Artist> coArtistField = new FPComboBoxArtist("Co Artist");
         place(coArtistField,-153,-30);
         coArtistField.setItems(data.getArtists());
@@ -117,10 +116,16 @@ public class EventView extends StackPane {
         ComboBox<Double> beginTime = new FPComboBoxDouble("Begin time",100,40);
         place(beginTime,-183,155);
         beginTime.setItems(controller.getTimes());
+        beginTime.getSelectionModel().select(2);
 
         ComboBox<Double> endTime = new FPComboBoxDouble("End time",100,40);
         place(endTime,-80,155);
         endTime.setItems(controller.getTimes());
+        beginTime.setOnAction( e -> {
+            endTime.setItems(controller.getEndTimes(beginTime.getSelectionModel().getSelectedItem()));
+            mainArtistField.setItems(data.getAvailableArtists(beginTime.getSelectionModel().getSelectedItem(), endTime.getSelectionModel().getSelectedItem()));
+        });
+
 
         FPButton addEvent = new FPButton("Add ", 90, 35);
         place(addEvent,-50,230);
@@ -139,11 +144,19 @@ public class EventView extends StackPane {
 
         addEvent.setOnAction(event -> {
 
-            data.addToEvents(new Event(mainArtistField.getSelectionModel().getSelectedItem().getName(),
-                    stageField.getSelectionModel().getSelectedItem().getName(),
-                    beginTime.getSelectionModel().getSelectedItem(),
-                    endTime.getSelectionModel().getSelectedItem(),
-                    popularityField.getSelectionModel().getSelectedItem()));
+            try {
+                data.addToEvents(mainArtistField.getSelectionModel().getSelectedItem(),
+                        stageField.getSelectionModel().getSelectedItem().getName(),
+                        beginTime.getSelectionModel().getSelectedItem(),
+                        endTime.getSelectionModel().getSelectedItem(),
+                        popularityField.getSelectionModel().getSelectedItem());
+            } catch (Exception e){
+                ((FPComboBoxArtist) mainArtistField).invalidInputStyle();
+                ((FPComboBoxStage) stageField).invalidInputStyle();
+                ((FPComboBoxDouble) beginTime).invalidInputStyle();
+                ((FPComboBoxDouble) endTime).invalidInputStyle();
+                ((FPComboBoxString) popularityField).invalidInputStyle();
+            }
 
         });
 
@@ -162,6 +175,7 @@ public class EventView extends StackPane {
 
         return stackPane;
     }
+
     public void place(Node node, int x, int y){
         node.setLayoutX(x);
         node.setLayoutY(y);

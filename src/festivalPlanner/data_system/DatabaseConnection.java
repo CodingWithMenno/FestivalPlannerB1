@@ -63,12 +63,12 @@ public class DatabaseConnection {
 
         while( databaseReply.next() ) {
 
-            events.add(new Event(databaseReply.getString(1),
-                    databaseReply.getString(2),
-                    databaseReply.getDouble(3),
-                    databaseReply.getDouble(4),
-                    databaseReply.getString(5),
-                    databaseReply.getString(6)));
+//            events.add(new Event(databaseReply.getString(1),
+//                    databaseReply.getString(2),
+//                    databaseReply.getDouble(3),
+//                    databaseReply.getDouble(4),
+//                    databaseReply.getString(5),
+//                    databaseReply.getString(6)));
 
         }
 

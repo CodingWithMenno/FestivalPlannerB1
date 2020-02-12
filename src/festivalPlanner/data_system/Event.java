@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Event {
 
-    private String headArtist;
+    private Artist headArtist;
     private ArrayList<Artist> coArtists;
     private String stage;
     private double startTime;
@@ -16,7 +16,7 @@ public class Event {
     private String popularity;
     private String photoURL;
 
-    public Event(String headArtist, String stage, double startTime, double endTime, String popularity, String photoURL) {
+    public Event(Artist headArtist, String stage, double startTime, double endTime, String popularity, String photoURL) {
         this.headArtist = headArtist;
         this.stage = stage;
         this.startTime = startTime;
@@ -25,7 +25,7 @@ public class Event {
         this.photoURL = photoURL;
     }
 
-    public Event(String headArtist, String stage, double startTime, double endTime, String popularity) {
+    public Event(Artist headArtist, String stage, double startTime, double endTime, String popularity) {
         this.headArtist = headArtist;
         this.stage = stage;
         this.startTime = startTime;
@@ -33,7 +33,7 @@ public class Event {
         this.popularity = popularity;
     }
 
-    public String getHeadArtist() {
+    public Artist getHeadArtist() {
         return headArtist;
     }
 
@@ -61,7 +61,4 @@ public class Event {
         return photoURL;
     }
 
-    public String toString(){
-        return this.headArtist;
-    }
 }
