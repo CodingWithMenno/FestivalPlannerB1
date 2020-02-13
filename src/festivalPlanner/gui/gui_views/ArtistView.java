@@ -87,19 +87,19 @@ public class ArtistView extends StackPane {
         place(thirdTitle,110,-150);
 
         DynamicTitle artistName = new DynamicTitle("Artist Name", 17);
-        place(artistName,-300,-90);
+        place(artistName,-302,-90);
 
         DynamicTitle Age = new DynamicTitle("Age",17);
-        place(Age,-300,-30);
+        place(Age,-334,-30);
 
         DynamicTitle Genre = new DynamicTitle("Genre", 17);
-        place(Genre,-300,30);
+        place(Genre,-328,30);
 
         DynamicTitle profileImage = new DynamicTitle("Profile Image", 17);
-        place(profileImage,-300,90);
+        place(profileImage,-297,90);
 
         DynamicTitle biography = new DynamicTitle("Biography", 17);
-        place(biography,-300,155);
+        place(biography,-311,155);
 
         //Fields
 
@@ -107,7 +107,7 @@ public class ArtistView extends StackPane {
         place(artistNameField,-153,-90);
 
         TextField ageField = new FPTextField("Age",80,40);
-        place(ageField,-153,-30);
+        place(ageField,-187,-30);
 
         TextField genreField = new FPTextField("Genre");
         place(genreField,-153,30);
@@ -133,13 +133,13 @@ public class ArtistView extends StackPane {
         );
 
         TextArea biographyField = new FPTextArea("Biography",160,80);
-        place(biographyField,-153,165);
+        place(biographyField,-149,165);
 
         FPButton addArtist = new FPButton("Add ", 90, 35);
-        place(addArtist,-50,230);
+        place(addArtist,-61,230);
 
         FPButton clearButton = new FPButton("Clear All ", 90, 35);
-        place(clearButton,-170,230);
+        place(clearButton,-181,230);
 
         clearButton.setOnAction(event -> {
             artistNameField.clear();
@@ -194,6 +194,7 @@ public class ArtistView extends StackPane {
             open.setText("");
 
         });
+
 
 
         return stackPane;
