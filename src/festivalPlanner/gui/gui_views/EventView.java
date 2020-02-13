@@ -82,19 +82,19 @@ public class EventView extends StackPane {
         place(thirdTitle,110,-150);
 
         DynamicTitle mainArtist = new DynamicTitle("Main Artist", 17);
-        place(mainArtist,-300,-90);
+        place(mainArtist,-308,-90);
 
         DynamicTitle coArtist = new DynamicTitle("Co Artist",17);
-        place(coArtist,-300,-30);
+        place(coArtist,-315,-30);
 
         DynamicTitle stage = new DynamicTitle("Stage", 17);
-        place(stage,-300,30);
+        place(stage,-326,30);
 
         DynamicTitle popularity = new DynamicTitle("Popularity", 17);
-        place(popularity,-300,90);
+        place(popularity,-309,90);
 
         DynamicTitle Time = new DynamicTitle("Time", 17);
-        place(Time,-300,155);
+        place(Time,-330,155);
 
         //Fields
         ComboBox<Artist> mainArtistField = new FPComboBoxArtist("Main Artist");
@@ -116,12 +116,12 @@ public class EventView extends StackPane {
         popularityField.setItems(this.controller.getPopularity());
 
         ComboBox<Double> beginTime = new FPComboBoxDouble("Begin time",100,40);
-        place(beginTime,-183,155);
+        place(beginTime,-178,155);
         beginTime.setItems(controller.getTimes());
         beginTime.getSelectionModel().select(2);
 
         ComboBox<Double> endTime = new FPComboBoxDouble("End time",100,40);
-        place(endTime,-80,155);
+        place(endTime,-75,155);
         endTime.setItems(controller.getTimes());
         beginTime.setOnAction( e -> {
             System.out.println("test2");
@@ -130,7 +130,7 @@ public class EventView extends StackPane {
 
 
         FPButton addEvent = new FPButton("Add ", 90, 35);
-        place(addEvent,-50,230);
+        place(addEvent,-71,230);
 
         ListView<Event> listViewStages = new ListView();
 
@@ -165,7 +165,7 @@ public class EventView extends StackPane {
         });
 
         FPButton clearButton = new FPButton("Clear All ", 90, 35);
-        place(clearButton,-170,230);
+        place(clearButton,-182,230);
 
         FPButton RemoveArtist = new FPButton("Remove ", 90, 35);
         place(RemoveArtist,310,230);
