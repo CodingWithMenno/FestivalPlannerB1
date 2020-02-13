@@ -61,4 +61,8 @@ public class Event {
         return photoURL;
     }
 
+    public String toString(){
+        return this.headArtist.getName() +" "+ startTime + " - " + endTime;
+    }
+
 }
