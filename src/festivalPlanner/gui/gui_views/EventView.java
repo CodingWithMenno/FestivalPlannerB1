@@ -157,6 +157,8 @@ public class EventView extends StackPane {
                 ((FPComboBoxString) popularityField).invalidInputStyle();
             }
 
+
+
         });
 
         FPButton clearButton = new FPButton("Clear All ", 90, 35);
