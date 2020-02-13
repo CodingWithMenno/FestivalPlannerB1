@@ -11,6 +11,10 @@ import planner_viewer.TimeLineView;
 
 import java.sql.SQLException;
 
+/**
+ * This is the main view. Here you can see the agenda of all the stages, events and artists.
+ */
+
 public class MainView extends VBox {
 
     private HeaderBar headerBar;

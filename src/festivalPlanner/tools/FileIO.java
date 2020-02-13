@@ -7,6 +7,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
+/**
+ * This class stores all the data (Artists, events and stages) in a file.
+ */
+
 public class FileIO {
 
     public void writeStringToFile(String towrite, String path){

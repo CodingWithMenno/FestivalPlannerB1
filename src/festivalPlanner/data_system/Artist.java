@@ -3,6 +3,11 @@ package festivalPlanner.data_system;
 import festivalPlanner.gui.gui_controllers.ArtistViewController;
 import javafx.scene.image.ImageView;
 
+/**
+ * An artist needs a name, age, genre, descriptiom and artist photo. Here is where they
+ * are stored.
+ */
+
 public class Artist {
 
     private String name;

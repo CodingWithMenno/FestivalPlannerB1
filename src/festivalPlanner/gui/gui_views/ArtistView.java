@@ -24,6 +24,10 @@ import javafx.scene.image.ImageView;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * This class opens a new window where you can add new artists.
+ */
+
 public class ArtistView extends StackPane {
 
     private SceneHandler sceneHandler;

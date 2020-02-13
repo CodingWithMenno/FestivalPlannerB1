@@ -21,6 +21,11 @@ import javafx.scene.shape.Rectangle;
 
 import java.sql.SQLException;
 
+/**
+ * When starting the application you start at this class. Here you need to login with a username and password
+ * which are stored in a database.
+ */
+
 public class LoginView extends StackPane {
 
     private SceneHandler sceneHandler;

@@ -3,6 +3,10 @@ package festivalPlanner.data_system;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * In this class is all data stored. The data consist of artistss, stages and events.
+ */
+
 public class Data {
 
     private ObservableList<Artist> artists;

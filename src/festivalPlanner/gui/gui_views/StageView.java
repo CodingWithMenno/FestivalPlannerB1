@@ -15,6 +15,10 @@ import javafx.scene.layout.StackPane;
 
 import java.sql.SQLException;
 
+/**
+ * This class opens a new window where you can add new stages.
+ */
+
 public class StageView extends StackPane {
 
     private SceneHandler sceneHandler;

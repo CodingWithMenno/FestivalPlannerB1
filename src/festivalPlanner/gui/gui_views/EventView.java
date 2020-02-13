@@ -23,6 +23,10 @@ import javafx.scene.layout.StackPane;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * This class opens a new window where you can add new events.
+ */
+
 public class EventView extends StackPane {
 
     private SceneHandler sceneHandler;
