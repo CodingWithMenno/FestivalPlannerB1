@@ -16,14 +16,7 @@ public class Event {
     private String popularity;
     private String photoURL;
 
-    public Event(Artist headArtist, String stage, double startTime, double endTime, String popularity, String photoURL) {
-        this.headArtist = headArtist;
-        this.stage = stage;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.popularity = popularity;
-        this.photoURL = photoURL;
-    }
+
 
     public Event(Artist headArtist, String stage, double startTime, double endTime, String popularity) {
         this.headArtist = headArtist;
@@ -31,6 +24,8 @@ public class Event {
         this.startTime = startTime;
         this.endTime = endTime;
         this.popularity = popularity;
+        this.photoURL = this.headArtist.getArtistPhoto();
+
     }
 
     public Artist getHeadArtist() {

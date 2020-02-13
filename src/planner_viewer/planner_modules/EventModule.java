@@ -60,16 +60,24 @@ public class EventModule extends VBox {
         eventTitleLabel.setStyle("-fx-text-fill: white; -fx-font-size: 20; -fx-font-family: Helvetica; -fx-font-weight: 700");
         eventTimeLabel.setStyle("-fx-text-fill: white; -fx-font-size: 15; -fx-font-family: Helvetica;");
 
-        String url = "https://cdn.vox-cdn.com/thumbor/e5PgdnUTcdfPoXydiBctllA62yA=/0x0:1600x1118/1200x800/filters:focal(672x431:928x687)/cdn.vox-cdn.com/uploads/chorus_image/image/59464313/TimStudio2104_edit.0.jpg";
+
+        String url = backgroundURL;
+
+        if(url.equals("")){
+            url = "https://upload.wikimedia.org/wikipedia/commons/d/dc/Blue_fade.jpg";
+        }
+
+
 
         this.setStyle("-fx-background-radius: 20; " +
                 "-fx-text-fill: #35477D; "+
-                "-fx-background-color: Black;"+
+                "-fx-background-color: Blue;"+
                 "-fx-background-image: url('" + url + "');" +
                 "-fx-background-repeat: no-repeat;" +
                 "-fx-background-size: cover;" +
                 "-fx-background-position: right center;" +
                 "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 10, 0.0 , 4 , 4 );");
+
 
         setTranslateX(relativeStartPos);
         

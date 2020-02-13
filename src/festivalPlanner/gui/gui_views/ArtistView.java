@@ -124,7 +124,7 @@ public class ArtistView extends StackPane {
 
 //        this.controller = new ArtistViewController();
 
-        Button open = new FPButton("Open",80,40);
+        TextField open = new FPTextField("Picture URL");
         place(open,-153,90);
         fpListView.setMinSize(200,320);
         fpListView.setMaxSize(200,320);
@@ -168,7 +168,8 @@ public class ArtistView extends StackPane {
                 Artist artist = new Artist(artistNameField.getText(),
                         age,
                         genreField.getText(),
-                        biographyField.getText());
+                        biographyField.getText(),
+                        open.getText());
 
                 this.data.addToArtists(artist);
 
@@ -180,6 +181,7 @@ public class ArtistView extends StackPane {
             ageField.setText("");
             genreField.setText("");
             biographyField.setText("");
+            open.setText("");
 
 
         });
@@ -189,6 +191,7 @@ public class ArtistView extends StackPane {
             ageField.setText("");
             biographyField.setText("");
             genreField.setText("");
+            open.setText("");
 
         });
 
