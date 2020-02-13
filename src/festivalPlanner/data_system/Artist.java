@@ -57,5 +57,17 @@ public class Artist {
     public String getArtistPhoto() {
         return artistPhoto;
     }
+
+    public int getAge(){
+        return this.age;
+    }
+
+    public String getGenre(){
+        return this.genre;
+    }
+
+    public String getDescription(){
+        return this.description;
+    }
 }
 
