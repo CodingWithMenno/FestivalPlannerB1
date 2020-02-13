@@ -165,8 +165,6 @@ public class StageView extends StackPane {
 
                     if (alreadyExist == 1) {
 
-                        System.out.println("jaman");
-
                         data.getStages().get(place).setName(stage.getName());
                         data.getStages().get(place).setCapacity(stage.getCapacity());
                         data.getStages().get(place).setEmergencyExits(stage.getEmergencyExits());
