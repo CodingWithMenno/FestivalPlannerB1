@@ -1,10 +1,13 @@
 package festivalPlanner.data_system;
 
+import festivalPlanner.tools.FileIO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class Data {
+import java.io.File;
 
+public class Data {
+    private FileIO IO;
     private ObservableList<Artist> artists;
     private ObservableList<Stage> stages;
     private ObservableList<Event> events;
@@ -13,6 +16,7 @@ public class Data {
         this.artists = FXCollections.observableArrayList();
         this.stages = FXCollections.observableArrayList();
         this.events = FXCollections.observableArrayList();
+        this.IO = new FileIO();
     }
 
     public void fetchLocalSave(String listType){
@@ -20,8 +24,20 @@ public class Data {
     }
 
     public void addToArtists(Artist artist){
+
+        IO.writeArrayListArtist(this.artists, "/C:/Users/Davy/Documents/SavedArtists.txt");
+
+        this.artists = IO.readArtistFile("/C:/Users/Davy/Documents/SavedArtists.txt");
         this.artists.add(artist);
+
+
+        System.out.println("addToArtist method called, we got this list: " + this.artists);
+
+        getArtists();
+
+
     }
+
 
     public void addToStages(Stage stage){
         this.stages.add(stage);
@@ -52,7 +68,13 @@ public class Data {
     }
 
     public ObservableList<Artist> getArtists() {
-        return artists;
+
+        this.artists = IO.readArtistFile("/C:/Users/Davy/Documents/SavedArtists.txt");
+
+//        Artist yolo = new Artist("mavo", 12, "alal", "hihi");
+//        this.artists.add(yolo);
+        System.out.println("called getartists");
+        return this.artists;
     }
 
 

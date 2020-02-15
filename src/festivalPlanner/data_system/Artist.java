@@ -3,7 +3,9 @@ package festivalPlanner.data_system;
 import festivalPlanner.gui.gui_controllers.ArtistViewController;
 import javafx.scene.image.ImageView;
 
-public class Artist {
+import java.io.Serializable;
+
+public class Artist implements Serializable {
 
     private String name;
     private int age;

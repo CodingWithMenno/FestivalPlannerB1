@@ -1,15 +1,27 @@
 package festivalPlanner.tools;
 
 
+import festivalPlanner.data_system.Artist;
+import festivalPlanner.data_system.Event;
+import festivalPlanner.data_system.Stage;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.stream.Stream;
 
-public class FileIO {
+public class FileIO implements Serializable {
+    private ObservableList<Artist> FileIOArists;
+    private ObservableList<Stage> FileIOStages;
+    private ObservableList<Event> FileIOEvents;
 
-    public void writeStringToFile(String towrite, String path){
+    public FileIO() {
+        this.FileIOArists = FXCollections.observableArrayList();
+        this.FileIOStages = FXCollections.observableArrayList();
+        this.FileIOEvents = FXCollections.observableArrayList();
+    }
+
+    public void writeStringToFile(String towrite, String path) {
         try {
             FileWriter writer = new FileWriter(path, true);
             writer.write(towrite);
@@ -20,58 +32,79 @@ public class FileIO {
         }
     }
 
-    public void readStringFromFile(String path){
+    public void readStringFromFile(String path) {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
                 System.out.println(line);
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void writeArrayList(ArrayList<String> arraylist, String path){
+    public void writeArrayListArtist(ObservableList<Artist> arraylist, String path) {
+        readArtistFile("/C:/Users/Davy/Documents/SavedArtists.txt");
+
+
+        System.out.println("I get this list: ))) : " + arraylist);
+
+
+        ArrayList<Artist> templist = new ArrayList<>();
+        for (Artist artist : arraylist) {
+            templist.add(artist);
+            System.out.println("Added to the templist, templist is now: " + templist);
+        }
+
+
         try {
-            FileWriter writer = new FileWriter(path, true);
+            FileOutputStream f = new FileOutputStream(new File(path));
+            ObjectOutputStream obj = new ObjectOutputStream(f);
 
-            for (int i = 0; i < arraylist.size(); i++) {
-                writer.write(arraylist.get(i));
-                writer.write("\r\n");   // write new line
-                if (arraylist.size() == (i + 1)) {
-                    writer.write("#");
-                    writer.write("\r\n");
-                }
-            }
+            FileWriter fwOb = new FileWriter("path", false);
+            PrintWriter pwOb = new PrintWriter(fwOb, false);
+            pwOb.flush();
+            pwOb.close();
+            fwOb.close();
 
-            writer.close();
+
+            obj.writeObject(templist);
+            System.out.println("Ik ga writen :)");
+
+            obj.close();
+            f.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        arraylist.clear();
+        templist.clear();
     }
 
-    public ArrayList<String> readArrayList(String path){
-        ArrayList<String> returnlist = new ArrayList<String>();
+    public ObservableList<Artist> readArtistFile(String path) {
+        ArrayList<Artist> templist = new ArrayList<>();
+        try {
+            FileInputStream f = new FileInputStream(new File(path));
+            ObjectInputStream obj = new ObjectInputStream(f);
 
+            try {
+                templist = (ArrayList<Artist>) obj.readObject();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                    returnlist.add(line);
-                if (line.equals("#")) {
-                    break;
+                for (Artist artist : templist) {
+                    FileIOArists.add(artist);
                 }
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-    return returnlist;}
 
 
+        return FileIOArists;
+    }
 
 
 }
