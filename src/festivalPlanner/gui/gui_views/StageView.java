@@ -72,16 +72,16 @@ public class StageView extends StackPane {
         place(thirdTitle,110,-150);
 
         DynamicTitle stageName = new DynamicTitle("Stage Name", 17);
-        place(stageName,-300,-90);
+        place(stageName,-301,-90);
 
         DynamicTitle Capacity = new DynamicTitle("Capacity",17);
-        place(Capacity,-300,-30);
+        place(Capacity,-316,-30);
 
         DynamicTitle indoor = new DynamicTitle("Indoor", 17);
-        place(indoor,-300,30);
+        place(indoor,-323,30);
 
         DynamicTitle emergencyExits = new DynamicTitle("Emergency Exits", 17);
-        place(emergencyExits,-300,90);
+        place(emergencyExits,-286,90);
 
         DynamicTitle firstAidKits = new DynamicTitle("First Aid Kits", 17);
         place(firstAidKits,-300,155);
@@ -89,7 +89,7 @@ public class StageView extends StackPane {
         //Fields
 
         TextField stageNameField = new FPTextField("Stage Name");
-        place(stageNameField, -153, -90);
+        place(stageNameField, -120, -90);
 
         TextField CapacityField = new FPTextField("Amount", 80, 40);
         place(CapacityField, -153, -30);
@@ -104,10 +104,10 @@ public class StageView extends StackPane {
         place(firstAidKitsField, -153, 155);
 
         FPButton addStage = new FPButton("Add ", 90, 35);
-        place(addStage, -50, 230);
+        place(addStage, -28, 230);
 
         FPButton clearButton = new FPButton("Clear All ", 90, 35);
-        place(clearButton, -170, 230);
+        place(clearButton, -148, 230);
 
         FPButton removeStage = new FPButton("Remove ", 90, 35);
         place(removeStage, 310, 230);
