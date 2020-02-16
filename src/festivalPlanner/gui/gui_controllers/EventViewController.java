@@ -1,5 +1,7 @@
 package festivalPlanner.gui.gui_controllers;
 
+import festivalPlanner.data_system.Artist;
+import festivalPlanner.data_system.Data;
 import festivalPlanner.data_system.Event;
 import festivalPlanner.gui.gui_views.EventView;
 import javafx.collections.FXCollections;
@@ -10,6 +12,7 @@ public class  EventViewController {
     private ObservableList<Double> times;
     private ObservableList<Double> endTimes;
     private ObservableList<String> popularity;
+    private ObservableList<Artist> coArtists;
 
 
     public EventViewController() {
@@ -39,6 +42,16 @@ public class  EventViewController {
             }
         }
         return this.endTimes;
+    }
+
+    public ObservableList<Artist> getCoArtists(Artist mainArtist, Data data){
+        this.coArtists = FXCollections.observableArrayList();
+        for (Artist artist : data.getArtists()){
+            if ( !(artist == mainArtist) ){
+                this.coArtists.add(artist);
+            }
+        }
+        return this.coArtists;
     }
 
     public void setPopularity(){

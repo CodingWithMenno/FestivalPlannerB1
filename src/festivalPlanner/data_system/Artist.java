@@ -4,6 +4,12 @@ import festivalPlanner.gui.gui_controllers.ArtistViewController;
 import javafx.scene.image.ImageView;
 
 import java.io.Serializable;
+/**
+ * An artist needs a name, age, genre, descriptiom and artist photo. Here is where they
+ * are stored.
+ */
+
+public class Artist {
 
 public class Artist implements Serializable {
 
@@ -58,6 +64,18 @@ public class Artist implements Serializable {
 
     public String getArtistPhoto() {
         return artistPhoto;
+    }
+
+    public int getAge(){
+        return this.age;
+    }
+
+    public String getGenre(){
+        return this.genre;
+    }
+
+    public String getDescription(){
+        return this.description;
     }
 }
 

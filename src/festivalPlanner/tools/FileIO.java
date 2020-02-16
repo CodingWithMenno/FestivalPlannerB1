@@ -10,6 +10,10 @@ import javafx.collections.ObservableList;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * This class stores all the data (Artists, events and stages) in a file.
+ */
+
 public class FileIO implements Serializable {
     private ObservableList<Artist> FileIOArists;
     private ObservableList<Stage> FileIOStages;

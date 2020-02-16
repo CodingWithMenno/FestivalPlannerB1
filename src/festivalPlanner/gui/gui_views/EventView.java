@@ -23,6 +23,10 @@ import javafx.scene.layout.StackPane;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * This class opens a new window where you can add new events.
+ */
+
 public class EventView extends StackPane {
 
     private SceneHandler sceneHandler;
@@ -104,7 +108,9 @@ public class EventView extends StackPane {
         ComboBox<Artist> coArtistField = new FPComboBoxArtist("Co Artist");
         place(coArtistField,-153,-30);
         coArtistField.setItems(data.getArtists());
-
+        mainArtistField.setOnAction(event -> {
+        coArtistField.setItems(controller.getCoArtists(mainArtistField.getSelectionModel().getSelectedItem(),data));
+        });
         ComboBox<Stage> stageField = new FPComboBoxStage("Stage");
         place(stageField,-153,30);
         stageField.setItems(data.getStages());
@@ -122,6 +128,7 @@ public class EventView extends StackPane {
         place(endTime,-75,155);
         endTime.setItems(controller.getTimes());
         beginTime.setOnAction( e -> {
+            System.out.println("test2");
             endTime.setItems(controller.getEndTimes(beginTime.getSelectionModel().getSelectedItem()));
         });
 

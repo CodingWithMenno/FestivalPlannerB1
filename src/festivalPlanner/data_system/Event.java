@@ -6,6 +6,11 @@ import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 
+/**
+ * An event needs a head artist, stage, starting time, ending time, popularity, photo, and sometimes
+ * one or more co artists. This class stores these attributes.
+ */
+
 public class Event {
 
     private Artist headArtist;

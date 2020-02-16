@@ -10,6 +10,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * This class is where the program starts when running the program, after this class you will
+ * directly go to the login page.
+ */
+
 public class StageManager extends Application {
 
     private Stage stage;

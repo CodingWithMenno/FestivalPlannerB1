@@ -11,6 +11,10 @@ import javafx.scene.Scene;
 
 import java.sql.SQLException;
 
+/**
+ * This class can switch between the different views.
+ */
+
 public class SceneHandler {
 
     private StageManager stageManager;
