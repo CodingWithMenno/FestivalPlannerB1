@@ -9,7 +9,6 @@ import java.io.Serializable;
  * are stored.
  */
 
-public class Artist {
 
 public class Artist implements Serializable {
 

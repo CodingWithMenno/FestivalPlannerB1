@@ -19,6 +19,10 @@ import planner_viewer.planner_modules.StageModule;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * this class places events on the timeline.
+ */
+
 public class TimeLineView extends StackPane {
 
     private DatabaseConnection databaseConnection;

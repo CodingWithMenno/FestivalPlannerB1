@@ -164,6 +164,10 @@ public class ArtistView extends StackPane {
             data.removeArtist(fpListView.getSelectionModel().getSelectedItem());
         });
 
+
+        /**
+         * this part checks for doubles or and adds an artist
+         */
         addArtist.setOnAction(event -> {
 
             int age = 0;

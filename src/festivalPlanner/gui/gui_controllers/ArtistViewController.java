@@ -9,6 +9,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.Observable;
+
+/**
+ * In this class the logic for the artist view is set up.
+ */
 public class ArtistViewController {
 
     private ObservableList<Artist> artists = FXCollections.observableArrayList();

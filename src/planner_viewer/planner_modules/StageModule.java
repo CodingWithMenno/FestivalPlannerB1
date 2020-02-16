@@ -6,6 +6,10 @@ import javafx.scene.layout.HBox;
 
 public class StageModule extends HBox {
 
+    /**
+     * this class makes the modules on the timeline for the stages.
+     */
+
     private Label stageTitle;
 
     public StageModule(String stageTitle) {

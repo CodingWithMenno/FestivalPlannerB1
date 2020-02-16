@@ -137,6 +137,10 @@ public class StageView extends StackPane {
             data.removeStage(listViewStages.getSelectionModel().getSelectedItem());
         });
 
+
+        /**
+         * this part checks for doubles or and adds a stage.
+         */
         addStage.setOnAction(event -> {
 
             int capacityAmount = 0;

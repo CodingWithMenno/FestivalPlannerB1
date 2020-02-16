@@ -6,8 +6,13 @@ import org.jfree.fx.FXGraphics2D;
 import java.awt.*;
 import java.awt.geom.Line2D;
 
+/**
+ * this class draws the timeline.
+ */
+
 
 public class CanvasDrawer extends Canvas {
+
 
     private Color timeLineFill = new Color(183,111,136);
     private Color divisionFill = new Color(238,238,238);
