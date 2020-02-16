@@ -116,7 +116,7 @@ public class EventView extends StackPane {
         ComboBox<Double> beginTime = new FPComboBoxDouble("Begin time",100,40);
         place(beginTime,-178,155);
         beginTime.setItems(controller.getTimes());
-        beginTime.getSelectionModel().select(2);
+        beginTime.getSelectionModel().select(0);
 
         ComboBox<Double> endTime = new FPComboBoxDouble("End time",100,40);
         place(endTime,-75,155);
