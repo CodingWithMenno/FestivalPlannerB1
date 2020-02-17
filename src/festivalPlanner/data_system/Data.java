@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * In this class is all data stored. The data consist of artistss, stages and events.
@@ -53,7 +54,7 @@ public class Data {
         boolean artistAvailable = true;
 
         for ( Event events : this.events){
-            if ( event.getHeadArtist() == events.getHeadArtist() || event.getStage().equals(events.getStage()) ){
+            if ( event.getHeadArtist().getName().equals(events.getHeadArtist().getName()) || event.getCoArtist().getName().equals(events.getCoArtist().getName()) || event.getStage().equals(events.getStage()) ){
                 if ( event.getEndTime() < events.getStartTime() || event.getStartTime() > events.getEndTime() ){
 
                 }
@@ -93,7 +94,21 @@ public class Data {
     }
 
     public void removeArtist(Artist artist){
-        artists.remove(artist);
+
+        ArrayList<Event> tempEvents = new ArrayList<>();
+
+        for ( Event event : this.events ){
+            if ( event.getHeadArtist().getName().equals(artist.getName()) || event.getCoArtist().getName().equals(artist.getName()) ){
+                tempEvents.add(event);
+            }
+        }
+
+        for (Event event : tempEvents) {
+            if (this.events.contains(event)){
+                removeEvent(event);
+            }
+        }
+        this.artists.remove(artist);
 
         IO.writeArrayListArtist(this.artists, "resources/SavedFiles/SavedArtists.txt");
 
@@ -102,6 +117,20 @@ public class Data {
     }
 
     public void removeStage(Stage stage){
+
+        ArrayList<Event> tempEvents = new ArrayList<>();
+
+        for ( Event event : this.events ){
+            if ( event.getStage().equals(stage.getName()) ){
+                tempEvents.add(event);
+            }
+        }
+
+        for (Event event : tempEvents) {
+            if (this.events.contains(event)){
+                removeEvent(event);
+            }
+        }
         stages.remove(stage);
 
         IO.writeArrayListStage(this.stages, "resources/SavedFiles/SavedStages.txt");

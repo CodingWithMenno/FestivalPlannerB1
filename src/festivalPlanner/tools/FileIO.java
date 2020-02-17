@@ -72,7 +72,6 @@ public class FileIO implements Serializable {
 
 
             obj.writeObject(templist);
-            System.out.println("Ik ga writen :)");
 
             obj.close();
             f.close();
