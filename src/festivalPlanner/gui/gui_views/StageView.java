@@ -185,7 +185,6 @@ public class StageView extends StackPane {
                 } else {
                     this.data.addToStages(stage);
                 }
-                else { this.data.getStages().add(stage); }
 
                 stageNameField.setText("");
                 CapacityField.setText("");
