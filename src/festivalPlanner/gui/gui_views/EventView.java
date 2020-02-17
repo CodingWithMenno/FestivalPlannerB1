@@ -154,18 +154,40 @@ public class EventView extends StackPane {
         addEvent.setOnAction(event -> {
 
             try {
+                try {
                 data.addToEvents(new Event(mainArtistField.getSelectionModel().getSelectedItem(),
+                        coArtistField.getSelectionModel().getSelectedItem(),
                         stageField.getSelectionModel().getSelectedItem().getName(),
                         beginTime.getSelectionModel().getSelectedItem(),
                         endTime.getSelectionModel().getSelectedItem(),
                         popularityField.getSelectionModel().getSelectedItem()));
             } catch (Exception e){
                 ((FPComboBoxArtist) mainArtistField).invalidInputStyle();
+                ((FPComboBoxArtist) coArtistField).invalidInputStyle();
                 ((FPComboBoxStage) stageField).invalidInputStyle();
                 ((FPComboBoxDouble) beginTime).invalidInputStyle();
                 ((FPComboBoxDouble) endTime).invalidInputStyle();
                 ((FPComboBoxString) popularityField).invalidInputStyle();
             }
+
+            } catch (Exception e){
+
+                try {
+                    data.addToEvents(new Event(mainArtistField.getSelectionModel().getSelectedItem(),
+                            stageField.getSelectionModel().getSelectedItem().getName(),
+                            beginTime.getSelectionModel().getSelectedItem(),
+                            endTime.getSelectionModel().getSelectedItem(),
+                            popularityField.getSelectionModel().getSelectedItem()));
+                } catch (Exception b){
+                    ((FPComboBoxArtist) mainArtistField).invalidInputStyle();
+                    ((FPComboBoxStage) stageField).invalidInputStyle();
+                    ((FPComboBoxDouble) beginTime).invalidInputStyle();
+                    ((FPComboBoxDouble) endTime).invalidInputStyle();
+                    ((FPComboBoxString) popularityField).invalidInputStyle();
+                }
+            }
+
+
 
 
 
@@ -182,7 +204,6 @@ public class EventView extends StackPane {
         });
 
         stackPane.getChildren().addAll(title,secondTitle,thirdTitle,mainArtist,coArtist,stage,popularity,listViewStages,Time,mainArtistField,coArtistField,stageField,popularityField,beginTime,endTime,addEvent,RemoveArtist,clearButton,makeLine(),makeLine2());
-
 
         return stackPane;
     }

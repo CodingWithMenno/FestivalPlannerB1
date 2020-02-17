@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Event implements Serializable {
 
     private Artist headArtist;
-    private ArrayList<Artist> coArtists;
+    private Artist coArtist;
     private String stage;
     private double startTime;
     private double endTime;
@@ -34,12 +34,23 @@ public class Event implements Serializable {
 
     }
 
+    public Event(Artist headArtist, Artist coArtist, String stage, double startTime, double endTime, String popularity) {
+        this.headArtist = headArtist;
+        this.coArtist = coArtist;
+        this.stage = stage;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.popularity = popularity;
+        this.photoURL = this.headArtist.getArtistPhoto();
+
+    }
+
     public Artist getHeadArtist() {
         return headArtist;
     }
 
-    public ArrayList<Artist> getCoArtists() {
-        return coArtists;
+    public Artist getCoArtist() {
+        return coArtist;
     }
 
     public String getStage() {

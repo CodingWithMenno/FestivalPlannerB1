@@ -4,6 +4,7 @@ import festivalPlanner.data_system.Data;
 import festivalPlanner.data_system.DatabaseConnection;
 import festivalPlanner.data_system.Event;
 import festivalPlanner.data_system.Stage;
+import festivalPlanner.gui.SceneHandler;
 import festivalPlanner.gui.gui_controllers.TimeLineViewScrollController;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -31,11 +32,13 @@ public class TimeLineView extends StackPane {
     private TimeLineViewScrollController timeLineViewScrollController;
     public Pane sliderContainer;
     private Data data;
+    private SceneHandler sceneHandler;
 
 
-    public TimeLineView(DatabaseConnection databaseConnection,Data data) throws SQLException {
+    public TimeLineView(DatabaseConnection databaseConnection, Data data, SceneHandler sceneHandler) throws SQLException {
 
         this.data = data;
+        this.sceneHandler = sceneHandler;
 
         this.timeLineViewScrollController = new TimeLineViewScrollController(this);
 
@@ -85,7 +88,7 @@ public class TimeLineView extends StackPane {
             for (Stage stage : data.getStages()){
 
                 if ( event.getStage().equals(stage.getName())){
-                    this.sliderContainer.getChildren().add( new EventModule(event.getHeadArtist().getName(), event.getStartTime(), event.getEndTime(), event.getPhotoURL(), data.getStages().indexOf(stage)));
+                    this.sliderContainer.getChildren().add( new EventModule(event.getHeadArtist().getName(), event.getStartTime(), event.getEndTime(), event.getPhotoURL(), data.getStages().indexOf(stage),this.sceneHandler,event));
                 }
 
             }

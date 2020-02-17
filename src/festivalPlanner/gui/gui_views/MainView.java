@@ -26,7 +26,7 @@ public class MainView extends VBox {
 
         this.headerBar = new HeaderBar(databaseConnection.fetchUserOrganization());
 
-        this.timeLineView = new TimeLineView(databaseConnection,data);
+        this.timeLineView = new TimeLineView(databaseConnection,data,sceneHandler);
         this.scenehandler = sceneHandler;
         this.controllerBar = new ControllerBar(this.timeLineView,this.scenehandler);
 

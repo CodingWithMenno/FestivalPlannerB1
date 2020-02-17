@@ -1,11 +1,10 @@
 package festivalPlanner.gui;
 
+import festivalPlanner.data_system.Artist;
 import festivalPlanner.data_system.Data;
 import festivalPlanner.data_system.DatabaseConnection;
-import festivalPlanner.gui.gui_views.ArtistView;
-import festivalPlanner.gui.gui_views.EventView;
-import festivalPlanner.gui.gui_views.MainView;
-import festivalPlanner.gui.gui_views.StageView;
+import festivalPlanner.data_system.Event;
+import festivalPlanner.gui.gui_views.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
@@ -61,6 +60,10 @@ public class SceneHandler {
 
     public void toAddStage(){
         this.stageManager.setStageScene(StageScene);
+    }
+
+    public void toInfoScene(Event event, String beginTime, String endTime){
+        this.stageManager.setStageScene(new Scene(new InfoView(event,this,beginTime,endTime)));
     }
 
     public void toMainView() throws SQLException {
