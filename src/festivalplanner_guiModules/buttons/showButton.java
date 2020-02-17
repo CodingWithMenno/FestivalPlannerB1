@@ -7,9 +7,9 @@ import javafx.scene.control.Button;
  * Custom Festival Planner button
  */
 
-public class FPButton extends Button implements FPButtons {
+public class showButton extends Button implements FPButtons {
 
-    public FPButton(String buttonText, int Width, int Height) {
+    public showButton(String buttonText, int Width, int Height) {
 
         setText(buttonText);
 

@@ -3,11 +3,9 @@ package festivalPlanner.gui.gui_views;
 import festivalPlanner.data_system.Data;
 import festivalPlanner.data_system.Stage;
 import festivalPlanner.gui.SceneHandler;
-import festivalplanner_guiModules.buttons.FPButton;
+import festivalplanner_guiModules.buttons.showButton;
 import festivalplanner_guiModules.inputfields.*;
 import festivalplanner_guiModules.text.titles.DynamicTitle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -51,7 +49,7 @@ public class StageView extends StackPane {
                 "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 20, 0.0 , 2 , 2 );"
         );
 
-        Button BackButton = new FPButton("X", 30, 30);
+        Button BackButton = new showButton("X", 30, 30);
         stackPane.getChildren().add(BackButton);
         BackButton.setOnAction(event -> {
             try {
@@ -107,13 +105,13 @@ public class StageView extends StackPane {
         TextField firstAidKitsField = new FPTextField("Amount", 80, 40);
         place(firstAidKitsField, -153, 155);
 
-        FPButton addStage = new FPButton("Add ", 90, 35);
+        showButton addStage = new showButton("Save ", 90, 35);
         place(addStage, -28, 230);
 
-        FPButton clearButton = new FPButton("Clear All ", 90, 35);
+        showButton clearButton = new showButton("Clear All ", 90, 35);
         place(clearButton, -148, 230);
 
-        FPButton removeStage = new FPButton("Remove ", 90, 35);
+        showButton removeStage = new showButton("Remove ", 90, 35);
         place(removeStage, 310, 230);
 
         ListView<Stage> listViewStages = new ListView<>();
@@ -127,7 +125,7 @@ public class StageView extends StackPane {
         listViewStages.setMinSize(200,320);
         listViewStages.setMaxSize(200,320);
 
-        FPButton show = new FPButton("Edit", 90, 35);
+        showButton show = new showButton("Show", 90, 35);
         place(show, 190, 230);
 
         stackPane.getChildren().addAll(title, secondTitle, thirdTitle, show, stageName, Capacity, indoor, emergencyExits, firstAidKits, stageNameField, listViewStages, CapacityField, indoorField, emergencyExitsField, firstAidKitsField, addStage , clearButton, removeStage, makeLine(), makeLine2());
@@ -171,13 +169,23 @@ public class StageView extends StackPane {
 
                     if (alreadyExist == 1) {
 
-                        data.getStages().get(place).setName(stage.getName());
-                        data.getStages().get(place).setCapacity(stage.getCapacity());
-                        data.getStages().get(place).setEmergencyExits(stage.getEmergencyExits());
-                        data.getStages().get(place).setFirstAidKits(stage.getFirstAidKits());
-                        data.getStages().get(place).setIndoor(stage.isIndoor());
-                        data.getStages().get(place).setSurface(stage.getSurface());
+                        Alert dialog = new Alert(Alert.AlertType.WARNING,"You are about to overwrite the info of "+ stageNameField.getText()+",\n are you sure about that?");
+                        dialog.setTitle("Overwriting artist");
+                        dialog.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+                        int finalPlace = place;
+                        int finalPlace1 = place;
+                        dialog.showAndWait().ifPresent(buttonType -> {
+                            if (buttonType == ButtonType.YES) {
 
+                                data.getStages().get(finalPlace1).setName(stage.getName());
+                                data.getStages().get(finalPlace1).setCapacity(stage.getCapacity());
+                                data.getStages().get(finalPlace1).setEmergencyExits(stage.getEmergencyExits());
+                                data.getStages().get(finalPlace1).setFirstAidKits(stage.getFirstAidKits());
+                                data.getStages().get(finalPlace1).setIndoor(stage.isIndoor());
+                                data.getStages().get(finalPlace1).setSurface(stage.getSurface());
+
+                            }
+                        });
 
                     } else {
                         this.data.addToStages(stage);
