@@ -4,9 +4,10 @@ import festivalPlanner.gui.StageManager;
 import festivalPlanner.gui.gui_controllers.EventViewController;
 import javafx.scene.image.ImageView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Event {
+public class Event implements Serializable {
 
     private Artist headArtist;
     private ArrayList<Artist> coArtists;

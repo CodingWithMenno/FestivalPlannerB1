@@ -16,31 +16,32 @@ public class Data {
         this.artists = FXCollections.observableArrayList();
         this.stages = FXCollections.observableArrayList();
         this.events = FXCollections.observableArrayList();
+
         this.IO = new FileIO();
-    }
 
-    public void fetchLocalSave(String listType){
-
+        this.artists = (this.IO.readArtistFile("resources/SavedFiles/SavedArtists.txt"));
+        this.stages = (this.IO.readStageFile("resources/SavedFiles/SavedStages.txt"));
+        this.events = (this.IO.readEventFile("resources/SavedFiles/SavedEvents.txt"));
     }
 
     public void addToArtists(Artist artist){
-
-        IO.writeArrayListArtist(this.artists, "/C:/Users/Davy/Documents/SavedArtists.txt");
-
-        this.artists = IO.readArtistFile("/C:/Users/Davy/Documents/SavedArtists.txt");
         this.artists.add(artist);
 
+        IO.writeArrayListArtist(this.artists, "resources/SavedFiles/SavedArtists.txt");
 
-        System.out.println("addToArtist method called, we got this list: " + this.artists);
-
-        getArtists();
-
-
+        this.artists.removeAll();
+        this.artists = IO.readArtistFile("resources/SavedFiles/SavedArtists.txt");
     }
 
 
     public void addToStages(Stage stage){
         this.stages.add(stage);
+
+        IO.writeArrayListStage(this.stages, "resources/SavedFiles/SavedStages.txt");
+
+        this.stages.removeAll();
+
+        this.stages = IO.readStageFile("resources/SavedFiles/SavedStages.txt");
     }
 
     public void addToEvents(Event event) throws Exception{
@@ -60,6 +61,12 @@ public class Data {
 
         if ( artistAvailable ){
             this.events.add(event);
+
+            IO.writeArrayListEvents(this.events, "resources/SavedFiles/SavedEvents.txt");
+
+            this.events.removeAll();
+
+            this.events = (IO.readEventFile("resources/SavedFiles/SavedEvents.txt"));
         }
         else {
             throw new Exception("Artist is booked");
@@ -68,35 +75,46 @@ public class Data {
     }
 
     public ObservableList<Artist> getArtists() {
-
-        this.artists = IO.readArtistFile("/C:/Users/Davy/Documents/SavedArtists.txt");
-
-//        Artist yolo = new Artist("mavo", 12, "alal", "hihi");
-//        this.artists.add(yolo);
-        System.out.println("called getartists");
         return this.artists;
     }
 
 
     public ObservableList<Stage> getStages() {
-        return stages;
+        return this.stages;
     }
 
 
     public ObservableList<Event> getEvents() {
-        return events;
+        return this.events;
     }
 
     public void removeArtist(Artist artist){
         artists.remove(artist);
+
+        IO.writeArrayListArtist(this.artists, "resources/SavedFiles/SavedArtists.txt");
+
+        this.artists.removeAll();
+        this.artists = IO.readArtistFile("resources/SavedFiles/SavedArtists.txt");
     }
 
     public void removeStage(Stage stage){
         stages.remove(stage);
+
+        IO.writeArrayListStage(this.stages, "resources/SavedFiles/SavedStages.txt");
+
+        this.stages.removeAll();
+
+        this.stages = IO.readStageFile("resources/SavedFiles/SavedStages.txt");
     }
 
     public void removeEvent(Event event){
-        events.remove(event);
+        this.events.remove(event);
+
+        IO.writeArrayListEvents(this.events, "resources/SavedFiles/SavedEvents.txt");
+
+        this.events.removeAll();
+
+        this.events = (IO.readEventFile("resources/SavedFiles/SavedEvents.txt"));
     }
 
 }

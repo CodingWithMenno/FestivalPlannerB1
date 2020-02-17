@@ -174,10 +174,10 @@ public class StageView extends StackPane {
 
 
                     } else {
-                        this.data.getStages().add(stage);
+                        this.data.addToStages(stage);
                     }
                 } else {
-                    this.data.getStages().add(stage);
+                    this.data.addToStages(stage);
                 }
 
 
