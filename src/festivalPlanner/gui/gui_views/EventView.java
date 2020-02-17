@@ -161,6 +161,14 @@ public class EventView extends StackPane {
                         beginTime.getSelectionModel().getSelectedItem(),
                         endTime.getSelectionModel().getSelectedItem(),
                         popularityField.getSelectionModel().getSelectedItem()));
+
+                    ((FPComboBoxArtist) mainArtistField).defaultStyle();
+                    ((FPComboBoxArtist) coArtistField).defaultStyle();
+                    ((FPComboBoxStage) stageField).defaultStyle();
+                    ((FPComboBoxDouble) beginTime).defaultStyle();
+                    ((FPComboBoxDouble) endTime).defaultStyle();
+                    ((FPComboBoxString) popularityField).defaultStyle();
+
             } catch (Exception e){
                 ((FPComboBoxArtist) mainArtistField).invalidInputStyle();
                 ((FPComboBoxArtist) coArtistField).invalidInputStyle();
@@ -178,6 +186,13 @@ public class EventView extends StackPane {
                             beginTime.getSelectionModel().getSelectedItem(),
                             endTime.getSelectionModel().getSelectedItem(),
                             popularityField.getSelectionModel().getSelectedItem()));
+
+                    ((FPComboBoxArtist) mainArtistField).defaultStyle();
+                    ((FPComboBoxStage) stageField).defaultStyle();
+                    ((FPComboBoxDouble) beginTime).defaultStyle();
+                    ((FPComboBoxDouble) endTime).defaultStyle();
+                    ((FPComboBoxString) popularityField).defaultStyle();
+
                 } catch (Exception b){
                     ((FPComboBoxArtist) mainArtistField).invalidInputStyle();
                     ((FPComboBoxStage) stageField).invalidInputStyle();

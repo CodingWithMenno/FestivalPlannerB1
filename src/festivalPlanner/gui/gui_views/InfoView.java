@@ -62,7 +62,7 @@ public class InfoView extends StackPane {
         VBox vBox = new VBox();
 
         try {
-             this.artist = new DynamicTitle(event.getHeadArtist().getName() + " ("+event.getHeadArtist().getAge()+ ")" + " & " +event.getCoArtist().getName()+ " ("+event.getCoArtist().getAge()+ ")", 21);
+             this.artist = new DynamicTitle(event.getHeadArtist().getName() + " ("+event.getHeadArtist().getAge()+ ")" + " & " +event.getCoArtist().getName()+ " ("+event.getCoArtist().getAge()+ ")", 40);
             place(artist,0,-220);
             stackPane.getChildren().add(artist);
         }catch (Exception e){
@@ -71,28 +71,27 @@ public class InfoView extends StackPane {
             stackPane.getChildren().add(artist);
         }
 
-        DynamicTitle time = new DynamicTitle("From " + beginTime + " til " + endTime , 21);
+        DynamicTitle time = new DynamicTitle("From " + beginTime + " till " + endTime , 21);
 
         DynamicTitle stage = new DynamicTitle("Stage: " + event.getStage(), 21);
 
         DynamicTitle genre = new DynamicTitle("Genre: " + event.getHeadArtist().getGenre(),21);
 
-        DynamicTitle description = new DynamicTitle("Description:\n"+event.getHeadArtist().getDescription(), 17);
+        DynamicTitle description = new DynamicTitle(event.getHeadArtist().getName() + ":\n"+event.getHeadArtist().getDescription(), 17);
 
         vBox.getChildren().addAll(time,stage,genre,description);
 
         try {
-             this.coArtistDescription = new DynamicTitle("Co-Artist Description:\n"+event.getCoArtist().getDescription(), 17);
-            place(coArtistDescription, -315, -30);
+             this.coArtistDescription = new DynamicTitle(event.getCoArtist().getName()+ ":\n"+event.getCoArtist().getDescription(), 17);
             vBox.getChildren().add(coArtistDescription);
         } catch (Exception e){}
 
         VBox artistPhoto = makePhoto(event.getPhotoURL());
-        place(artistPhoto,200,-150);
+        place(artistPhoto,200,-70);
 
         try{
             VBox coArtistPhoto = makePhoto(event.getCoArtist().getArtistPhoto());
-            place(artistPhoto,200,150);
+            place(coArtistPhoto,200,130);
             stackPane.getChildren().add(coArtistPhoto);
         }catch (Exception e){}
 
@@ -135,8 +134,8 @@ public class InfoView extends StackPane {
 
     public VBox makePhoto(String url){
         VBox photo = new VBox();
-        photo.setMaxSize(200,200);
-        photo.setMinSize(200,200);
+        photo.setMaxSize(170,170);
+        photo.setMinSize(170,170);
 
         photo.setStyle("-fx-background-radius: 20; " +
                 "-fx-text-fill: #35477D; "+
