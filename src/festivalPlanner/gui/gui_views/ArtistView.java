@@ -2,6 +2,7 @@ package festivalPlanner.gui.gui_views;
 
 import festivalPlanner.data_system.Artist;
 import festivalPlanner.data_system.Data;
+import festivalPlanner.data_system.Stage;
 import festivalPlanner.gui.SceneHandler;
 import festivalPlanner.gui.gui_controllers.ArtistViewController;
 import festivalplanner_guiModules.buttons.FPButton;
@@ -22,6 +23,10 @@ import javafx.scene.image.ImageView;
 
 import java.sql.SQLException;
 import java.util.List;
+
+/**
+ * This class opens a new window where you can add new artists.
+ */
 
 public class ArtistView extends StackPane {
 
@@ -122,12 +127,13 @@ public class ArtistView extends StackPane {
         fpListView.setItems(data.getArtists());
         place(fpListView,200,50);
 
-//        this.controller = new ArtistViewController();
-
         TextField open = new FPTextField("Picture URL");
         place(open,-153,90);
         fpListView.setMinSize(200,320);
         fpListView.setMaxSize(200,320);
+
+        FPButton show = new FPButton("Edit", 90, 35);
+        place(show, 190, 230);
 
         open.setOnAction(event -> this.controller.uploadPhoto()
         );
@@ -152,12 +158,16 @@ public class ArtistView extends StackPane {
         place(removeArtist,310,230);
 
 
-        stackPane.getChildren().addAll(title,secondTitle,thirdTitle,artistName,artistNameField,Age,fpListView,ageField,Genre,genreField,profileImage,biography,biographyField,open,addArtist,clearButton,removeArtist,makeLine(),makeLine2());
+        stackPane.getChildren().addAll(title,secondTitle,thirdTitle,artistName,artistNameField,Age,fpListView,ageField,Genre,genreField,profileImage,show,biography,biographyField,open,addArtist,clearButton,removeArtist,makeLine(),makeLine2());
 
         removeArtist.setOnAction(event -> {
             data.removeArtist(fpListView.getSelectionModel().getSelectedItem());
         });
 
+
+        /**
+         * this part checks for doubles or and adds an artist
+         */
         addArtist.setOnAction(event -> {
 
             int age = 0;
@@ -171,9 +181,29 @@ public class ArtistView extends StackPane {
                         biographyField.getText(),
                         open.getText());
 
-                this.data.addToArtists(artist);
+                if(data.getArtists().size() != 0) {
+                    int alreadyExist = 0;
+                    int place = 0;
+                    for (int i = 0; i < data.getArtists().size(); i++) {
+                        if (data.getArtists().get(i).getName().equals(artist.getName())) {
+                            alreadyExist = 1;
+                            place = i;
+                        }
+                    }
 
-            }
+                    if (alreadyExist == 1) {
+
+                        data.getArtists().get(place).setName(artist.getName());
+                        data.getArtists().get(place).setAge(artist.getAge());
+                        data.getArtists().get(place).setGenre(artist.getGenre());
+                        data.getArtists().get(place).setDescription(artist.getDescription());
+                        data.getArtists().get(place).setArtistPhoto(artist.getArtistPhoto());
+                    }
+                    else this.data.addToArtists(artist);
+                }
+                else {this.data.addToArtists(artist);}
+
+                }
             catch(Exception e) {
                 ageField.setText("Error");
             }
@@ -192,6 +222,19 @@ public class ArtistView extends StackPane {
             biographyField.setText("");
             genreField.setText("");
             open.setText("");
+
+        });
+
+        show.setOnAction(event -> {
+
+            Artist selected = fpListView.getSelectionModel().getSelectedItem();
+
+            artistNameField.setText(selected.getName());
+            ageField.setText(String.valueOf(selected.getAge()));
+            genreField.setText(selected.getGenre());
+            biographyField.setText(selected.getDescription());
+            open.setText(selected.getArtistPhoto());
+
 
         });
 

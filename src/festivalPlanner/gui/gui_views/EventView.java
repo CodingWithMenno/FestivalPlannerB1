@@ -23,6 +23,10 @@ import javafx.scene.layout.StackPane;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * This class opens a new window where you can add new events.
+ */
+
 public class EventView extends StackPane {
 
     private SceneHandler sceneHandler;
@@ -104,7 +108,9 @@ public class EventView extends StackPane {
         ComboBox<Artist> coArtistField = new FPComboBoxArtist("Co Artist");
         place(coArtistField,-153,-30);
         coArtistField.setItems(data.getArtists());
-
+        mainArtistField.setOnAction(event -> {
+        coArtistField.setItems(controller.getCoArtists(mainArtistField.getSelectionModel().getSelectedItem(),data));
+        });
         ComboBox<Stage> stageField = new FPComboBoxStage("Stage");
         place(stageField,-153,30);
         stageField.setItems(data.getStages());
@@ -116,12 +122,13 @@ public class EventView extends StackPane {
         ComboBox<Double> beginTime = new FPComboBoxDouble("Begin time",100,40);
         place(beginTime,-178,155);
         beginTime.setItems(controller.getTimes());
-        beginTime.getSelectionModel().select(2);
+        beginTime.getSelectionModel().select(0);
 
         ComboBox<Double> endTime = new FPComboBoxDouble("End time",100,40);
         place(endTime,-75,155);
         endTime.setItems(controller.getTimes());
         beginTime.setOnAction( e -> {
+            System.out.println("test2");
             endTime.setItems(controller.getEndTimes(beginTime.getSelectionModel().getSelectedItem()));
         });
 
@@ -141,6 +148,9 @@ public class EventView extends StackPane {
         listViewStages.setMinSize(200,320);
         listViewStages.setMaxSize(200,320);
 
+        /**
+         * this part adds an event.
+         */
         addEvent.setOnAction(event -> {
 
             try {

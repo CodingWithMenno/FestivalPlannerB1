@@ -1,5 +1,10 @@
 package festivalPlanner.data_system;
 
+/**
+ * A stage needs a name, capacity, surface (m2), some emergency exits, first aid kits and if its indoor.
+ * this class stores these attributes.
+ */
+
 import java.io.Serializable;
 
 public class Stage implements Serializable {

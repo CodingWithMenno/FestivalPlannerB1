@@ -5,6 +5,10 @@ import planner_viewer.planner_modules.StageModule;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * This class makes the connection between the database and the java program
+ */
+
 public class DatabaseConnection {
 
     private String databaseAddress = "jdbc:mysql://167.71.130.2:3306/festplanner_users";

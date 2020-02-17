@@ -15,6 +15,10 @@ import javafx.scene.layout.StackPane;
 
 import java.sql.SQLException;
 
+/**
+ * This class opens a new window where you can add new stages.
+ */
+
 public class StageView extends StackPane {
 
     private SceneHandler sceneHandler;
@@ -94,7 +98,7 @@ public class StageView extends StackPane {
         TextField CapacityField = new FPTextField("Amount", 80, 40);
         place(CapacityField, -153, -30);
 
-        CheckBox indoorField = new FPCheckBox("Indoor");
+        CheckBox indoorField = new FPCheckBox();
         place(indoorField, -153, 30);
 
         TextField emergencyExitsField = new FPTextField("Amount", 80, 40);
@@ -123,7 +127,7 @@ public class StageView extends StackPane {
         listViewStages.setMinSize(200,320);
         listViewStages.setMaxSize(200,320);
 
-        FPButton show = new FPButton("Show", 90, 35);
+        FPButton show = new FPButton("Edit", 90, 35);
         place(show, 190, 230);
 
         stackPane.getChildren().addAll(title, secondTitle, thirdTitle, show, stageName, Capacity, indoor, emergencyExits, firstAidKits, stageNameField, listViewStages, CapacityField, indoorField, emergencyExitsField, firstAidKitsField, addStage , clearButton, removeStage, makeLine(), makeLine2());
@@ -133,6 +137,10 @@ public class StageView extends StackPane {
             data.removeStage(listViewStages.getSelectionModel().getSelectedItem());
         });
 
+
+        /**
+         * this part checks for doubles or and adds a stage.
+         */
         addStage.setOnAction(event -> {
 
             int capacityAmount = 0;
@@ -152,14 +160,12 @@ public class StageView extends StackPane {
 
 
                 if (data.getStages().size() != 0) {
-
                     int alreadyExist = 0;
                     int place = 0;
-                    for (int i = 0; i < data.getStages().size() - 1; i++) {
+                    for (int i = 0; i < data.getStages().size(); i++) {
                         if (data.getStages().get(i).getName().equals(stage.getName())) {
                             alreadyExist = 1;
                             place = i;
-
                         }
                     }
 
@@ -179,7 +185,7 @@ public class StageView extends StackPane {
                 } else {
                     this.data.addToStages(stage);
                 }
-
+                else { this.data.getStages().add(stage); }
 
                 stageNameField.setText("");
                 CapacityField.setText("");
@@ -187,15 +193,11 @@ public class StageView extends StackPane {
                 emergencyExitsField.setText("");
                 firstAidKitsField.setText("");
 
-
             } catch (Exception e) {
                 CapacityField.setText("Error");
                 emergencyExitsField.setText("Error");
                 firstAidKitsField.setText("Error");
-            }
-
-
-        });
+            }});
 
         clearButton.setOnAction(event -> {
             stageNameField.setText("");

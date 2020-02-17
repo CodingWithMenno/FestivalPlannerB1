@@ -9,7 +9,9 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
-//import static com.sun.javafx.scene.control.skin.Utils.getResource;
+/**
+ * this class makes the modules on the timeline for the events.
+ */
 
 public class EventModule extends VBox {
 

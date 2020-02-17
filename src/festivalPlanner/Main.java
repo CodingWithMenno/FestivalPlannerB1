@@ -6,6 +6,9 @@ import festivalPlanner.tools.FileIO;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * Main, this class starts the program
+ */
 
 public class Main extends Application {
 

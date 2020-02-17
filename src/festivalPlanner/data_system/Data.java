@@ -6,6 +6,10 @@ import javafx.collections.ObservableList;
 
 import java.io.File;
 
+/**
+ * In this class is all data stored. The data consist of artistss, stages and events.
+ */
+
 public class Data {
     private FileIO IO;
     private ObservableList<Artist> artists;
