@@ -83,7 +83,7 @@ public class Data {
 
 
     public ObservableList<Stage> getStages() {
-        return stages;
+        return this.stages;
     }
 
 

@@ -1,5 +1,7 @@
 package planner_viewer.planner_modules;
 
+import festivalPlanner.data_system.Event;
+import festivalPlanner.gui.SceneHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Side;
@@ -16,10 +18,14 @@ import javafx.scene.shape.Rectangle;
 public class EventModule extends VBox {
 
     private String backgroundURL;
+    private SceneHandler sceneHandler;
+    private Event mainEvent;
 
-    public EventModule(String eventTitle, double eventStart, double eventEnd, String backgroundURL, double YPos) {
+    public EventModule(String eventTitle, double eventStart, double eventEnd, String backgroundURL, double YPos, SceneHandler sceneHandler, Event mainEvent) {
 
+        this.mainEvent = mainEvent;
         this.backgroundURL = backgroundURL;
+        this.sceneHandler = sceneHandler;
 
         String eventStartStr = String.valueOf(eventStart);
         String eventEndStr = String.valueOf(eventEnd);
@@ -90,7 +96,11 @@ public class EventModule extends VBox {
         setAlignment(Pos.CENTER_LEFT);
         setPadding(new Insets(0,0,0,10));
 
-
+        String finalEventStartStr = eventStartStr;
+        String finalEventEndStr = eventEndStr;
+        setOnMousePressed(event -> {
+            sceneHandler.toInfoScene(this.mainEvent, finalEventStartStr, finalEventEndStr);
+        });
 }}
 
 
