@@ -54,7 +54,8 @@ public class Data {
         boolean artistAvailable = true;
 
         for ( Event events : this.events){
-            if ( event.getHeadArtist().getName().equals(events.getHeadArtist().getName()) || event.getCoArtist().getName().equals(events.getCoArtist().getName()) || event.getStage().equals(events.getStage()) ){
+            if ( event.getHeadArtist().getName().equals(events.getHeadArtist().getName()) || event.getCoArtist().getName().equals(events.getCoArtist().getName()) ||
+                    event.getStage().equals(events.getStage()) || event.getHeadArtist().getName().equals(events.getCoArtist().getName()) || event.getCoArtist().getName().equals(events.getHeadArtist().getName())){
                 if ( event.getEndTime() < events.getStartTime() || event.getStartTime() > events.getEndTime() ){
 
                 }
