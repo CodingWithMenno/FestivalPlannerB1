@@ -6,13 +6,10 @@ import festivalPlanner.data_system.Event;
 import festivalPlanner.data_system.Stage;
 import festivalPlanner.gui.SceneHandler;
 
-import festivalPlanner.gui.gui_controllers.ArtistViewController;
 import festivalPlanner.gui.gui_controllers.EventViewController;
-import festivalplanner_guiModules.buttons.FPButton;
+import festivalplanner_guiModules.buttons.showButton;
 import festivalplanner_guiModules.inputfields.*;
 import festivalplanner_guiModules.text.titles.DynamicTitle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -21,7 +18,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 /**
  * This class opens a new window where you can add new events.
@@ -62,7 +58,7 @@ public class EventView extends StackPane {
                         "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 20, 0.0 , 2 , 2 );"
                 );
 
-        Button BackButton = new FPButton("X",30,30);
+        Button BackButton = new showButton("X",30,30);
         stackPane.getChildren().add(BackButton);
         BackButton.setOnAction(event -> {
             try {
@@ -133,7 +129,7 @@ public class EventView extends StackPane {
         });
 
 
-        FPButton addEvent = new FPButton("Add ", 90, 35);
+        showButton addEvent = new showButton("Add ", 90, 35);
         place(addEvent,-71,230);
 
         ListView<Event> listViewStages = new ListView();
@@ -208,10 +204,10 @@ public class EventView extends StackPane {
 
         });
 
-        FPButton clearButton = new FPButton("Clear All ", 90, 35);
+        showButton clearButton = new showButton("Clear All ", 90, 35);
         place(clearButton,-182,230);
 
-        FPButton RemoveArtist = new FPButton("Remove ", 90, 35);
+        showButton RemoveArtist = new showButton("Remove ", 90, 35);
         place(RemoveArtist,310,230);
 
         RemoveArtist.setOnAction(event -> {
