@@ -44,6 +44,7 @@ public class ControllerBar extends HBox {
         Button artistButton = new showButton("Artists", 95, 45);
         Button stageButton = new showButton("Stages", 95, 45);
         Button eventButton = new showButton("Events", 95, 45);
+        Button simulateButton = new FPSimulateButton();
 
         eventButton.setOnAction(event -> {
             this.sceneHandler.toAddEvent();
@@ -57,11 +58,17 @@ public class ControllerBar extends HBox {
             this.sceneHandler.toAddArtist();
         });
 
+        simulateButton.setOnAction(event -> {
+            this.sceneHandler.toSimulationView();
+        });
+
+
+
         rightSideContainer.getChildren().addAll(
                 artistButton,
                 stageButton,
                 eventButton,
-                new FPSimulateButton()
+                simulateButton
         );
 
         return rightSideContainer;

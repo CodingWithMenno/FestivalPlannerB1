@@ -7,6 +7,7 @@ import festivalPlanner.data_system.Event;
 import festivalPlanner.gui.gui_views.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.sql.SQLException;
 
@@ -16,6 +17,7 @@ import java.sql.SQLException;
 
 public class SceneHandler {
 
+    private Stage stage;
     private StageManager stageManager;
     private DatabaseConnection databaseConnection;
     private ArtistView artistView;
@@ -29,7 +31,8 @@ public class SceneHandler {
     private Data data;
 
 
-    public SceneHandler(StageManager stageManager, DatabaseConnection databaseConnection) throws SQLException {
+    public SceneHandler(StageManager stageManager, DatabaseConnection databaseConnection,Stage stage) throws SQLException {
+        this.stage = stage;
         this.stageManager = stageManager;
         this.databaseConnection = databaseConnection;
         this.data = new Data();
@@ -68,6 +71,12 @@ public class SceneHandler {
 
     public void toMainView() throws SQLException {
         this.stageManager.setStageScene(new Scene(new MainView(this,databaseConnection,data)));
+    }
+
+    public void toSimulationView(){
+        this.stage.setWidth(1920);
+        this.stage.setHeight(1080);
+        this.stageManager.setStageScene(new Scene(new SimulationView(data)));
     }
 
 
