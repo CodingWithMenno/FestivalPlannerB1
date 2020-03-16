@@ -21,10 +21,12 @@ public class Event implements Serializable {
     private double endTime;
     private String popularity;
     private String photoURL;
+    private boolean hasCoArtist;
 
 
 
     public Event(Artist headArtist, String stage, double startTime, double endTime, String popularity) {
+        this.hasCoArtist = false;
         this.headArtist = headArtist;
         this.stage = stage;
         this.startTime = startTime;
@@ -35,6 +37,7 @@ public class Event implements Serializable {
     }
 
     public Event(Artist headArtist, Artist coArtist, String stage, double startTime, double endTime, String popularity) {
+        this.hasCoArtist = true;
         this.headArtist = headArtist;
         this.coArtist = coArtist;
         this.stage = stage;
@@ -77,4 +80,7 @@ public class Event implements Serializable {
         return this.headArtist.getName() +" "+ startTime + " - " + endTime;
     }
 
+    public boolean HasCoArtist() {
+        return hasCoArtist;
+    }
 }

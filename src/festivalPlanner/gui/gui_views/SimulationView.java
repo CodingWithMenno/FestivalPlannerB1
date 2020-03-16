@@ -1,6 +1,7 @@
 package festivalPlanner.gui.gui_views;
 
 import festivalPlanner.data_system.Data;
+import festivalPlanner.gui.gui_controllers.NPCController;
 import festivalPlanner.gui.gui_controllers.TimelineScrollBar;
 import festivalPlanner.simulation.Map;
 import festivalPlanner.simulation.Visitor;
@@ -11,7 +12,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.StackPane;
 import org.jfree.fx.FXGraphics2D;
-import javafx.scene.image.Image;
 
 
 import javax.imageio.ImageIO;
@@ -35,14 +35,15 @@ public class SimulationView extends StackPane {
     private ArrayList<Visitor> visitors;
     private BufferedImage image;
     private AffineTransform affineTransform;
+    private NPCController npcController;
 
     public static double mouseX;
     public static double mouseY;
 
 
     public SimulationView(Data data) {
-        whats();
         this.data = data;
+        whats();
 
         new AnimationTimer() {
             long last = -1;
@@ -85,10 +86,8 @@ public class SimulationView extends StackPane {
         } catch (IOException e) {
         }
 
-
-
-
         this.scrollBar = new TimelineScrollBar(canvas);
+        this.npcController = new NPCController(scrollBar,data);
         getChildren().addAll(canvas,scrollBar.makehbox());
         this.visitors = new ArrayList<>();
 
@@ -111,6 +110,9 @@ public class SimulationView extends StackPane {
             this.mouseY = event.getY();
         });
         this.scrollBar.update();
+        if(this.scrollBar.getTimeMinutes() % 60 == 0){
+            npcController.update();
+        }
 
     }
 

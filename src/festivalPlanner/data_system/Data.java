@@ -50,22 +50,17 @@ public class Data {
     }
 
     public void addToEvents(Event event) throws Exception{
+        boolean artistAvailable;
 
-        boolean artistAvailable = true;
-
-        for ( Event events : this.events){
-            if ( event.getHeadArtist().getName().equals(events.getHeadArtist().getName()) || event.getCoArtist().getName().equals(events.getCoArtist().getName()) ||
-                    event.getStage().equals(events.getStage()) || event.getHeadArtist().getName().equals(events.getCoArtist().getName()) || event.getCoArtist().getName().equals(events.getHeadArtist().getName())){
-                if ( event.getEndTime() < events.getStartTime() || event.getStartTime() > events.getEndTime() ){
-
-                }
-                else {
-                    artistAvailable = false;
-                }
-            }
+        System.out.println(event.HasCoArtist());
+        if(event.HasCoArtist()){
+          artistAvailable = checkForDoubles(event);
+        }else{
+            artistAvailable =  checkForDoubles2(event);
         }
 
         if ( artistAvailable ){
+
             this.events.add(event);
 
             IO.writeArrayListEvents(this.events, "resources/SavedFiles/SavedEvents.txt");
@@ -76,6 +71,7 @@ public class Data {
         }
         else {
             throw new Exception("Artist is booked");
+
         }
 
     }
@@ -149,6 +145,77 @@ public class Data {
         this.events.removeAll();
 
         this.events = (IO.readEventFile("resources/SavedFiles/SavedEvents.txt"));
+    }
+
+    public boolean checkForDoubles(Event event){
+
+        for ( Event otherEvent : this.events){
+                if(otherEvent.HasCoArtist()){
+
+                    if ( event.getHeadArtist().getName().equals(otherEvent.getHeadArtist().getName()) ||  event.getCoArtist().getName().equals(otherEvent.getCoArtist().getName()) ||
+                            event.getStage().equals(otherEvent.getStage()) || event.getHeadArtist().getName().equals(otherEvent.getCoArtist().getName()) || event.getCoArtist().getName().equals(otherEvent.getHeadArtist().getName())){
+                        if ( event.getEndTime() >= otherEvent.getStartTime() &&  event.getEndTime() <= otherEvent.getEndTime() || event.getStartTime() >= otherEvent.getStartTime()  && event.getStartTime() <= otherEvent.getEndTime()){
+                            System.out.println("test1");
+                            return false;
+                        }
+                        else {
+                            System.out.println("test2");
+                            return true;
+                        }
+                    }
+
+
+
+                }else {
+
+
+                    if ( event.getHeadArtist().getName().equals(otherEvent.getHeadArtist().getName()) ||
+                            event.getStage().equals(otherEvent.getStage()) || event.getCoArtist().getName().equals(otherEvent.getHeadArtist().getName())){
+                        if ( event.getEndTime() >= otherEvent.getStartTime() &&  event.getEndTime() <= otherEvent.getEndTime() || event.getStartTime() >= otherEvent.getStartTime()  && event.getStartTime() <= otherEvent.getEndTime()){
+                            return false;
+                        }
+                        else {
+                            return true;
+                        }
+                    }
+
+
+
+                }
+
+
+        }
+        return true;
+    }
+
+
+    public boolean checkForDoubles2(Event event){
+        for ( Event otherEvent : this.events){
+
+            if(otherEvent.HasCoArtist()){
+                if ( event.getHeadArtist().getName().equals(otherEvent.getHeadArtist().getName()) ||
+                        event.getStage().equals(otherEvent.getStage()) || event.getHeadArtist().getName().equals(otherEvent.getCoArtist().getName())){
+                    if ( event.getEndTime() >= otherEvent.getStartTime() &&  event.getEndTime() <= otherEvent.getEndTime() || event.getStartTime() >= otherEvent.getStartTime()  && event.getStartTime() <= otherEvent.getEndTime()){
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                }
+
+            }else {
+                if ( event.getHeadArtist().getName().equals(otherEvent.getHeadArtist().getName()) ||
+                        event.getStage().equals(otherEvent.getStage())){
+                    if ( event.getEndTime() >= otherEvent.getStartTime() &&  event.getEndTime() <= otherEvent.getEndTime() || event.getStartTime() >= otherEvent.getStartTime()  && event.getStartTime() <= otherEvent.getEndTime()){
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
 }

@@ -29,6 +29,7 @@ public class EventView extends StackPane {
     private MainView mainView;
     private EventViewController controller;
     private Data data;
+    private Event newEvent;
 
 
     public EventView(SceneHandler sceneHandler, Data data){
@@ -148,40 +149,43 @@ public class EventView extends StackPane {
          * this part adds an event.
          */
         addEvent.setOnAction(event -> {
-
-            try {
+            this.newEvent = null;
+            if(!(coArtistField.getSelectionModel().getSelectedItem() == null)){
                 try {
-                data.addToEvents(new Event(mainArtistField.getSelectionModel().getSelectedItem(),
-                        coArtistField.getSelectionModel().getSelectedItem(),
-                        stageField.getSelectionModel().getSelectedItem().getName(),
-                        beginTime.getSelectionModel().getSelectedItem(),
-                        endTime.getSelectionModel().getSelectedItem(),
-                        popularityField.getSelectionModel().getSelectedItem()));
+                     Event event1 = new Event(mainArtistField.getSelectionModel().getSelectedItem(),
+                            coArtistField.getSelectionModel().getSelectedItem(),
+                            stageField.getSelectionModel().getSelectedItem().getName(),
+                            beginTime.getSelectionModel().getSelectedItem(),
+                            endTime.getSelectionModel().getSelectedItem(),
+                            popularityField.getSelectionModel().getSelectedItem());
+
+                    data.addToEvents(event1);
 
                     ((FPComboBoxArtist) mainArtistField).defaultStyle();
-                    ((FPComboBoxArtist) coArtistField).defaultStyle();
-                    ((FPComboBoxStage) stageField).defaultStyle();
-                    ((FPComboBoxDouble) beginTime).defaultStyle();
-                    ((FPComboBoxDouble) endTime).defaultStyle();
-                    ((FPComboBoxString) popularityField).defaultStyle();
+                ((FPComboBoxArtist) coArtistField).defaultStyle();
+                ((FPComboBoxStage) stageField).defaultStyle();
+                ((FPComboBoxDouble) beginTime).defaultStyle();
+                ((FPComboBoxDouble) endTime).defaultStyle();
+                ((FPComboBoxString) popularityField).defaultStyle();
 
             } catch (Exception e){
-                ((FPComboBoxArtist) mainArtistField).invalidInputStyle();
+                    ((FPComboBoxArtist) mainArtistField).invalidInputStyle();
                 ((FPComboBoxArtist) coArtistField).invalidInputStyle();
                 ((FPComboBoxStage) stageField).invalidInputStyle();
                 ((FPComboBoxDouble) beginTime).invalidInputStyle();
                 ((FPComboBoxDouble) endTime).invalidInputStyle();
                 ((FPComboBoxString) popularityField).invalidInputStyle();
-            }
 
-            } catch (Exception e){
+            }}else  {
 
                 try {
-                    data.addToEvents(new Event(mainArtistField.getSelectionModel().getSelectedItem(),
+                    Event event1 = new Event(mainArtistField.getSelectionModel().getSelectedItem(),
                             stageField.getSelectionModel().getSelectedItem().getName(),
                             beginTime.getSelectionModel().getSelectedItem(),
                             endTime.getSelectionModel().getSelectedItem(),
-                            popularityField.getSelectionModel().getSelectedItem()));
+                            popularityField.getSelectionModel().getSelectedItem());
+
+                    data.addToEvents(event1);
 
                     ((FPComboBoxArtist) mainArtistField).defaultStyle();
                     ((FPComboBoxStage) stageField).defaultStyle();
@@ -198,10 +202,7 @@ public class EventView extends StackPane {
                 }
             }
 
-
-
-
-
+            System.out.println("\n\n\n\n");
         });
 
         showButton clearButton = new showButton("Clear All ", 90, 35);
