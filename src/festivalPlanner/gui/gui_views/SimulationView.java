@@ -31,11 +31,6 @@ public class SimulationView extends StackPane {
     public SimulationView(Data data) {
         whats();
         this.data = data;
-
-
-
-
-
         new AnimationTimer() {
             long last = -1;
             @Override
@@ -51,15 +46,17 @@ public class SimulationView extends StackPane {
 
 
     public void whats(){
-//        this.map = new Map("proftaakmap.json");
+        setWidth(1920);
+        setHeight(1080);
+        map = new Map("proftaakmap.json");
         this.canvas = new Canvas();
+        graphics = new FXGraphics2D(canvas.getGraphicsContext2D());
+
         this.canvas.setHeight(1080);
         this.canvas.setWidth(1920);
         this.scrollBar = new TimelineScrollBar(canvas);
         getChildren().addAll(canvas,scrollBar.makehbox());
-        graphics = new FXGraphics2D(canvas.getGraphicsContext2D());
-        setWidth(1920);
-        setHeight(1080);
+
         this.visitors = new ArrayList<>();
 
 
@@ -93,7 +90,7 @@ public class SimulationView extends StackPane {
         graphics.setBackground(Color.white);
 
 
-//        this.map.drawMap(graphics, canvas);
+        this.map.drawMap(graphics, canvas);
         for (Visitor visitor : this.visitors) {
             visitor.draw(graphics);
         }
