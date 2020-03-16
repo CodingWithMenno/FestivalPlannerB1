@@ -1,6 +1,8 @@
 package festivalPlanner.simulation;
 
 import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
 import org.jfree.fx.FXGraphics2D;
 
 import javax.imageio.ImageIO;
@@ -104,10 +106,7 @@ public class Map {
         }
     }
 
-    public void drawMap(FXGraphics2D graphics, Canvas canvas){
-        graphics.setTransform(new AffineTransform());
-        //graphics.setBackground(Color.white);
-        //graphics.clearRect(0, 0, (int)canvas.getWidth(), (int)canvas.getHeight());
+    public void drawMap(FXGraphics2D graphics){
         for(Layer layer : layers){
 
             int i = 0;
@@ -118,16 +117,10 @@ public class Map {
 
                     Integer tileId = layer.getData().get(i);
                     graphics.drawImage(tiles.get(tileId), x * tileWidth, y * tileHeight, null);
+
                     i++;
                 }
             }
-            //break;
-
         }
-
-        //System.out.println(this.tiles);
-        //graphics.drawImage(tiles.get(64), 0, 0, null);
-
-
     }
 }
