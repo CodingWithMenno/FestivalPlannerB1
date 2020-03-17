@@ -20,17 +20,16 @@ import java.sql.SQLException;
 public class StageView extends StackPane {
 
     private SceneHandler sceneHandler;
-    private MainView mainView;
     private EventView eventView;
     private Data data;
+    public static int AMOUNT_OF_STAGES;
 
 
     public StageView(SceneHandler sceneHandler, EventView eventView, Data data){
         this.sceneHandler = sceneHandler;
-        this.mainView = mainView;
         this.eventView = eventView;
         this.data = data;
-
+        AMOUNT_OF_STAGES = data.getStages().size();
 
         setWidth(1280);
         setHeight(800);

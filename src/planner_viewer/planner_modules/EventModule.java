@@ -76,10 +76,8 @@ public class EventModule extends VBox {
         }
 
 
-
-        this.setStyle("-fx-background-radius: 20; " +
-                "-fx-text-fill: #35477D; "+
-                "-fx-background-color: Blue;"+
+        this.setStyle("-fx-text-fill: #35477D; "+
+                "-fx-background-color: lightBlue;"+
                 "-fx-background-image: url('" + url + "');" +
                 "-fx-background-repeat: no-repeat;" +
                 "-fx-background-size: cover;" +

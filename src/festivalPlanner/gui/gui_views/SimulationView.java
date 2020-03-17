@@ -1,14 +1,17 @@
 package festivalPlanner.gui.gui_views;
 
 import festivalPlanner.data_system.Data;
+import festivalPlanner.gui.SceneHandler;
 import festivalPlanner.gui.gui_controllers.NPCController;
 import festivalPlanner.gui.gui_controllers.TimelineScrollBar;
 import festivalPlanner.simulation.Map;
 import festivalPlanner.simulation.Visitor;
+import festivalplanner_guiModules.buttons.showButton;
 import javafx.animation.AnimationTimer;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.StackPane;
 import org.jfree.fx.FXGraphics2D;
@@ -21,6 +24,7 @@ import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 
@@ -29,6 +33,7 @@ public class SimulationView extends StackPane {
     private Data data;
     private Canvas canvas;
     private FXGraphics2D graphics;
+    private SceneHandler sceneHandler;
 
     private TimelineScrollBar scrollBar;
     private Map map;
@@ -41,7 +46,8 @@ public class SimulationView extends StackPane {
     public static double mouseY;
 
 
-    public SimulationView(Data data) {
+    public SimulationView(Data data, SceneHandler sceneHandler) {
+        this.sceneHandler = sceneHandler;
         this.data = data;
         whats();
 
@@ -87,9 +93,26 @@ public class SimulationView extends StackPane {
         }
 
         this.scrollBar = new TimelineScrollBar(canvas);
-        this.npcController = new NPCController(scrollBar,data);
-        getChildren().addAll(canvas,scrollBar.makehbox());
         this.visitors = new ArrayList<>();
+        this.npcController = new NPCController(scrollBar,data,visitors);
+
+
+        Button BackButton = new showButton("X",30,30);
+        BackButton.setOnAction(event -> {
+            try {
+                this.sceneHandler.toMainView();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+
+        BackButton.setLayoutX(925);
+        BackButton.setLayoutY(-505);
+        BackButton.setTranslateX(925);
+        BackButton.setTranslateY(-505);
+
+
+        getChildren().addAll(canvas,scrollBar.makehbox(),BackButton);
 
         for (int i = 0; i < 100; i++) {
             this.visitors.add(new Visitor(new Point2D.Double(10, 10)));

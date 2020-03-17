@@ -70,13 +70,15 @@ public class SceneHandler {
     }
 
     public void toMainView() throws SQLException {
+        this.stage.setWidth(1280);
+        this.stage.setHeight(800);
         this.stageManager.setStageScene(new Scene(new MainView(this,databaseConnection,data)));
     }
 
     public void toSimulationView(){
         this.stage.setWidth(1920);
         this.stage.setHeight(1080);
-        this.stageManager.setStageScene(new Scene(new SimulationView(data)));
+        this.stageManager.setStageScene(new Scene(new SimulationView(data,this)));
     }
 
 

@@ -68,8 +68,16 @@ public class Event implements Serializable {
         return endTime;
     }
 
-    public String getPopularity() {
-        return popularity;
+    public double getPopularity() {
+        if(popularity.equals("0%")){
+            return 0.0;
+        } else if(popularity.equals("100%")){
+            return 100.0;
+        } else {
+            String a = popularity.charAt(0) +""+ popularity.charAt(1)+"";
+            double b = Double.parseDouble(a);
+            return Integer.parseInt(a);
+        }
     }
 
     public String getPhotoURL() {

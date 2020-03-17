@@ -5,7 +5,10 @@ package festivalPlanner.data_system;
  * this class stores these attributes.
  */
 
+import festivalPlanner.gui.gui_views.StageView;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Stage implements Serializable {
 

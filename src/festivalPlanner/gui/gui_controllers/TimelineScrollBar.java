@@ -100,7 +100,7 @@ public class TimelineScrollBar {
         hBox.setMinSize(205,30);
 
         hBox.setSpacing(10);
-        place(hBox,-845,475);
+        place(hBox,-845,463);
 
         ImageView forwardView = new ImageView(forward);
         forwardView.setOnMousePressed(event -> {
