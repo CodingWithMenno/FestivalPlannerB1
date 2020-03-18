@@ -41,6 +41,7 @@ public class SimulationView extends StackPane {
     private BufferedImage image;
     private AffineTransform affineTransform;
     private NPCController npcController;
+    private AnimationTimer animationTimer;
 
     public static double mouseX;
     public static double mouseY;
@@ -51,7 +52,7 @@ public class SimulationView extends StackPane {
         this.data = data;
         whats();
 
-        new AnimationTimer() {
+        this.animationTimer = new AnimationTimer() {
             long last = -1;
             @Override
             public void handle(long now) {
@@ -61,7 +62,8 @@ public class SimulationView extends StackPane {
                 last = now;
                 draw(graphics);
             }
-        }.start();
+        };
+        this.animationTimer.start();
     }
 
 
@@ -97,9 +99,10 @@ public class SimulationView extends StackPane {
         this.npcController = new NPCController(scrollBar,data,visitors);
 
 
-        Button BackButton = new showButton("X",30,30);
+        Button BackButton = new showButton("Exit",60,35);
         BackButton.setOnAction(event -> {
             try {
+                this.animationTimer.stop();
                 this.sceneHandler.toMainView();
             } catch (SQLException e) {
                 e.printStackTrace();

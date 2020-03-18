@@ -26,6 +26,7 @@ public class TimelineScrollBar {
     private Shape time;
     private double timeMinutes;
     private String timeString;
+    private FXGraphics2D graphics;
     private Image forward = new Image("file:resources/FastForwardButton.png");
     private Image backward = new Image("file:resources/FastBackwardButton.png");
     private Image play = new Image("file:resources/PlayButton.png");
@@ -39,55 +40,42 @@ public class TimelineScrollBar {
         this.playing = true;
         this.timeMinutes = 0;
         this.timeString = "00:00";
+        this.graphics = new FXGraphics2D(canvas.getGraphicsContext2D());
         this.timex = 206;
         this.speed = 0.05;
-//        setHeight(1080);
-//        setWidth(1920);
-//        this.canvas.setHeight(1080);
-//        this.canvas.setWidth(1920);
         this.canvas.setOnMousePressed(e -> mousePressed(e));
         this.canvas.setOnMouseDragged(e -> mouseDragged(e));
-//        draw(new FXGraphics2D(canvas.getGraphicsContext2D()));
-        //        getChildren().addAll(canvas,makehbox());
-
     }
 
 
     private void mousePressed(MouseEvent e) {
-        if(e.getX() > 206 && e.getX() < 1646 && e.getY() > 995 && e.getY() < 1014) {
+        if(e.getX() > 206 && e.getX() < 1646 && e.getY() > 1040 && e.getY() < 1059) {
             mouseDragged(e);
         }
     }
 
     private void mouseDragged(MouseEvent e) {
-        if(e.getX() > 206 && e.getX() < 1646 && e.getY() > 995 && e.getY() < 1014) {
+        if(e.getX() > 206 && e.getX() < 1646 && e.getY() > 1040 && e.getY() < 1059) {
             timex = e.getX();
-            draw(new FXGraphics2D(canvas.getGraphicsContext2D()));
+            draw(graphics);
         }
     }
 
     public void draw(FXGraphics2D graphics){
-//        graphics.setTransform(new AffineTransform());
-//        graphics.setBackground(Color.WHITE);
-//        graphics.clearRect(0, 0, (int)canvas.getWidth(), (int)canvas.getHeight());
-
-//        graphics.setPaint(new Color(183,111,136));
-//        graphics.fill(new Rectangle (0,1050,(int)this.getWidth(),30));
-
-        Area timeLine = new Area(new Rectangle2D.Double(206,1000,1440,6));
+        Area timeLine = new Area(new Rectangle2D.Double(206,1045,1440,6));
         graphics.setPaint(Color.GRAY);
         graphics.fill(timeLine);
 
-        Area dragger = new Area(new Ellipse2D.Double(timex-9,995,18,18));
+        Area dragger = new Area(new Ellipse2D.Double(timex-9,1040,18,18));
         graphics.setPaint(Color.RED);
         graphics.fill(dragger);
 
-        Area overTime = new Area(new Rectangle2D.Double(206,1000,timex-206,6));
+        Area overTime = new Area(new Rectangle2D.Double(206,1045,timex-206,6));
         graphics.setPaint(Color.RED);
         graphics.fill(overTime);
 
         AffineTransform tx = new AffineTransform();
-        tx.translate(1660,1009);
+        tx.translate(1660,1054);
         this.time = tx.createTransformedShape(font.createGlyphVector(graphics.getFontRenderContext(),timeString).getOutline());
         graphics.setPaint(Color.BLACK);
         graphics.fill(this.time);
@@ -100,7 +88,7 @@ public class TimelineScrollBar {
         hBox.setMinSize(205,30);
 
         hBox.setSpacing(10);
-        place(hBox,-845,463);
+        place(hBox,-845,508);
 
         ImageView forwardView = new ImageView(forward);
         forwardView.setOnMousePressed(event -> {

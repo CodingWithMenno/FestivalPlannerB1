@@ -76,9 +76,12 @@ public class SceneHandler {
     }
 
     public void toSimulationView(){
+        this.stageManager.setStageScene(new Scene(new SimulationView(data,this)));
+
+        this.stage.setFullScreen(true);
+        this.stage.setMaximized(true);
         this.stage.setWidth(1920);
         this.stage.setHeight(1080);
-        this.stageManager.setStageScene(new Scene(new SimulationView(data,this)));
     }
 
 
