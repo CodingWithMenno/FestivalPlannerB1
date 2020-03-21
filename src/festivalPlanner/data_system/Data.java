@@ -1,5 +1,6 @@
 package festivalPlanner.data_system;
 
+import festivalPlanner.gui.gui_controllers.StageViewController;
 import festivalPlanner.tools.FileIO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -125,7 +125,6 @@ public class EventView extends StackPane {
         place(endTime,-75,155);
         endTime.setItems(controller.getTimes());
         beginTime.setOnAction( e -> {
-            System.out.println("test2");
             endTime.setItems(controller.getEndTimes(beginTime.getSelectionModel().getSelectedItem()));
         });
 

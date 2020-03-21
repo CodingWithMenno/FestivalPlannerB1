@@ -6,6 +6,7 @@ package festivalPlanner.data_system;
  */
 
 import festivalPlanner.gui.gui_views.StageView;
+import javafx.geometry.Point2D;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,23 +17,23 @@ public class Stage implements Serializable {
     private int capacity;
     private int surface;
     private boolean isIndoor;
-    private int emergencyExits;
+    private String placement;
     private int firstAidKits;
 
-    public Stage(String name, int capacity, int surface, boolean isIndoor, int emergencyExits, int firstAidKits) {
+    public Stage(String name, int capacity, int surface, boolean isIndoor, String placement, int firstAidKits) {
         this.name = name;
         this.capacity = capacity;
         this.surface = surface;
         this.isIndoor = isIndoor;
-        this.emergencyExits = emergencyExits;
+        this.placement = placement;
         this.firstAidKits = firstAidKits;
     }
 
-    public Stage(String name, int capacity, boolean isIndoor, int emergencyExits, int firstAidKits) {
+    public Stage(String name, int capacity, boolean isIndoor, String placement, int firstAidKits) {
         this.name = name;
         this.capacity = capacity;
         this.isIndoor = isIndoor;
-        this.emergencyExits = emergencyExits;
+        this.placement = placement;
         this.firstAidKits = firstAidKits;
     }
 
@@ -56,9 +57,6 @@ public class Stage implements Serializable {
         isIndoor = indoor;
     }
 
-    public void setEmergencyExits(int emergencyExits) {
-        this.emergencyExits = emergencyExits;
-    }
 
     public void setFirstAidKits(int firstAidKits) {
         this.firstAidKits = firstAidKits;
@@ -81,11 +79,15 @@ public class Stage implements Serializable {
         return isIndoor;
     }
 
-    public int getEmergencyExits() {
-        return emergencyExits;
-    }
-
     public int getFirstAidKits() {
         return firstAidKits;
+    }
+
+    public String getPlacement() {
+        return placement;
+    }
+
+    public void setPlacement(String placement) {
+        this.placement = placement;
     }
 }

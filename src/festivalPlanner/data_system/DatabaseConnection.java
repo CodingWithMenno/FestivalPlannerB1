@@ -48,7 +48,7 @@ public class DatabaseConnection {
                     databaseReply.getInt(2),
                     databaseReply.getInt(3),
                     databaseReply.getBoolean(4),
-                    databaseReply.getInt(5),
+                    databaseReply.getString(5),
                     databaseReply.getInt(6)));
 
         }

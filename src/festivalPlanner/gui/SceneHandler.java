@@ -37,6 +37,7 @@ public class SceneHandler {
         this.databaseConnection = databaseConnection;
         this.data = new Data();
 
+
         this.eventView = new EventView(this,data);
         this.stageView = new StageView(this,this.eventView,data);
         this.artistView = new ArtistView(this,this.eventView,data);
