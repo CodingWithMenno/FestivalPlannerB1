@@ -1,9 +1,6 @@
 package planner_viewer;
 
-import festivalPlanner.data_system.Data;
-import festivalPlanner.data_system.DatabaseConnection;
-import festivalPlanner.data_system.Event;
-import festivalPlanner.data_system.Stage;
+import festivalPlanner.data_system.*;
 import festivalPlanner.gui.SceneHandler;
 import festivalPlanner.gui.gui_controllers.TimeLineViewScrollController;
 import javafx.collections.ObservableList;
@@ -36,6 +33,7 @@ public class TimeLineView extends StackPane {
 
 
     public TimeLineView(DatabaseConnection databaseConnection, Data data, SceneHandler sceneHandler) throws SQLException {
+
 
         this.data = data;
         this.sceneHandler = sceneHandler;

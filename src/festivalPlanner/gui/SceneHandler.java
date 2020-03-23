@@ -1,11 +1,10 @@
 package festivalPlanner.gui;
 
-import festivalPlanner.data_system.Artist;
 import festivalPlanner.data_system.Data;
 import festivalPlanner.data_system.DatabaseConnection;
 import festivalPlanner.data_system.Event;
 import festivalPlanner.gui.gui_views.*;
-import javafx.scene.Parent;
+import festivalPlanner.gui.gui_views.SimulationView;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 

@@ -3,6 +3,8 @@ package festivalPlanner.gui.gui_controllers;
 import festivalPlanner.data_system.Data;
 import festivalPlanner.data_system.Event;
 import festivalPlanner.data_system.Stage;
+import festivalPlanner.simulation.RouteFollower;
+import festivalPlanner.simulation.TimelineScrollBar;
 import festivalPlanner.simulation.Visitor;
 import javafx.geometry.Point2D;
 
@@ -14,12 +16,14 @@ public class NPCController {
     private Data data;
     private ArrayList<Double> popularities;
     private ArrayList<Visitor> visitors;
-    private ArrayList<Point2D> positions;
+    private ArrayList<String> positions;
+    private RouteFollower routeFollower;
 
-    public NPCController(TimelineScrollBar scrollBar, Data data, ArrayList<Visitor>visitors) {
+    public NPCController(TimelineScrollBar scrollBar, Data data, ArrayList<Visitor>visitors, RouteFollower routeFollower) {
         this.visitors = visitors;
         this.scrollBar = scrollBar;
         this.data = data;
+        this.routeFollower = routeFollower;
     }
 
     public void update(){
@@ -176,28 +180,29 @@ public class NPCController {
         return totalPeople/totalPercentages;
     }
 
-    public void directVisitorToStage(Visitor visitor, Point2D point2D){
-
+    public void directVisitorToStage(Visitor visitor, String position){
+        System.out.println(position);
+        visitor.setPath(routeFollower.routeFinder(position,(int)visitor.getPosition().getY(),(int)visitor.getPosition().getX()));
     }
 
-    public Point2D getPosition(String stageName){
-        Point2D point2D = new Point2D(0,0);
+    public String getPosition(String stageName){
+       String position = "";
         for(Stage stage : data.getStages()){
             if(stage.getName().equals(stageName)){
                 if(stage.getPlacement().equals("Middle")){
-                    point2D = new Point2D(1,1);
+                    position = "Middle";
                 }else if(stage.getPlacement().equals("North West")){
-                    point2D = new Point2D(2,2);
+                    position = "North West";
                 }else if(stage.getPlacement().equals("North East")){
-                    point2D = new Point2D(3,3);
+                    position = "North East";
                 }else if(stage.getPlacement().equals("South West")){
-                    point2D = new Point2D(4,4);
+                    position = "South West";
                 }else if(stage.getPlacement().equals("South East")){
-                    point2D = new Point2D(5,5);
+                    position = "South East";
                 }
             }
         }
-        return point2D;
+        return position;
     }
 }
 

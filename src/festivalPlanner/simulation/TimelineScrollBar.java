@@ -1,4 +1,4 @@
-package festivalPlanner.gui.gui_controllers;
+package festivalPlanner.simulation;
 
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;

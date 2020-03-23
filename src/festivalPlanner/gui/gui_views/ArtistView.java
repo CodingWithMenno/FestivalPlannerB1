@@ -2,6 +2,7 @@ package festivalPlanner.gui.gui_views;
 
 import festivalPlanner.data_system.Artist;
 import festivalPlanner.data_system.Data;
+import festivalPlanner.data_system.Event;
 import festivalPlanner.gui.SceneHandler;
 import festivalPlanner.gui.gui_controllers.ArtistViewController;
 import festivalplanner_guiModules.buttons.showButton;
@@ -202,6 +203,7 @@ public class ArtistView extends StackPane {
                                 data.getArtists().get(finalPlace).setArtistPhoto(artist.getArtistPhoto());
 
                             }
+                            data.updateFileIO();
                         });
 
                     }

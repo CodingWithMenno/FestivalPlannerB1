@@ -50,6 +50,35 @@ public class Data {
         this.stages = IO.readStageFile("resources/SavedFiles/SavedStages.txt");
     }
 
+    public void updateFileIO(){
+//        IO.writeArrayListArtist(this.artists, "resources/SavedFiles/SavedArtists.txt");
+//        this.artists.clear();
+//        this.artists = IO.readArtistFile("resources/SavedFiles/SavedArtists.txt");
+//
+//        IO.writeArrayListStage(this.stages, "resources/SavedFiles/SavedStages.txt");
+//        this.stages.clear();
+//        this.stages = IO.readStageFile("resources/SavedFiles/SavedStages.txt");
+//
+//        for(Event event : this.events){
+//            for(Artist artist : this.artists){
+//                if(event.getHeadArtist().getName().equals(artist.getName())){
+//                    if(event.HasCoArtist()){
+//
+//                    }else {
+//                        System.out.println(artist.getDescription());
+//                        event = new Event(artist,event.getStage(),event.getStartTime(),event.getEndTime(),event.getPopularityInString());
+//                    }
+//                }
+//            }
+//        }
+
+
+
+//        IO.writeArrayListEvents(this.events, "resources/SavedFiles/SavedEvents.txt");
+//        this.events.clear();
+//        this.events = (IO.readEventFile("resources/SavedFiles/SavedEvents.txt"));
+    }
+
     public void addToEvents(Event event) throws Exception{
         boolean artistAvailable;
 
@@ -156,11 +185,9 @@ public class Data {
                     if ( event.getHeadArtist().getName().equals(otherEvent.getHeadArtist().getName()) ||  event.getCoArtist().getName().equals(otherEvent.getCoArtist().getName()) ||
                             event.getStage().equals(otherEvent.getStage()) || event.getHeadArtist().getName().equals(otherEvent.getCoArtist().getName()) || event.getCoArtist().getName().equals(otherEvent.getHeadArtist().getName())){
                         if ( event.getEndTime() >= otherEvent.getStartTime() &&  event.getEndTime() <= otherEvent.getEndTime() || event.getStartTime() >= otherEvent.getStartTime()  && event.getStartTime() <= otherEvent.getEndTime()){
-                            System.out.println("test1");
                             return false;
                         }
                         else {
-                            System.out.println("test2");
                             return true;
                         }
                     }

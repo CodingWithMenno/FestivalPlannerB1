@@ -70,13 +70,13 @@ public class InfoView extends StackPane {
             stackPane.getChildren().add(artist);
         }
 
-        DynamicTitle time = new DynamicTitle("From " + beginTime + " till " + endTime , 21);
+        DynamicTitle time = new DynamicTitle("From " + beginTime + " till " + endTime +"\n--------------------------------" , 21);
 
-        DynamicTitle stage = new DynamicTitle("Stage: " + event.getStage(), 21);
+        DynamicTitle stage = new DynamicTitle("Stage: " + event.getStage()+"\n--------------------------------", 21);
 
-        DynamicTitle genre = new DynamicTitle("Genre: " + event.getHeadArtist().getGenre(),21);
+        DynamicTitle genre = new DynamicTitle("Genre: " + event.getHeadArtist().getGenre()+"\n--------------------------------",21);
 
-        DynamicTitle description = new DynamicTitle(event.getHeadArtist().getName() + ":\n"+event.getHeadArtist().getDescription(), 17);
+        DynamicTitle description = new DynamicTitle(event.getHeadArtist().getName() + ":\n"+event.getHeadArtist().getDescription()+"\n--------------------------------", 17);
 
         vBox.getChildren().addAll(time,stage,genre,description);
 
@@ -96,7 +96,6 @@ public class InfoView extends StackPane {
 
         vBox.setAlignment(Pos.TOP_LEFT);
         place(vBox,50,125);
-        vBox.setSpacing(20);
 
         stackPane.getChildren().addAll(vBox,makeLine(),makeLine2(),artistPhoto);
         return stackPane;

@@ -3,7 +3,8 @@ package festivalPlanner.gui.gui_views;
 import festivalPlanner.data_system.Data;
 import festivalPlanner.gui.SceneHandler;
 import festivalPlanner.gui.gui_controllers.NPCController;
-import festivalPlanner.gui.gui_controllers.TimelineScrollBar;
+import festivalPlanner.simulation.RouteFollower;
+import festivalPlanner.simulation.TimelineScrollBar;
 import festivalPlanner.simulation.Map;
 import festivalPlanner.simulation.Visitor;
 import festivalplanner_guiModules.buttons.showButton;
@@ -42,6 +43,7 @@ public class SimulationView extends StackPane {
     private AffineTransform affineTransform;
     private NPCController npcController;
     private AnimationTimer animationTimer;
+    private RouteFollower routeFollower;
 
     public static double mouseX;
     public static double mouseY;
@@ -96,7 +98,9 @@ public class SimulationView extends StackPane {
 
         this.scrollBar = new TimelineScrollBar(canvas);
         this.visitors = new ArrayList<>();
-        this.npcController = new NPCController(scrollBar,data,visitors);
+        this.routeFollower = new RouteFollower(1088,1920);
+        this.npcController = new NPCController(scrollBar,data,visitors,routeFollower);
+        this.routeFollower.buildRouteMap(map.getPathLayer("Pad").getData());
 
 
         Button BackButton = new showButton("Exit",60,35);
@@ -117,12 +121,13 @@ public class SimulationView extends StackPane {
 
         getChildren().addAll(canvas,scrollBar.makehbox(),BackButton);
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1; i++) {
             this.visitors.add(new Visitor(new Point2D.Double(10, 10)));
         }
         for (Visitor visitor : this.visitors) {
             visitor.setOtherVisitors(this.visitors);
         }
+
 
     }
 

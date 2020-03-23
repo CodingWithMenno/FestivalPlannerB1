@@ -80,6 +80,10 @@ public class Event implements Serializable {
         }
     }
 
+    public String getPopularityInString(){
+        return this.popularity;
+    }
+
     public String getPhotoURL() {
         return photoURL;
     }
