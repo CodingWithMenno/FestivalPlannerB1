@@ -14,10 +14,12 @@ public class NPCController {
 
     private TimelineScrollBar scrollBar;
     private Data data;
-    private ArrayList<Double> popularities;
+    private ArrayList<Double> popularities = new ArrayList<>();
     private ArrayList<Visitor> visitors;
-    private ArrayList<String> positions;
+    private ArrayList<String> positions = new ArrayList<>();
     private RouteFollower routeFollower;
+    private ArrayList<Event> eventsRightNow = new ArrayList<>();
+    private Point2D stageCoords;
 
     public NPCController(TimelineScrollBar scrollBar, Data data, ArrayList<Visitor>visitors, RouteFollower routeFollower) {
         this.visitors = visitors;
@@ -29,27 +31,27 @@ public class NPCController {
     public void update(){
        double b =  scrollBar.getTimeMinutes();
        b = b/60;
-       int amountofeventrightnow = 0;
+
+        int amountofeventrightnow = 0;
+        eventsRightNow.clear();
 
        for(Event event : data.getEvents()){
            if(event.getStartTime() <= b && event.getEndTime() >= b){
+               eventsRightNow.add(event);
                amountofeventrightnow++;
            }
        }
-
        if(amountofeventrightnow > 0) {
-           this.positions = new ArrayList<>();
-           this.popularities = new ArrayList<>();
-           int i = 0;
-           for (Event event : data.getEvents()) {
+           this.positions.clear();
+           this.popularities.clear();
+           for (Event event : eventsRightNow) {
                popularities.add(event.getPopularity());
                positions.add(getPosition(event.getStage()));
-               i++;
            }
        }
 
-        System.out.println(popularities.toString());
-        System.out.println(positions.toString());
+//        System.out.println(popularities.toString());
+//        System.out.println(positions.toString());
 
        if(amountofeventrightnow == 0){
            divideOver0Events();
@@ -171,7 +173,7 @@ public class NPCController {
     public double formula(){
 
         double totalPercentages = 0.0;
-        double totalPeople = 100;
+        double totalPeople = visitors.size();
 
         for ( int i = 0 ; i <  popularities.size (); i++ )
         {
@@ -181,8 +183,9 @@ public class NPCController {
     }
 
     public void directVisitorToStage(Visitor visitor, String position){
-        System.out.println(position);
-        visitor.setPath(routeFollower.routeFinder(position,(int)visitor.getPosition().getY(),(int)visitor.getPosition().getX()));
+        if(!(visitor.getLastPosition().getX() == getStageCoords(position).getX() && visitor.getLastPosition().getY() == getStageCoords(position).getY())) {
+            visitor.setPath(routeFollower.routeFinder(position, (int) visitor.getLastPosition().getY(), (int) visitor.getLastPosition().getX()));
+        }
     }
 
     public String getPosition(String stageName){
@@ -203,6 +206,25 @@ public class NPCController {
             }
         }
         return position;
+    }
+
+    public Point2D getStageCoords(String stage){
+        Point2D point2D = new Point2D(0,0);
+        if(stage.equals("Middle")){
+            point2D = new Point2D(991,674);
+        }else if(stage.equals("North West")){
+            point2D = new Point2D(191,322);
+        }else if(stage.equals("North East")){
+            point2D = new Point2D(1729,289);
+        }else if(stage.equals("South West")){
+            point2D = new Point2D(191,961);
+        }else if(stage.equals("South East")){
+            point2D = new Point2D(1695,993);
+        }
+        return point2D;
+
+
+
     }
 }
 

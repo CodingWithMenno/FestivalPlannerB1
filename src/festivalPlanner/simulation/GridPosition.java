@@ -18,7 +18,7 @@ public class GridPosition {
 
     public GridPosition(int yPos, int xPos) {
 
-        this.walkable = true;
+        this.walkable = false;
 
         this.xPos = xPos;
         this.yPos = yPos;

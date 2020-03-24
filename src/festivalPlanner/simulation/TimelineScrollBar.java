@@ -42,7 +42,7 @@ public class TimelineScrollBar {
         this.timeString = "00:00";
         this.graphics = new FXGraphics2D(canvas.getGraphicsContext2D());
         this.timex = 206;
-        this.speed = 0.05;
+        this.speed = 0.005;
         this.canvas.setOnMousePressed(e -> mousePressed(e));
         this.canvas.setOnMouseDragged(e -> mouseDragged(e));
     }

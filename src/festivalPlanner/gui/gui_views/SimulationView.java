@@ -121,8 +121,24 @@ public class SimulationView extends StackPane {
 
         getChildren().addAll(canvas,scrollBar.makehbox(),BackButton);
 
-        for (int i = 0; i < 1; i++) {
-            this.visitors.add(new Visitor(new Point2D.Double(10, 10)));
+//        for (int i = 0; i < 1; i++) {
+//            this.visitors.add(new Visitor(new Point2D.Double(992, 850+(i*11))));
+//        }
+//
+        for (int i = 0; i < 20; i++) {
+            this.visitors.add(new Visitor(new Point2D.Double(992, 850+(i*11))));
+        }
+        for (int i = 0; i < 20; i++) {
+            this.visitors.add(new Visitor(new Point2D.Double(1003, 850+(i*11))));
+        }
+        for (int i = 0; i < 20; i++) {
+            this.visitors.add(new Visitor(new Point2D.Double(981, 850+(i*11))));
+        }
+        for (int i = 0; i < 20; i++) {
+            this.visitors.add(new Visitor(new Point2D.Double(970, 850+(i*11))));
+        }
+        for (int i = 0; i < 20; i++) {
+            this.visitors.add(new Visitor(new Point2D.Double(1014, 850+(i*11))));
         }
         for (Visitor visitor : this.visitors) {
             visitor.setOtherVisitors(this.visitors);

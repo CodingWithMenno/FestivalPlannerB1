@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -20,24 +21,30 @@ public class Visitor implements Updatable{
     private Ellipse2D hitbox;
     private double rotationSpeed;
     private ArrayList<Visitor> otherVisitors;
+    private Point2D lastPosition;
 
     private ArrayList<GridPosition> path = new ArrayList<>();
     private int pathArrayIndex = 1;
 
     public Visitor(Point2D position) {
         this.position = position;
+        this.lastPosition = new Point2D.Double(position.getX(),position.getY());
         Random random = new Random();
         //this.position = new Point2D.Double(random.nextInt(2000), random.nextInt(2000));
-        this.speed = 1;
+        this.speed = 1.4;
         this.rotationSpeed = 0.1;
-        this.hitbox = new Ellipse2D.Double(this.position.getX(), this.position.getY(), 10, 10);
-        this.targetPos = new Point2D.Double(180, 225);
+        this.hitbox = new Ellipse2D.Double(this.position.getX(), this.position.getY(), 6, 6);
+        this.targetPos = new Point2D.Double(this.position.getX(),this.position.getY());
         this.angle = 1;
     }
 
 
     @Override
     public void draw(FXGraphics2D g2d) {
+        for(GridPosition gridPosition : this.path){
+            g2d.setColor(Color.GREEN);
+            g2d.fill(new Rectangle2D.Double(gridPosition.getxPos(),gridPosition.getyPos(),1,1));
+        }
         g2d.draw(this.hitbox);
         g2d.fill(this.hitbox);
     }
@@ -45,13 +52,17 @@ public class Visitor implements Updatable{
     @Override
     public void update(Canvas canvas) {
 
-        if(path.isEmpty()){
+        if (path.isEmpty()) {
 
-        }else {
+        } else {
             this.targetPos = new Point2D.Double(this.path.get(this.pathArrayIndex).getxPos(), this.path.get(this.pathArrayIndex).getyPos());
+
             if (this.path.size() - 1 != this.pathArrayIndex) {
                 this.pathArrayIndex++;
+            }else {
+                this.lastPosition = new Point2D.Double(this.path.get(this.pathArrayIndex).getxPos(), this.path.get(this.pathArrayIndex).getyPos());
             }
+
 
             double targetAngle = Math.atan2(this.targetPos.getY() - this.position.getY(), this.targetPos.getX() - this.position.getX());
 
@@ -81,7 +92,7 @@ public class Visitor implements Updatable{
                 this.angle -= this.rotationSpeed * 2;
             }
 
-            this.hitbox = new Ellipse2D.Double(this.position.getX(), this.position.getY(), 10, 10);
+            this.hitbox = new Ellipse2D.Double(this.position.getX(), this.position.getY(), 6, 6);
         }
     }
 
@@ -117,5 +128,10 @@ public class Visitor implements Updatable{
 
     public void setPath(ArrayList<GridPosition> path){
         this.path = path;
+        this.pathArrayIndex = 0;
+    }
+
+    public Point2D getLastPosition() {
+        return lastPosition;
     }
 }

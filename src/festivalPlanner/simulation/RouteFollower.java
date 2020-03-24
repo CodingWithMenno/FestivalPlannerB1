@@ -63,11 +63,11 @@ public class RouteFollower {
         for ( int i = 0; i < 1088/32; i++ ){
             for ( int j = 0; j < 1920/32; j++ ){
 
-                if ( tileMapGrid[i][j] == 0 ){
+                if ( tileMapGrid[i][j] == 98 ){
                     for ( int tileWidth = 0; tileWidth < 32; tileWidth++ ){
                         for ( int tileHeight = 0; tileHeight < 32; tileHeight++ ){
 
-                            this.twoDArray[i*32+tileWidth][j*32+tileHeight].setWalkable(false);
+                            this.twoDArray[i*32+tileWidth][j*32+tileHeight].setWalkable(true);
 
                         }
                     }
