@@ -70,6 +70,7 @@ public class NPCController {
 
     public void divideOver0Events(){
         for(Visitor visitor : visitors){
+            directVisitorToStage(visitor,"Toilet");
         }
     }
 
@@ -220,6 +221,8 @@ public class NPCController {
             point2D = new Point2D(191,961);
         }else if(stage.equals("South East")){
             point2D = new Point2D(1695,993);
+        }else if(stage.equals("Toilet")){
+            point2D = new Point2D(756,424);
         }
         return point2D;
 

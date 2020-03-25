@@ -72,7 +72,7 @@ public class SimulationView extends StackPane {
     public void whats(){
         setWidth(1920);
         setHeight(1080);
-        map = new Map("proftaakmap.json");
+        map = new Map("proftaakmap4.json");
         this.affineTransform = new AffineTransform();
         this.canvas = new Canvas();
 
@@ -179,5 +179,7 @@ public class SimulationView extends StackPane {
 
     }
 
-
+    public NPCController getNpcController() {
+        return npcController;
+    }
 }

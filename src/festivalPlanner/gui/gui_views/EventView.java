@@ -149,59 +149,67 @@ public class EventView extends StackPane {
          */
         addEvent.setOnAction(event -> {
             this.newEvent = null;
-            if(!(coArtistField.getSelectionModel().getSelectedItem() == null)){
-                try {
-                     Event event1 = new Event(mainArtistField.getSelectionModel().getSelectedItem(),
-                            coArtistField.getSelectionModel().getSelectedItem(),
-                            stageField.getSelectionModel().getSelectedItem().getName(),
-                            beginTime.getSelectionModel().getSelectedItem(),
-                            endTime.getSelectionModel().getSelectedItem(),
-                            popularityField.getSelectionModel().getSelectedItem());
+            if(!(beginTime.getSelectionModel().getSelectedItem() == null || endTime.getSelectionModel().getSelectedItem() == null || popularityField.getSelectionModel().getSelectedItem() == null)) {
+                if (!(coArtistField.getSelectionModel().getSelectedItem() == null)) {
+                    try {
+                        Event event1 = new Event(mainArtistField.getSelectionModel().getSelectedItem(),
+                                coArtistField.getSelectionModel().getSelectedItem(),
+                                stageField.getSelectionModel().getSelectedItem().getName(),
+                                beginTime.getSelectionModel().getSelectedItem(),
+                                endTime.getSelectionModel().getSelectedItem(),
+                                popularityField.getSelectionModel().getSelectedItem());
 
-                    data.addToEvents(event1);
+                        data.addToEvents(event1);
 
-                    ((FPComboBoxArtist) mainArtistField).defaultStyle();
-                ((FPComboBoxArtist) coArtistField).defaultStyle();
-                ((FPComboBoxStage) stageField).defaultStyle();
-                ((FPComboBoxDouble) beginTime).defaultStyle();
-                ((FPComboBoxDouble) endTime).defaultStyle();
-                ((FPComboBoxString) popularityField).defaultStyle();
+                        ((FPComboBoxArtist) mainArtistField).defaultStyle();
+                        ((FPComboBoxArtist) coArtistField).defaultStyle();
+                        ((FPComboBoxStage) stageField).defaultStyle();
+                        ((FPComboBoxDouble) beginTime).defaultStyle();
+                        ((FPComboBoxDouble) endTime).defaultStyle();
+                        ((FPComboBoxString) popularityField).defaultStyle();
 
-            } catch (Exception e){
-                    ((FPComboBoxArtist) mainArtistField).invalidInputStyle();
-                ((FPComboBoxArtist) coArtistField).invalidInputStyle();
+                    } catch (Exception e) {
+                        ((FPComboBoxArtist) mainArtistField).invalidInputStyle();
+                        ((FPComboBoxArtist) coArtistField).invalidInputStyle();
+                        ((FPComboBoxStage) stageField).invalidInputStyle();
+                        ((FPComboBoxDouble) beginTime).invalidInputStyle();
+                        ((FPComboBoxDouble) endTime).invalidInputStyle();
+                        ((FPComboBoxString) popularityField).invalidInputStyle();
+
+                    }
+                } else {
+
+                    try {
+                        Event event1 = new Event(mainArtistField.getSelectionModel().getSelectedItem(),
+                                stageField.getSelectionModel().getSelectedItem().getName(),
+                                beginTime.getSelectionModel().getSelectedItem(),
+                                endTime.getSelectionModel().getSelectedItem(),
+                                popularityField.getSelectionModel().getSelectedItem());
+
+                        data.addToEvents(event1);
+
+                        ((FPComboBoxArtist) mainArtistField).defaultStyle();
+                        ((FPComboBoxStage) stageField).defaultStyle();
+                        ((FPComboBoxDouble) beginTime).defaultStyle();
+                        ((FPComboBoxDouble) endTime).defaultStyle();
+                        ((FPComboBoxString) popularityField).defaultStyle();
+
+                    } catch (Exception b) {
+                        ((FPComboBoxArtist) mainArtistField).invalidInputStyle();
+                        ((FPComboBoxStage) stageField).invalidInputStyle();
+                        ((FPComboBoxDouble) beginTime).invalidInputStyle();
+                        ((FPComboBoxDouble) endTime).invalidInputStyle();
+                        ((FPComboBoxString) popularityField).invalidInputStyle();
+                    }
+                }
+
+            }else {
+                ((FPComboBoxArtist) mainArtistField).invalidInputStyle();
                 ((FPComboBoxStage) stageField).invalidInputStyle();
                 ((FPComboBoxDouble) beginTime).invalidInputStyle();
                 ((FPComboBoxDouble) endTime).invalidInputStyle();
                 ((FPComboBoxString) popularityField).invalidInputStyle();
-
-            }}else  {
-
-                try {
-                    Event event1 = new Event(mainArtistField.getSelectionModel().getSelectedItem(),
-                            stageField.getSelectionModel().getSelectedItem().getName(),
-                            beginTime.getSelectionModel().getSelectedItem(),
-                            endTime.getSelectionModel().getSelectedItem(),
-                            popularityField.getSelectionModel().getSelectedItem());
-
-                    data.addToEvents(event1);
-
-                    ((FPComboBoxArtist) mainArtistField).defaultStyle();
-                    ((FPComboBoxStage) stageField).defaultStyle();
-                    ((FPComboBoxDouble) beginTime).defaultStyle();
-                    ((FPComboBoxDouble) endTime).defaultStyle();
-                    ((FPComboBoxString) popularityField).defaultStyle();
-
-                } catch (Exception b){
-                    ((FPComboBoxArtist) mainArtistField).invalidInputStyle();
-                    ((FPComboBoxStage) stageField).invalidInputStyle();
-                    ((FPComboBoxDouble) beginTime).invalidInputStyle();
-                    ((FPComboBoxDouble) endTime).invalidInputStyle();
-                    ((FPComboBoxString) popularityField).invalidInputStyle();
-                }
             }
-
-            System.out.println("\n\n\n\n");
         });
 
         showButton clearButton = new showButton("Clear All ", 90, 35);

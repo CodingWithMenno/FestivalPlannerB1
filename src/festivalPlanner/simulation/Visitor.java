@@ -31,9 +31,9 @@ public class Visitor implements Updatable{
         this.lastPosition = new Point2D.Double(position.getX(),position.getY());
         Random random = new Random();
         //this.position = new Point2D.Double(random.nextInt(2000), random.nextInt(2000));
-        this.speed = 1.4;
+        this.speed = 2;
         this.rotationSpeed = 0.1;
-        this.hitbox = new Ellipse2D.Double(this.position.getX(), this.position.getY(), 6, 6);
+        this.hitbox = new Ellipse2D.Double(this.position.getX(), this.position.getY(), 3, 3);
         this.targetPos = new Point2D.Double(this.position.getX(),this.position.getY());
         this.angle = 1;
     }
@@ -41,10 +41,10 @@ public class Visitor implements Updatable{
 
     @Override
     public void draw(FXGraphics2D g2d) {
-        for(GridPosition gridPosition : this.path){
-            g2d.setColor(Color.GREEN);
-            g2d.fill(new Rectangle2D.Double(gridPosition.getxPos(),gridPosition.getyPos(),1,1));
-        }
+//        for(GridPosition gridPosition : this.path){
+//            g2d.setColor(Color.GREEN);
+//            g2d.fill(new Rectangle2D.Double(gridPosition.getxPos(),gridPosition.getyPos(),1,1));
+//        }
         g2d.draw(this.hitbox);
         g2d.fill(this.hitbox);
     }
@@ -60,6 +60,7 @@ public class Visitor implements Updatable{
             if (this.path.size() - 1 != this.pathArrayIndex) {
                 this.pathArrayIndex++;
             }else {
+                System.out.println("jajajaj");
                 this.lastPosition = new Point2D.Double(this.path.get(this.pathArrayIndex).getxPos(), this.path.get(this.pathArrayIndex).getyPos());
             }
 
@@ -92,7 +93,7 @@ public class Visitor implements Updatable{
                 this.angle -= this.rotationSpeed * 2;
             }
 
-            this.hitbox = new Ellipse2D.Double(this.position.getX(), this.position.getY(), 6, 6);
+            this.hitbox = new Ellipse2D.Double(this.position.getX(), this.position.getY(), 3, 3);
         }
     }
 

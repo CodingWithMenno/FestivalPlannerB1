@@ -1,5 +1,6 @@
 package festivalPlanner.simulation;
 
+import festivalPlanner.gui.gui_views.SimulationView;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
@@ -43,23 +44,25 @@ public class TimelineScrollBar {
         this.graphics = new FXGraphics2D(canvas.getGraphicsContext2D());
         this.timex = 206;
         this.speed = 0.005;
-        this.canvas.setOnMousePressed(e -> mousePressed(e));
-        this.canvas.setOnMouseDragged(e -> mouseDragged(e));
+        this.canvas.setOnMousePressed(event -> {
+            System.out.println(MouseInfo.getPointerInfo().getLocation().getX() + "Y: "+MouseInfo.getPointerInfo().getLocation().getY() );
+        });
     }
 
 
-    private void mousePressed(MouseEvent e) {
-        if(e.getX() > 206 && e.getX() < 1646 && e.getY() > 1040 && e.getY() < 1059) {
-            mouseDragged(e);
-        }
-    }
-
-    private void mouseDragged(MouseEvent e) {
-        if(e.getX() > 206 && e.getX() < 1646 && e.getY() > 1040 && e.getY() < 1059) {
-            timex = e.getX();
-            draw(graphics);
-        }
-    }
+//    private void mousePressed(MouseEvent e) {
+//        if(e.getX() > 206 && e.getX() < 1646 && e.getY() > 1040 && e.getY() < 1059) {
+//            mouseDragged(e);
+//        }
+//    }
+//
+//    private void mouseDragged(MouseEvent e) {
+//        if(e.getX() > 206 && e.getX() < 1646 && e.getY() > 1040 && e.getY() < 1059) {
+//            timex = e.getX();
+//            draw(graphics);
+//            this.simulationView.getNpcController().update();
+//        }
+//    }
 
     public void draw(FXGraphics2D graphics){
         Area timeLine = new Area(new Rectangle2D.Double(206,1045,1440,6));
@@ -92,12 +95,12 @@ public class TimelineScrollBar {
 
         ImageView forwardView = new ImageView(forward);
         forwardView.setOnMousePressed(event -> {
-            this.speed = 1;
+            this.speed = 0.3;
         });
 
         ImageView backwardView = new ImageView(backward);
         backwardView.setOnMousePressed(event -> {
-            this.speed = -1;
+            this.speed = -0.3;
         });
 
         ImageView playView = new ImageView(play);

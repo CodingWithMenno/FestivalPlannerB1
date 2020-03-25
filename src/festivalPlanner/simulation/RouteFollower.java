@@ -16,12 +16,16 @@ public class RouteFollower {
     private HashMap<GridPosition, GridPosition> northWestStageHeatMap = new HashMap<>();
     private HashMap<GridPosition, GridPosition> southEastStageHeatMap = new HashMap<>();
     private HashMap<GridPosition, GridPosition> southWestStageHeatMap = new HashMap<>();
+    private HashMap<GridPosition, GridPosition> toiletsHeatMap = new HashMap<>();
+
 
     private GridPosition northWestPoint = null;
     private GridPosition northEastPoint = null;
     private GridPosition mainStagePoint = null;
     private GridPosition southWestPoint = null;
     private GridPosition southEastPoint = null;
+    private GridPosition toiletsPoint = null;
+
 
 
     public RouteFollower(double windowWidth, double windowHeight) {
@@ -89,9 +93,10 @@ public class RouteFollower {
 
         this.northWestPoint = this.twoDArray[322][191];
         this.northEastPoint = this.twoDArray[289][1729];
-        this.mainStagePoint = this.twoDArray[674][991];
+        this.mainStagePoint = this.twoDArray[600][991];
         this.southWestPoint = this.twoDArray[961][191];
         this.southEastPoint = this.twoDArray[993][1695];
+        this.toiletsPoint = this.twoDArray[424][756];
 
         ArrayList<GridPosition> frontier = new ArrayList<>();
 
@@ -100,6 +105,7 @@ public class RouteFollower {
         this.northWestStageHeatMap.put(northWestPoint, null);
         this.southEastStageHeatMap.put(southEastPoint, null);
         this.southWestStageHeatMap.put(southWestPoint, null);
+        this.toiletsHeatMap.put(toiletsPoint,null);
 
         frontier.add(mainStagePoint);
 
@@ -168,9 +174,24 @@ public class RouteFollower {
 
             for ( GridPosition gridPosition : current.getNeighbouringPositions()){
 
-                if (!this.northWestStageHeatMap.containsKey(gridPosition) && gridPosition.isWalkable()){
+                if (!this.southWestStageHeatMap.containsKey(gridPosition) && gridPosition.isWalkable()){
                     frontier.add(gridPosition);
                     this.southWestStageHeatMap.put(gridPosition, current);
+                }
+            }
+        }
+
+        frontier.clear();
+        frontier.add(toiletsPoint);
+
+        for( int i = 0; i < frontier.size(); i++){
+            GridPosition current = frontier.get(i);
+
+            for ( GridPosition gridPosition : current.getNeighbouringPositions()){
+
+                if (!this.toiletsHeatMap.containsKey(gridPosition) && gridPosition.isWalkable()){
+                    frontier.add(gridPosition);
+                    this.toiletsHeatMap.put(gridPosition, current);
                 }
             }
         }
@@ -273,6 +294,27 @@ public class RouteFollower {
                 }
 
             }
+            return route;
+        } else if ( stageCode.equals("Toilet")){
+            GridPosition start = this.toiletsPoint;
+            GridPosition end = this.twoDArray[starty][startx];
+
+            ArrayList<GridPosition> route = new ArrayList<>();
+
+            route.add(this.toiletsHeatMap.get(end));
+
+            for ( int i = 0; i < route.size(); i++ ){
+
+                if ( route.get(i) != start ){
+                    route.add(this.toiletsHeatMap.get( route.get(i) ) );
+                } else {
+                    break;
+                }
+
+            }
+
+
+
             return route;
         } else {
             return null;
