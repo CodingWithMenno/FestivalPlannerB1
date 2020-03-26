@@ -54,8 +54,6 @@ public class SimulationView extends StackPane {
     private boolean updateNpccontroller = true;
     private int zoomx = 960;
     private int zoomy = 540;
-    private int mousex;
-    private int mousey;
 
     public SimulationView(Data data, SceneHandler sceneHandler) {
         this.sceneHandler = sceneHandler;
@@ -226,6 +224,7 @@ public class SimulationView extends StackPane {
             canvas.setScaleY(1);
             canvastx = new AffineTransform();
             this.zoomx = 960;
+            this.zoomy = 540;
             zoomedIn = false;
         }
     }
