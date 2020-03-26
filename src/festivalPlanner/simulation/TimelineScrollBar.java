@@ -15,6 +15,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 
 
 public class TimelineScrollBar {
@@ -33,10 +34,12 @@ public class TimelineScrollBar {
     private Image play = new Image("file:resources/PlayButton.png");
     private Image pause = new Image("file:resources/PauseButton.png");
     private Font font = new Font("Arial", Font.PLAIN, 24);
+    private ArrayList<Visitor> visitors;
 
 
 
-    public TimelineScrollBar(Canvas canvas) {
+    public TimelineScrollBar(Canvas canvas, ArrayList<Visitor> visitors) {
+        this.visitors = visitors;
         this.canvas = canvas;
         this.playing = true;
         this.timeMinutes = 0;
@@ -95,27 +98,39 @@ public class TimelineScrollBar {
 
         ImageView forwardView = new ImageView(forward);
         forwardView.setOnMousePressed(event -> {
-            this.speed = 0.3;
+            this.speed = 0.070;
+            for(Visitor visitor : visitors){
+                visitor.setSpeed(2.5);
+                visitor.setRotationSpeed(0.4);
+            }
         });
 
         ImageView backwardView = new ImageView(backward);
         backwardView.setOnMousePressed(event -> {
-            this.speed = -0.3;
+            this.speed = -0.070;
+            for(Visitor visitor : visitors){
+                visitor.setSpeed(2.5);
+                visitor.setRotationSpeed(0.4);
+            }
         });
 
-        ImageView playView = new ImageView(play);
-        playView.setOnMousePressed(event -> {
-
-        });
 
         ImageView pauseView = new ImageView(pause);
         pauseView.setOnMousePressed(event -> {
             if(this.playing){
                 pauseView.setImage(play);
                 this.speed = 0;
+                for(Visitor visitor : visitors){
+                    visitor.setSpeed(0);
+                    visitor.setRotationSpeed(0.2);
+                }
             }else {
                 pauseView.setImage(pause);
-                this.speed = 0.05;
+                this.speed = 0.005;
+                for(Visitor visitor : visitors){
+                    visitor.setSpeed(1.5);
+                    visitor.setRotationSpeed(0.2);
+                }
             }
             this.playing = !this.playing;
 

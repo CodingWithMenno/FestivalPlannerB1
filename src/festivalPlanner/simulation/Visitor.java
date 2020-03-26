@@ -29,11 +29,9 @@ public class Visitor implements Updatable{
     public Visitor(Point2D position) {
         this.position = position;
         this.lastPosition = new Point2D.Double(position.getX(),position.getY());
-        Random random = new Random();
-        //this.position = new Point2D.Double(random.nextInt(2000), random.nextInt(2000));
-        this.speed = 2;
-        this.rotationSpeed = 0.1;
-        this.hitbox = new Ellipse2D.Double(this.position.getX(), this.position.getY(), 3, 3);
+        this.speed = 1.5;
+        this.rotationSpeed = 0.2;
+        this.hitbox = new Ellipse2D.Double(this.position.getX(), this.position.getY(), 8, 8);
         this.targetPos = new Point2D.Double(this.position.getX(),this.position.getY());
         this.angle = 1;
     }
@@ -55,15 +53,16 @@ public class Visitor implements Updatable{
         if (path.isEmpty()) {
 
         } else {
-            this.targetPos = new Point2D.Double(this.path.get(this.pathArrayIndex).getxPos(), this.path.get(this.pathArrayIndex).getyPos());
-
-            if (this.path.size() - 1 != this.pathArrayIndex) {
-                this.pathArrayIndex++;
-            }else {
-                System.out.println("jajajaj");
+            if(this.targetPos.getX() >= this.position.getX() - 64 && this.targetPos.getX() <= this.position.getX() + 64 && this.targetPos.getY() >= this.position.getY() - 64 && this.targetPos.getY() <= this.position.getY() + 64) {
+                this.targetPos = new Point2D.Double(this.path.get(this.pathArrayIndex).getxPos(), this.path.get(this.pathArrayIndex).getyPos());
                 this.lastPosition = new Point2D.Double(this.path.get(this.pathArrayIndex).getxPos(), this.path.get(this.pathArrayIndex).getyPos());
-            }
 
+                if (this.path.size() - 1 != this.pathArrayIndex) {
+                    this.pathArrayIndex++;
+                } else {
+                    this.lastPosition = new Point2D.Double(this.path.get(this.pathArrayIndex).getxPos(), this.path.get(this.pathArrayIndex).getyPos());
+                }
+            }
 
             double targetAngle = Math.atan2(this.targetPos.getY() - this.position.getY(), this.targetPos.getX() - this.position.getX());
 
@@ -93,7 +92,7 @@ public class Visitor implements Updatable{
                 this.angle -= this.rotationSpeed * 2;
             }
 
-            this.hitbox = new Ellipse2D.Double(this.position.getX(), this.position.getY(), 3, 3);
+            this.hitbox = new Ellipse2D.Double(this.position.getX(), this.position.getY(), 8, 8);
         }
     }
 
@@ -134,5 +133,13 @@ public class Visitor implements Updatable{
 
     public Point2D getLastPosition() {
         return lastPosition;
+    }
+
+    public void setSpeed(double speed){
+        this.speed = speed;
+    }
+
+    public void setRotationSpeed(double rotationSpeed) {
+        this.rotationSpeed = rotationSpeed;
     }
 }

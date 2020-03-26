@@ -93,7 +93,7 @@ public class RouteFollower {
 
         this.northWestPoint = this.twoDArray[322][191];
         this.northEastPoint = this.twoDArray[289][1729];
-        this.mainStagePoint = this.twoDArray[600][991];
+        this.mainStagePoint = this.twoDArray[616][991];
         this.southWestPoint = this.twoDArray[961][191];
         this.southEastPoint = this.twoDArray[993][1695];
         this.toiletsPoint = this.twoDArray[424][756];

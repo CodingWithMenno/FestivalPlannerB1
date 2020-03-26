@@ -19,7 +19,6 @@ public class NPCController {
     private ArrayList<String> positions = new ArrayList<>();
     private RouteFollower routeFollower;
     private ArrayList<Event> eventsRightNow = new ArrayList<>();
-    private Point2D stageCoords;
 
     public NPCController(TimelineScrollBar scrollBar, Data data, ArrayList<Visitor>visitors, RouteFollower routeFollower) {
         this.visitors = visitors;
@@ -30,7 +29,7 @@ public class NPCController {
 
     public void update(){
        double b =  scrollBar.getTimeMinutes();
-       b = b/60;
+       b = (b/60 );
 
         int amountofeventrightnow = 0;
         eventsRightNow.clear();
@@ -69,8 +68,14 @@ public class NPCController {
     }
 
     public void divideOver0Events(){
-        for(Visitor visitor : visitors){
-            directVisitorToStage(visitor,"Toilet");
+        int i = 0;
+        for(Visitor visitor : visitors) {
+            if (i < 13) {
+                directVisitorToStage(visitor,"Toilet");
+            } else if (i < 60) {
+                directVisitorToStage(visitor,"Middle");
+            }
+            i++;
         }
     }
 
@@ -212,7 +217,7 @@ public class NPCController {
     public Point2D getStageCoords(String stage){
         Point2D point2D = new Point2D(0,0);
         if(stage.equals("Middle")){
-            point2D = new Point2D(991,674);
+            point2D = new Point2D(991,616);
         }else if(stage.equals("North West")){
             point2D = new Point2D(191,322);
         }else if(stage.equals("North East")){
