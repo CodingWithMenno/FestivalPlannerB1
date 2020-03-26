@@ -162,13 +162,14 @@ public class SimulationView extends StackPane {
         }
 
         this.scrollBar.update();
+        if (this.scrollBar.getTimeMinutes() % 60 == 0){
+            this.updateNpccontroller = true;
+        }
         if(this.scrollBar.getTimeMinutes() % 60 == 1 && this.updateNpccontroller){
             npcController.update();
             this.updateNpccontroller = false;
         }
-        if (this.scrollBar.getTimeMinutes() % 60 == 2){
-            this.updateNpccontroller = true;
-        }
+
 
     }
 

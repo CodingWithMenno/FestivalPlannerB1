@@ -28,7 +28,6 @@ public class TimelineScrollBar {
     private Shape time;
     private double timeMinutes;
     private String timeString;
-    private FXGraphics2D graphics;
     private Image forward = new Image("file:resources/FastForwardButton.png");
     private Image backward = new Image("file:resources/FastBackwardButton.png");
     private Image play = new Image("file:resources/PlayButton.png");
@@ -49,7 +48,7 @@ public class TimelineScrollBar {
         this.timeMinutes = 0;
         this.timeString = "00:00";
         this.timex = 15;
-        this.speed = 0.01;
+        this.speed = 0.015;
     }
 
 
@@ -130,7 +129,7 @@ public class TimelineScrollBar {
                 }
             }else {
                 pauseView.setImage(pause);
-                this.speed = 0.01;
+                this.speed = 0.015;
                 for(Visitor visitor : visitors){
                     visitor.setSpeed(1.5);
                     visitor.setRotationSpeed(0.2);
