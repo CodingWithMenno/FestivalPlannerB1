@@ -148,6 +148,9 @@ public class SimulationView extends StackPane {
 
 
     public void update(double deltatime){
+        if(this.scrollBar.getTimeMinutes()==1440){
+            npcController.visitorsToExit();
+        }
         if(animationCounter < 321){
             animationCounter++;
         }
@@ -170,9 +173,7 @@ public class SimulationView extends StackPane {
             npcController.update();
             this.updateNpccontroller = false;
         }
-        if(this.scrollBar.getTimeMinutes()==1440){
 
-        }
 
 
     }

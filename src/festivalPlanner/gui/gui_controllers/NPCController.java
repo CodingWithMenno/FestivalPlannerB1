@@ -67,6 +67,13 @@ public class NPCController {
        }
     }
 
+    public void visitorsToExit(){
+        for (Visitor visitor : visitors){
+            directVisitorToStage(visitor,"endPoint");
+        }
+    }
+
+
     public void divideOver0Events(){
         int i = 0;
         for(Visitor visitor : visitors) {
@@ -190,6 +197,7 @@ public class NPCController {
 
     public void directVisitorToStage(Visitor visitor, String position){
         if(!(visitor.getLastPosition().getX() == getStageCoords(position).getX() && visitor.getLastPosition().getY() == getStageCoords(position).getY())) {
+            System.out.println("2");
             visitor.setPath(routeFollower.routeFinder(position, (int) visitor.getLastPosition().getY(), (int) visitor.getLastPosition().getX()));
         }
     }
@@ -208,6 +216,8 @@ public class NPCController {
                     position = "South West";
                 }else if(stage.getPlacement().equals("South East")){
                     position = "South East";
+                }else if(stage.getPlacement().equals("endPoint")){
+                    position = "endPoint";
                 }
             }
         }
@@ -228,6 +238,8 @@ public class NPCController {
             point2D = new Point2D(1695,993);
         }else if(stage.equals("Toilet")){
             point2D = new Point2D(756,424);
+        }else if(stage.equals("endPoint")){
+            point2D = new Point2D(1000,1060);
         }
         return point2D;
 

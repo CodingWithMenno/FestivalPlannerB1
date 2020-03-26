@@ -189,6 +189,7 @@ public class EventView extends StackPane {
                         data.addToEvents(event1);
 
                         ((FPComboBoxArtist) mainArtistField).defaultStyle();
+                        ((FPComboBoxArtist) coArtistField).defaultStyle();
                         ((FPComboBoxStage) stageField).defaultStyle();
                         ((FPComboBoxDouble) beginTime).defaultStyle();
                         ((FPComboBoxDouble) endTime).defaultStyle();

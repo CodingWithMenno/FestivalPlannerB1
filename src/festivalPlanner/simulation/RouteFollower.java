@@ -17,6 +17,7 @@ public class RouteFollower {
     private HashMap<GridPosition, GridPosition> southEastStageHeatMap = new HashMap<>();
     private HashMap<GridPosition, GridPosition> southWestStageHeatMap = new HashMap<>();
     private HashMap<GridPosition, GridPosition> toiletsHeatMap = new HashMap<>();
+    private HashMap<GridPosition, GridPosition> endHeatMap = new HashMap<>();
 
 
     private GridPosition northWestPoint = null;
@@ -25,6 +26,8 @@ public class RouteFollower {
     private GridPosition southWestPoint = null;
     private GridPosition southEastPoint = null;
     private GridPosition toiletsPoint = null;
+    private GridPosition endPoint = null;
+
 
 
 
@@ -97,6 +100,7 @@ public class RouteFollower {
         this.southWestPoint = this.twoDArray[961][191];
         this.southEastPoint = this.twoDArray[993][1695];
         this.toiletsPoint = this.twoDArray[424][756];
+        this.endPoint = this.twoDArray[1060][1000];
 
         ArrayList<GridPosition> frontier = new ArrayList<>();
 
@@ -106,6 +110,7 @@ public class RouteFollower {
         this.southEastStageHeatMap.put(southEastPoint, null);
         this.southWestStageHeatMap.put(southWestPoint, null);
         this.toiletsHeatMap.put(toiletsPoint,null);
+        this.endHeatMap.put(endPoint,null);
 
         frontier.add(mainStagePoint);
 
@@ -192,6 +197,21 @@ public class RouteFollower {
                 if (!this.toiletsHeatMap.containsKey(gridPosition) && gridPosition.isWalkable()){
                     frontier.add(gridPosition);
                     this.toiletsHeatMap.put(gridPosition, current);
+                }
+            }
+        }
+
+        frontier.clear();
+        frontier.add(endPoint);
+
+        for( int i = 0; i < frontier.size(); i++){
+            GridPosition current = frontier.get(i);
+
+            for ( GridPosition gridPosition : current.getNeighbouringPositions()){
+
+                if (!this.endHeatMap.containsKey(gridPosition) && gridPosition.isWalkable()){
+                    frontier.add(gridPosition);
+                    this.endHeatMap.put(gridPosition, current);
                 }
             }
         }
@@ -313,8 +333,24 @@ public class RouteFollower {
 
             }
 
+            return route;
+        } else if ( stageCode.equals("endPoint")){
+            GridPosition start = this.endPoint;
+            GridPosition end = this.twoDArray[starty][startx];
 
+            ArrayList<GridPosition> route = new ArrayList<>();
 
+            route.add(this.endHeatMap.get(end));
+
+            for ( int i = 0; i < route.size(); i++ ){
+
+                if ( route.get(i) != start ){
+                    route.add(this.endHeatMap.get( route.get(i) ) );
+                } else {
+                    break;
+                }
+
+            }
             return route;
         } else {
             return null;
