@@ -14,6 +14,7 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -36,6 +37,7 @@ public class SimulationView extends StackPane {
 
     private Data data;
     private Canvas canvas;
+
     private FXGraphics2D graphics;
     private SceneHandler sceneHandler;
 
@@ -51,7 +53,7 @@ public class SimulationView extends StackPane {
     private boolean zoomedIn = false;
     private boolean updateNpccontroller = true;
     private int zoomx = 960;
-    private int zoomy = 0;
+    private int zoomy = 540;
     private int mousex;
     private int mousey;
 
@@ -59,8 +61,10 @@ public class SimulationView extends StackPane {
         this.sceneHandler = sceneHandler;
         this.data = data;
         whats();
+        this.canvas.setFocusTraversable(true);
         this.canvas.setOnScroll(event -> onScrolled(event));
-        this.canvas.setOnMouseMoved(event -> mouseMoved(event));
+        this.canvas.setOnKeyPressed(event -> keyPressed(event));
+
 
         this.animationTimer = new AnimationTimer() {
             long last = -1;
@@ -106,7 +110,7 @@ public class SimulationView extends StackPane {
         }
 
         this.visitors = new ArrayList<>();
-        this.scrollBar = new TimelineScrollBar(canvas,this.visitors);
+        this.scrollBar = new TimelineScrollBar(this.visitors);
         this.routeFollower = new RouteFollower(1088,1920);
         this.npcController = new NPCController(scrollBar,data,visitors,routeFollower);
         this.routeFollower.buildRouteMap(map.getPathLayer("Pad").getData());
@@ -179,30 +183,39 @@ public class SimulationView extends StackPane {
             visitor.draw(graphics);
         }
 
-        this.scrollBar.draw(graphics);
+        this.scrollBar.draw();
 
 
     }
 
 
-    public void mouseMoved(MouseEvent e) {
+    public void keyPressed(KeyEvent e) {
         if (this.zoomedIn) {
-            if (e.getX() > 960){
-                if(zoomx < 1920){
-                    canvastx.translate(-5,0);
-                    this.zoomx -= -10;
+            if (e.getCode() == KeyCode.RIGHT) {
+                if (zoomx < 1920) {
+                    canvastx.translate(-20, 0);
+                    this.zoomx -= -40;
                 }
-            }else {
-                if(zoomx > 0 ){
-                    canvastx.translate(5,0);
-                    this.zoomx -= 10;
+            }
+            else if (e.getCode() == KeyCode.LEFT) {
+                if (zoomx > 0) {
+                    canvastx.translate(20, 0);
+                    this.zoomx -= 40;
+                }
+            }else if (e.getCode() == KeyCode.DOWN) {
+                if (zoomy < 1080) {
+                    canvastx.translate(0, -15);
+                    this.zoomy -= -30;
+                }
+            }else if (e.getCode() == KeyCode.UP) {
+                if (zoomy > 0) {
+                    canvastx.translate(0, 15);
+                    this.zoomy -= 30;
                 }
             }
 
-
         }
     }
-
     public void onScrolled(ScrollEvent e){
         if(e.getDeltaY() > 0 && !zoomedIn){
             canvas.setScaleX(2);

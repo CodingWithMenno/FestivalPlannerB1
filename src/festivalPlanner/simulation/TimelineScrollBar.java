@@ -20,8 +20,8 @@ import java.util.ArrayList;
 
 public class TimelineScrollBar {
 
-    private Canvas canvas;
-
+    private Canvas canvas2;
+    private FXGraphics2D graphics2;
     private double timex;
     private boolean playing;
     private double speed;
@@ -35,21 +35,21 @@ public class TimelineScrollBar {
     private Image pause = new Image("file:resources/PauseButton.png");
     private Font font = new Font("Arial", Font.PLAIN, 24);
     private ArrayList<Visitor> visitors;
+    private int hour;
 
 
 
-    public TimelineScrollBar(Canvas canvas, ArrayList<Visitor> visitors) {
+    public TimelineScrollBar(ArrayList<Visitor> visitors) {
+        this.canvas2 = new Canvas();
+        graphics2 =  new FXGraphics2D(canvas2.getGraphicsContext2D());
+        this.canvas2.setHeight(30);
+        this.canvas2.setWidth(1550);
         this.visitors = visitors;
-        this.canvas = canvas;
         this.playing = true;
         this.timeMinutes = 0;
         this.timeString = "00:00";
-        this.graphics = new FXGraphics2D(canvas.getGraphicsContext2D());
-        this.timex = 206;
-        this.speed = 0.005;
-        this.canvas.setOnMousePressed(event -> {
-            System.out.println(MouseInfo.getPointerInfo().getLocation().getX() + "Y: "+MouseInfo.getPointerInfo().getLocation().getY() );
-        });
+        this.timex = 15;
+        this.speed = 0.01;
     }
 
 
@@ -67,50 +67,54 @@ public class TimelineScrollBar {
 //        }
 //    }
 
-    public void draw(FXGraphics2D graphics){
-        Area timeLine = new Area(new Rectangle2D.Double(206,1045,1440,6));
-        graphics.setPaint(Color.GRAY);
-        graphics.fill(timeLine);
+    public void draw(){
+        graphics2.clearRect(0, 0, (int)canvas2.getWidth(), (int)canvas2.getHeight());
+        graphics2.setBackground(Color.WHITE);
+        Area timeLine = new Area(new Rectangle2D.Double(15,12,1440,6));
+        graphics2.setPaint(Color.GRAY);
+        graphics2.fill(timeLine);
 
-        Area dragger = new Area(new Ellipse2D.Double(timex-9,1040,18,18));
-        graphics.setPaint(Color.RED);
-        graphics.fill(dragger);
+        Area dragger = new Area(new Ellipse2D.Double(timex-9,7,18,18));
+        graphics2.setPaint(Color.RED);
+        graphics2.fill(dragger);
 
-        Area overTime = new Area(new Rectangle2D.Double(206,1045,timex-206,6));
-        graphics.setPaint(Color.RED);
-        graphics.fill(overTime);
+        Area overTime = new Area(new Rectangle2D.Double(15,12,timex-15,6));
+        graphics2.setPaint(Color.RED);
+        graphics2.fill(overTime);
 
         AffineTransform tx = new AffineTransform();
-        tx.translate(1660,1054);
-        this.time = tx.createTransformedShape(font.createGlyphVector(graphics.getFontRenderContext(),timeString).getOutline());
-        graphics.setPaint(Color.BLACK);
-        graphics.fill(this.time);
+        tx.translate(1469,24);
+        this.time = tx.createTransformedShape(font.createGlyphVector(graphics2.getFontRenderContext(),timeString).getOutline());
+        graphics2.setPaint(Color.BLACK);
+        graphics2.fill(this.time);
 
     }
 
     public HBox makehbox(){
         HBox hBox = new HBox();
+        hBox.setStyle("-fx-background-color: White;");
         hBox.setMaxSize(205,30);
         hBox.setMinSize(205,30);
 
         hBox.setSpacing(10);
-        place(hBox,-845,508);
+        place(hBox,-805,525);
 
         ImageView forwardView = new ImageView(forward);
         forwardView.setOnMousePressed(event -> {
-            this.speed = 0.070;
-            for(Visitor visitor : visitors){
-                visitor.setSpeed(2.5);
-                visitor.setRotationSpeed(0.4);
+            this.hour = (int)timeMinutes/60;
+            int toTime = (this.hour + 1) * 60;
+            if(toTime <= 1440){
+                timex = toTime+15;
             }
+
         });
 
         ImageView backwardView = new ImageView(backward);
         backwardView.setOnMousePressed(event -> {
-            this.speed = -0.070;
-            for(Visitor visitor : visitors){
-                visitor.setSpeed(2.5);
-                visitor.setRotationSpeed(0.4);
+            this.hour = (int)timeMinutes/60;
+            int toTime = (this.hour - 1) * 60;
+            if(toTime >= 0){
+                timex = toTime+15;
             }
         });
 
@@ -126,7 +130,7 @@ public class TimelineScrollBar {
                 }
             }else {
                 pauseView.setImage(pause);
-                this.speed = 0.005;
+                this.speed = 0.01;
                 for(Visitor visitor : visitors){
                     visitor.setSpeed(1.5);
                     visitor.setRotationSpeed(0.2);
@@ -136,21 +140,21 @@ public class TimelineScrollBar {
 
         });
 
-        hBox.getChildren().addAll(backwardView,pauseView,forwardView);
+        hBox.getChildren().addAll(backwardView,pauseView,forwardView,canvas2);
         return hBox;
     }
 
     public void update(){
         timex+=speed;
 
-        if(timex >= 1646){
-            timex = 1646;
+        if(timex >= 1455){
+            timex = 15;
         }
-        if(timex <= 206){
-            timex = 206;
+        if(timex <= 15){
+            timex = 15;
         }
+        this.timeMinutes = (int)timex -15;
 
-        this.timeMinutes = (int)timex - 206;
         setTimeString();
     }
 
