@@ -35,6 +35,7 @@ public class TimelineScrollBar {
     private Font font = new Font("Arial", Font.PLAIN, 24);
     private ArrayList<Visitor> visitors;
     private int hour;
+    private boolean on = false;
 
 
 
@@ -48,7 +49,7 @@ public class TimelineScrollBar {
         this.timeMinutes = 0;
         this.timeString = "00:00";
         this.timex = 15;
-        this.speed = 0.015;
+        this.speed = 0;
     }
 
 
@@ -100,44 +101,47 @@ public class TimelineScrollBar {
 
         ImageView forwardView = new ImageView(forward);
         forwardView.setOnMousePressed(event -> {
-            this.hour = (int)timeMinutes/60;
-            int toTime = (this.hour + 1) * 60;
-            if(toTime <= 1440){
-                timex = toTime+15;
-            }
+            if(on) {
+                this.hour = (int) timeMinutes / 60;
+                int toTime = (this.hour + 1) * 60;
+                if (toTime <= 1440) {
+                    timex = toTime + 15;
+                }
 
-        });
+            }});
 
         ImageView backwardView = new ImageView(backward);
         backwardView.setOnMousePressed(event -> {
-            this.hour = (int)timeMinutes/60;
-            int toTime = (this.hour - 1) * 60;
-            if(toTime >= 0){
-                timex = toTime+15;
-            }
-        });
+            if(on) {
+                this.hour = (int) timeMinutes / 60;
+                int toTime = (this.hour - 1) * 60;
+                if (toTime >= 0) {
+                    timex = toTime + 15;
+                }
+            }});
 
 
         ImageView pauseView = new ImageView(pause);
         pauseView.setOnMousePressed(event -> {
-            if(this.playing){
-                pauseView.setImage(play);
-                this.speed = 0;
-                for(Visitor visitor : visitors){
-                    visitor.setSpeed(0);
-                    visitor.setRotationSpeed(0.2);
+            if (on) {
+                if (this.playing) {
+                    pauseView.setImage(play);
+                    this.speed = 0;
+                    for (Visitor visitor : visitors) {
+                        visitor.setSpeed(0);
+                        visitor.setRotationSpeed(0.2);
+                    }
+                } else {
+                    pauseView.setImage(pause);
+                    this.speed = 0.015;
+                    for (Visitor visitor : visitors) {
+                        visitor.setSpeed(1.5);
+                        visitor.setRotationSpeed(0.2);
+                    }
                 }
-            }else {
-                pauseView.setImage(pause);
-                this.speed = 0.015;
-                for(Visitor visitor : visitors){
-                    visitor.setSpeed(1.5);
-                    visitor.setRotationSpeed(0.2);
-                }
-            }
-            this.playing = !this.playing;
+                this.playing = !this.playing;
 
-        });
+            }});
 
         hBox.getChildren().addAll(backwardView,pauseView,forwardView,canvas2);
         return hBox;
@@ -147,7 +151,7 @@ public class TimelineScrollBar {
         timex+=speed;
 
         if(timex >= 1455){
-            timex = 15;
+            timex = 1455;
         }
         if(timex <= 15){
             timex = 15;
@@ -190,5 +194,13 @@ public class TimelineScrollBar {
 
     public double getTimeMinutes() {
         return timeMinutes;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
+
+    public void setOn(boolean on) {
+        this.on = on;
     }
 }

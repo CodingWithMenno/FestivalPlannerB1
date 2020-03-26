@@ -54,6 +54,7 @@ public class SimulationView extends StackPane {
     private boolean updateNpccontroller = true;
     private int zoomx = 960;
     private int zoomy = 540;
+    private int animationCounter = 0;
 
     public SimulationView(Data data, SceneHandler sceneHandler) {
         this.sceneHandler = sceneHandler;
@@ -132,21 +133,11 @@ public class SimulationView extends StackPane {
 
         getChildren().addAll(canvas,scrollBar.makehbox(),BackButton);
 
-//        for (int i = 0; i < 1; i++) {
-//            this.visitors.add(new Visitor(new Point2D.Double(992, 850+(i*11))));
-//        }
-//
         for (int b = 0; b<4; b++) {
             for (int i = 0; i < 15; i++) {
                 this.visitors.add(new Visitor(new Point2D.Double(960+(b*20), 760 + (i * 20))));
             }
         }
-//        for (int i = 0; i < 20; i++) {
-//            this.visitors.add(new Visitor(new Point2D.Double(1003, 850+(i*11))));
-//        }
-//        for (int i = 0; i < 20; i++) {
-//            this.visitors.add(new Visitor(new Point2D.Double(981, 850+(i*11))));
-//        }
 
         for (Visitor visitor : this.visitors) {
             visitor.setOtherVisitors(this.visitors);
@@ -157,6 +148,16 @@ public class SimulationView extends StackPane {
 
 
     public void update(double deltatime){
+        if(animationCounter < 321){
+            animationCounter++;
+        }
+        if(animationCounter == 320){
+            for (Visitor visitor : this.visitors) {
+                visitor.setOpeningAnimation(false);
+            }
+            this.scrollBar.setSpeed(0.015);
+            this.scrollBar.setOn(true);
+        }
         for (Visitor visitor : this.visitors) {
             visitor.update(this.canvas);
         }
@@ -169,6 +170,9 @@ public class SimulationView extends StackPane {
             npcController.update();
             this.updateNpccontroller = false;
         }
+        if(this.scrollBar.getTimeMinutes()==1440){
+
+        }
 
 
     }
@@ -176,7 +180,6 @@ public class SimulationView extends StackPane {
     public void draw(FXGraphics2D graphics) {
         graphics.setTransform(canvastx);
         graphics.clearRect(0, 0, (int)canvas.getWidth(), (int)canvas.getHeight());
-        graphics.setBackground(Color.WHITE);
 
         graphics.drawImage(this.image,affineTransform,null);
 

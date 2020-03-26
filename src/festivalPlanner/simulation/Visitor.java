@@ -23,6 +23,8 @@ public class Visitor implements Updatable{
     private Point2D lastPosition;
     private Image character;
     private AffineTransform tx = new AffineTransform();
+    private boolean openingAnimation = true;
+    private int animationCoord= 320;
 
     private ArrayList<GridPosition> path = new ArrayList<>();
     private int pathArrayIndex = 1;
@@ -36,11 +38,12 @@ public class Visitor implements Updatable{
         this.position = position;
         this.lastPosition = new Point2D.Double(position.getX(),position.getY());
         this.speed = 1.5;
-        this.rotationSpeed = 0.2;
+        this.rotationSpeed = 0.1;
         this.hitbox = new Ellipse2D.Double(this.position.getX(), this.position.getY(), 15, 15);
         this.targetPos = new Point2D.Double(this.position.getX(),this.position.getY());
         this.angle = 1;
         this.tx.scale(6,6);
+        this.animationCoord += this.position.getY();
     }
 
 
@@ -53,52 +56,56 @@ public class Visitor implements Updatable{
     @Override
     public void update(Canvas canvas) {
 
-        if (path.isEmpty()) {
-
+        if (openingAnimation) {
+            this.position = new Point2D.Double(position.getX(),animationCoord);
+            animationCoord--;
         } else {
-            if(this.targetPos.getX() >= this.position.getX() - 64 && this.targetPos.getX() <= this.position.getX() + 64 && this.targetPos.getY() >= this.position.getY() - 64 && this.targetPos.getY() <= this.position.getY() + 64) {
-                this.targetPos = new Point2D.Double(this.path.get(this.pathArrayIndex).getxPos(), this.path.get(this.pathArrayIndex).getyPos());
-                this.lastPosition = new Point2D.Double(this.path.get(this.pathArrayIndex).getxPos(), this.path.get(this.pathArrayIndex).getyPos());
 
-                if (this.path.size() - 1 != this.pathArrayIndex) {
-                    this.pathArrayIndex++;
-                } else {
+            if (path.isEmpty()) {
+            } else {
+                if (this.targetPos.getX() >= this.position.getX() - 64 && this.targetPos.getX() <= this.position.getX() + 64 && this.targetPos.getY() >= this.position.getY() - 64 && this.targetPos.getY() <= this.position.getY() + 64) {
+                    this.targetPos = new Point2D.Double(this.path.get(this.pathArrayIndex).getxPos(), this.path.get(this.pathArrayIndex).getyPos());
                     this.lastPosition = new Point2D.Double(this.path.get(this.pathArrayIndex).getxPos(), this.path.get(this.pathArrayIndex).getyPos());
+
+                    if (this.path.size() - 1 != this.pathArrayIndex) {
+                        this.pathArrayIndex++;
+                    } else {
+                        this.lastPosition = new Point2D.Double(this.path.get(this.pathArrayIndex).getxPos(), this.path.get(this.pathArrayIndex).getyPos());
+                    }
                 }
+
+                double targetAngle = Math.atan2(this.targetPos.getY() - this.position.getY(), this.targetPos.getX() - this.position.getX());
+
+                double angleDifference = this.angle - targetAngle;
+                while (angleDifference < -Math.PI) {
+                    angleDifference += 2 * Math.PI;
+                }
+                while (angleDifference > Math.PI) {
+                    angleDifference -= 2 * Math.PI;
+                }
+
+                if (Math.abs(angleDifference) < this.rotationSpeed) {
+                    this.angle = targetAngle;
+                } else if (angleDifference < 0) {
+                    this.angle += rotationSpeed;
+                } else {
+                    this.angle -= this.rotationSpeed;
+                }
+
+                turn(this.angle);
+
+                Point2D newPos = new Point2D.Double(this.position.getX() + this.speed * Math.cos(this.angle), this.position.getY() + this.speed * Math.sin(this.angle));
+
+                if (!collision(newPos)) {
+                    this.position.setLocation(newPos);
+                } else {
+                    this.angle -= this.rotationSpeed * 2;
+                }
+
+                this.hitbox = new Ellipse2D.Double(this.position.getX(), this.position.getY(), 15, 15);
             }
-
-            double targetAngle = Math.atan2(this.targetPos.getY() - this.position.getY(), this.targetPos.getX() - this.position.getX());
-
-            double angleDifference = this.angle - targetAngle;
-            while (angleDifference < -Math.PI) {
-                angleDifference += 2 * Math.PI;
-            }
-            while (angleDifference > Math.PI) {
-                angleDifference -= 2 * Math.PI;
-            }
-
-            if (Math.abs(angleDifference) < this.rotationSpeed) {
-                this.angle = targetAngle;
-            } else if (angleDifference < 0) {
-                this.angle += rotationSpeed;
-            } else {
-                this.angle -= this.rotationSpeed;
-            }
-
-            turn(this.angle);
-
-            Point2D newPos = new Point2D.Double(this.position.getX() + this.speed * Math.cos(this.angle), this.position.getY() + this.speed * Math.sin(this.angle));
-
-            if (!collision(newPos)) {
-                this.position.setLocation(newPos);
-            } else {
-                this.angle -= this.rotationSpeed * 2;
-            }
-
-            this.hitbox = new Ellipse2D.Double(this.position.getX(), this.position.getY(), 15, 15);
         }
     }
-
     private boolean collision(Point2D position) {
         for (Visitor visitor : this.otherVisitors) {
             if (position.distance(visitor.getPosition()) < this.hitbox.getWidth()) {
@@ -144,5 +151,9 @@ public class Visitor implements Updatable{
 
     public void setRotationSpeed(double rotationSpeed) {
         this.rotationSpeed = rotationSpeed;
+    }
+
+    public void setOpeningAnimation(boolean openingAnimation) {
+        this.openingAnimation = openingAnimation;
     }
 }
