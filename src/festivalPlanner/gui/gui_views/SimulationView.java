@@ -136,15 +136,17 @@ public class SimulationView extends StackPane {
 //            this.visitors.add(new Visitor(new Point2D.Double(992, 850+(i*11))));
 //        }
 //
-        for (int i = 0; i < 20; i++) {
-            this.visitors.add(new Visitor(new Point2D.Double(992, 850+(i*11))));
+        for (int b = 0; b<4; b++) {
+            for (int i = 0; i < 15; i++) {
+                this.visitors.add(new Visitor(new Point2D.Double(960+(b*20), 760 + (i * 20))));
+            }
         }
-        for (int i = 0; i < 20; i++) {
-            this.visitors.add(new Visitor(new Point2D.Double(1003, 850+(i*11))));
-        }
-        for (int i = 0; i < 20; i++) {
-            this.visitors.add(new Visitor(new Point2D.Double(981, 850+(i*11))));
-        }
+//        for (int i = 0; i < 20; i++) {
+//            this.visitors.add(new Visitor(new Point2D.Double(1003, 850+(i*11))));
+//        }
+//        for (int i = 0; i < 20; i++) {
+//            this.visitors.add(new Visitor(new Point2D.Double(981, 850+(i*11))));
+//        }
 
         for (Visitor visitor : this.visitors) {
             visitor.setOtherVisitors(this.visitors);

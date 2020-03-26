@@ -1,16 +1,15 @@
 package festivalPlanner.simulation;
 
 import javafx.scene.canvas.Canvas;
-import javafx.scene.shape.Sphere;
 import org.jfree.fx.FXGraphics2D;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Visitor implements Updatable{
 
@@ -22,29 +21,33 @@ public class Visitor implements Updatable{
     private double rotationSpeed;
     private ArrayList<Visitor> otherVisitors;
     private Point2D lastPosition;
+    private Image character;
+    private AffineTransform tx = new AffineTransform();
 
     private ArrayList<GridPosition> path = new ArrayList<>();
     private int pathArrayIndex = 1;
 
     public Visitor(Point2D position) {
+        try {
+            this.character = ImageIO.read(getClass().getResource("character.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.position = position;
         this.lastPosition = new Point2D.Double(position.getX(),position.getY());
         this.speed = 1.5;
         this.rotationSpeed = 0.2;
-        this.hitbox = new Ellipse2D.Double(this.position.getX(), this.position.getY(), 8, 8);
+        this.hitbox = new Ellipse2D.Double(this.position.getX(), this.position.getY(), 15, 15);
         this.targetPos = new Point2D.Double(this.position.getX(),this.position.getY());
         this.angle = 1;
+        this.tx.scale(6,6);
     }
 
 
     @Override
     public void draw(FXGraphics2D g2d) {
-//        for(GridPosition gridPosition : this.path){
-//            g2d.setColor(Color.GREEN);
-//            g2d.fill(new Rectangle2D.Double(gridPosition.getxPos(),gridPosition.getyPos(),1,1));
-//        }
-        g2d.draw(this.hitbox);
-        g2d.fill(this.hitbox);
+        g2d.drawImage(character,(int)this.position.getX()-6,(int)this.position.getY()-6,26,26,null);
+
     }
 
     @Override
@@ -92,7 +95,7 @@ public class Visitor implements Updatable{
                 this.angle -= this.rotationSpeed * 2;
             }
 
-            this.hitbox = new Ellipse2D.Double(this.position.getX(), this.position.getY(), 8, 8);
+            this.hitbox = new Ellipse2D.Double(this.position.getX(), this.position.getY(), 15, 15);
         }
     }
 
