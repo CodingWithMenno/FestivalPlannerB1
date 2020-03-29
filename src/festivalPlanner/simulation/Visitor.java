@@ -30,8 +30,12 @@ public class Visitor implements Updatable{
     private int pathArrayIndex = 1;
 
     public Visitor(Point2D position) {
+        double randomNumber = ( Math.random ( ) * ( ( 18 - 1 ) + 1 ) ) + 1;
+        int rN = ( int ) randomNumber;
+        String resource = "/Persons/" + String.valueOf ( rN ) + ".png";
+        System.out.println ( resource );
         try {
-            this.character = ImageIO.read(getClass().getResource("character.png"));
+            this.character = ImageIO.read(getClass().getResource( resource));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -49,6 +53,7 @@ public class Visitor implements Updatable{
 
     @Override
     public void draw(FXGraphics2D g2d) {
+        System.out.println ("draw in visitor class" );
         g2d.drawImage(character,(int)this.position.getX()-6,(int)this.position.getY()-6,26,26,null);
 
     }
@@ -102,7 +107,7 @@ public class Visitor implements Updatable{
                     this.angle -= this.rotationSpeed * 2;
                 }
 
-                this.hitbox = new Ellipse2D.Double(this.position.getX(), this.position.getY(), 15, 15);
+                this.hitbox = new Ellipse2D.Double(this.position.getX(), this.position.getY(), 18, 18);
             }
         }
     }
