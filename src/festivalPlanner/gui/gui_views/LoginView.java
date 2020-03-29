@@ -73,15 +73,12 @@ public class LoginView extends StackPane {
         setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.ENTER){
                 loginButton.actionStyle();
-                System.out.println("login tried");
 
                 try {
                     if (databaseConnection.validateUser(username.getText(), password.getText())) {
-                        System.out.println("Success");
 
                         this.loginSuccessful();
                     } else {
-                        System.out.println("Failed");
                         username.invalidInputStyle();
                         password.invalidInputStyle();
                     }

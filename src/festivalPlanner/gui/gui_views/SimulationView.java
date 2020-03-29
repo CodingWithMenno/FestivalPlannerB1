@@ -90,7 +90,6 @@ public class SimulationView extends StackPane {
 		this.canvas.setHeight ( 1080 );
 		this.canvas.setWidth ( 1920 );
 		
-		System.out.println ( "whats draw method" );
 		this.map.drawMap ( graphics );
 		
 		WritableImage image = canvas.snapshot ( new SnapshotParameters ( ) , null );
@@ -185,16 +184,16 @@ public class SimulationView extends StackPane {
 	}
 	
 	public void draw ( FXGraphics2D graphics ) {
+		graphics.setTransform(canvastx);
 		graphics.clearRect ( 0 , 0 , ( int ) canvas.getWidth ( ) , ( int ) canvas.getHeight ( ) );
 		graphics.drawImage ( this.image , 0 , 0 , 1920 , 1080 , null );
 		
-		System.out.println ( "drawing visitors" );
 		for ( Visitor visitor : this.visitors )
 		{
 			visitor.draw ( graphics );
 		}
 		
-		//this.scrollBar.draw();
+		this.scrollBar.draw();
 		
 	}
 	

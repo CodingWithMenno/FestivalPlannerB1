@@ -28,7 +28,6 @@ public class CanvasDrawer extends Canvas {
     }
 
     private void drawDivision( FXGraphics2D graphics ){
-        System.out.println ( "drawDivision");
         int blockWidthCounter= 0;
 
         for(int i = 0; i<24;i++){
@@ -45,7 +44,6 @@ public class CanvasDrawer extends Canvas {
     }
 
     private void drawTimeLine( FXGraphics2D graphics ){
-        System.out.println ("drawTimeLine" );
         graphics.setPaint(timeLineFill);
         graphics.fill(new Rectangle(0,0, 2760,30));
 
@@ -54,7 +52,6 @@ public class CanvasDrawer extends Canvas {
         graphics.setPaint(Color.white);
 
         for(int i = 0; i<25;i++){
-            System.out.println ("drawTimeLine pt. 2" );
             graphics.draw(new Line2D.Double(blockWidthCounter, 5, blockWidthCounter, 25));
 
             blockWidthCounter += 115;

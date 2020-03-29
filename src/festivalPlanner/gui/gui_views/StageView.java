@@ -142,7 +142,7 @@ public class StageView extends StackPane {
          * this part checks for doubles or and adds a stage.
          */
         addStage.setOnAction(event -> {
-            if(!(placementField.getSelectionModel().getSelectedItem() == null)){
+//            if(!(placementField.getSelectionModel().getSelectedItem() == null)){
 
             int capacityAmount = 0;
             int firstAidKitsAmount = 0;
@@ -171,7 +171,7 @@ public class StageView extends StackPane {
                     if (alreadyExist == 1) {
 
                         Alert dialog = new Alert(Alert.AlertType.WARNING,"You are about to overwrite the info of "+ stageNameField.getText()+",\n are you sure about that?");
-                        dialog.setTitle("Overwriting artist");
+                        dialog.setTitle("Overwriting stage");
                         dialog.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
                         int finalPlace = place;
                         int finalPlace1 = place;
@@ -180,14 +180,17 @@ public class StageView extends StackPane {
 
                                 data.getStages().get(finalPlace1).setName(stage.getName());
                                 data.getStages().get(finalPlace1).setCapacity(stage.getCapacity());
-                                data.getStages().get(finalPlace1).setPlacement(stage.getPlacement());
+//                                data.getStages().get(finalPlace1).setPlacement(stage.getPlacement());
                                 data.getStages().get(finalPlace1).setFirstAidKits(stage.getFirstAidKits());
                                 data.getStages().get(finalPlace1).setIndoor(stage.isIndoor());
                                 data.getStages().get(finalPlace1).setSurface(stage.getSurface());
 
                             }
+                            data.updateFileIO();
                         });
 
+                    } else if(placementField.getSelectionModel().getSelectedItem() == null){
+                        placementField.invalidInputStyle();
                     } else {
                         this.data.addToStages(stage);
                         placementField.defaultStyle();
@@ -207,9 +210,10 @@ public class StageView extends StackPane {
             } catch (Exception e) {
                 CapacityField.setText("Error");
                 firstAidKitsField.setText("Error");
-            } }else {
-                placementField.invalidInputStyle();
             }
+//            }else {
+//                placementField.invalidInputStyle();
+//            }
         });
 
         clearButton.setOnAction(event -> {

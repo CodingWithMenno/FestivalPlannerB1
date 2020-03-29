@@ -51,32 +51,18 @@ public class Data {
     }
 
     public void updateFileIO(){
-//        IO.writeArrayListArtist(this.artists, "resources/SavedFiles/SavedArtists.txt");
-//        this.artists.clear();
-//        this.artists = IO.readArtistFile("resources/SavedFiles/SavedArtists.txt");
-//
-//        IO.writeArrayListStage(this.stages, "resources/SavedFiles/SavedStages.txt");
-//        this.stages.clear();
-//        this.stages = IO.readStageFile("resources/SavedFiles/SavedStages.txt");
-//
-//        for(Event event : this.events){
-//            for(Artist artist : this.artists){
-//                if(event.getHeadArtist().getName().equals(artist.getName())){
-//                    if(event.HasCoArtist()){
-//
-//                    }else {
-//                        System.out.println(artist.getDescription());
-//                        event = new Event(artist,event.getStage(),event.getStartTime(),event.getEndTime(),event.getPopularityInString());
-//                    }
-//                }
-//            }
-//        }
+        IO.writeArrayListArtist(this.artists, "resources/SavedFiles/SavedArtists.txt");
+        this.artists.clear();
+        this.artists = IO.readArtistFile("resources/SavedFiles/SavedArtists.txt");
+
+        IO.writeArrayListStage(this.stages, "resources/SavedFiles/SavedStages.txt");
+        this.stages.clear();
+        this.stages = IO.readStageFile("resources/SavedFiles/SavedStages.txt");
 
 
-
-//        IO.writeArrayListEvents(this.events, "resources/SavedFiles/SavedEvents.txt");
-//        this.events.clear();
-//        this.events = (IO.readEventFile("resources/SavedFiles/SavedEvents.txt"));
+        IO.writeArrayListEvents(this.events, "resources/SavedFiles/SavedEvents.txt");
+        this.events.clear();
+        this.events = (IO.readEventFile("resources/SavedFiles/SavedEvents.txt"));
     }
 
     public void addToEvents(Event event) throws Exception{

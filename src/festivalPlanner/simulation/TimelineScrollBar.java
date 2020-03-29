@@ -68,7 +68,6 @@ public class TimelineScrollBar {
 //    }
 
     public void draw(){
-        System.out.println ("timelinescrollbar draw" );
         graphics2.clearRect(0, 0, (int)canvas2.getWidth(), (int)canvas2.getHeight());
         graphics2.setBackground(Color.WHITE);
         Area timeLine = new Area(new Rectangle2D.Double(15,12,1440,6));

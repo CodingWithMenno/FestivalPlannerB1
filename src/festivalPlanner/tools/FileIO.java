@@ -149,7 +149,6 @@ public class FileIO implements Serializable {
             try {
                 templist = (ArrayList<Stage>) obj.readObject();
 
-                System.out.println(templist);
 
                 for (Stage stage : templist) {
                     FileIOStages.add(stage);

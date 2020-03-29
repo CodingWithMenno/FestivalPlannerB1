@@ -33,7 +33,6 @@ public class Visitor implements Updatable{
         double randomNumber = ( Math.random ( ) * ( ( 18 - 1 ) + 1 ) ) + 1;
         int rN = ( int ) randomNumber;
         String resource = "/Persons/" + String.valueOf ( rN ) + ".png";
-        System.out.println ( resource );
         try {
             this.character = ImageIO.read(getClass().getResource( resource));
         } catch (IOException e) {
@@ -53,7 +52,6 @@ public class Visitor implements Updatable{
 
     @Override
     public void draw(FXGraphics2D g2d) {
-        System.out.println ("draw in visitor class" );
         g2d.drawImage(character,(int)this.position.getX()-6,(int)this.position.getY()-6,26,26,null);
 
     }

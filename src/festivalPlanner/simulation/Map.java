@@ -122,7 +122,6 @@ public class Map {
         graphics.setTransform(new AffineTransform());
         //graphics.setBackground(Color.white);
         //graphics.clearRect(0, 0, (int)canvas.getWidth(), (int)canvas.getHeight());
-        System.out.println ("drawMap" );
         for(Layer layer : layers){
 
             int i = 0;
