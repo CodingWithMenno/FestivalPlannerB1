@@ -10,6 +10,10 @@ import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
 
+/**
+ *  This class takes care of controlling the npc's.
+ */
+
 public class NPCController {
 
     private TimelineScrollBar scrollBar;
@@ -27,6 +31,9 @@ public class NPCController {
         this.routeFollower = routeFollower;
     }
 
+    /**
+     *The update method checks how many events are busy at a certain time.
+     */
     public void update(){
        double b =  scrollBar.getTimeMinutes();
        b = (b/60 );
@@ -66,6 +73,10 @@ public class NPCController {
             divideOver5Events();
        }
     }
+
+    /**
+     * The 7 methods below divide the visitors over certain places.
+     */
 
     public void visitorsToExit(){
         for (Visitor visitor : visitors){
@@ -183,6 +194,9 @@ public class NPCController {
         }
     }
 
+    /**
+     * The method below is a formule for dividing the npc's
+     */
     public double formula(){
 
         double totalPercentages = 0.0;
@@ -195,12 +209,20 @@ public class NPCController {
         return totalPeople/totalPercentages;
     }
 
+    /**
+     * The method below sends a npc to a place using pathfinding
+     */
+
     public void directVisitorToStage(Visitor visitor, String position){
         if(!(visitor.getLastPosition().getX() == getStageCoords(position).getX() && visitor.getLastPosition().getY() == getStageCoords(position).getY())) {
             System.out.println("2");
             visitor.setPath(routeFollower.routeFinder(position, (int) visitor.getLastPosition().getY(), (int) visitor.getLastPosition().getX()));
         }
     }
+
+    /**
+     * The two methods below are needed to get parameters for the pathfinding.
+     */
 
     public String getPosition(String stageName){
        String position = "";

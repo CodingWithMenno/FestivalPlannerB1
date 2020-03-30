@@ -68,6 +68,9 @@ public class Event implements Serializable {
         return endTime;
     }
 
+    /**
+     *The popularity is a string but to calculate with it, it needs to be converted to a double, that's what the method below is meant for.
+     */
     public double getPopularity() {
         if(popularity.equals("0%")){
             return 0.0;

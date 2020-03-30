@@ -16,6 +16,10 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * This class makes and draws the map from a jason file.
+ */
+
 public class Map {
 
     private int width;

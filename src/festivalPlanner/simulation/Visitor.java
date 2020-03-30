@@ -10,6 +10,9 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.util.ArrayList;
+/**
+ * This class draws the visitors and contains all the info about each visitor. This class also contains the logic for walking and non-colliding of the npc.
+ */
 
 public class Visitor implements Updatable{
 

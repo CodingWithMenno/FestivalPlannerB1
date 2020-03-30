@@ -2,6 +2,10 @@ package festivalPlanner.simulation;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * This class has info about a tileset of the map which is needed for pathfinding.
+ */
+
 public class Tileset {
 
     private String name;

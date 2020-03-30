@@ -31,6 +31,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * This class draws the simulation scene.
+ */
+
 public class SimulationView extends StackPane {
 	
 	private Data data;
@@ -196,6 +200,10 @@ public class SimulationView extends StackPane {
 		this.scrollBar.draw();
 		
 	}
+
+	/**
+	 * The two methods below takes care of the camera control.
+	 */
 	
 	public void keyPressed ( KeyEvent e ) {
 		if ( this.zoomedIn )

@@ -17,6 +17,10 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
+/**
+ * This class draws and takes care of the logic for the timeline scrollbar in the simulation.
+ */
+
 
 public class TimelineScrollBar {
 
@@ -160,6 +164,10 @@ public class TimelineScrollBar {
 
         setTimeString();
     }
+
+    /**
+     * The method below converts the amount of minutes to a time string.
+     */
 
     public void setTimeString(){
 

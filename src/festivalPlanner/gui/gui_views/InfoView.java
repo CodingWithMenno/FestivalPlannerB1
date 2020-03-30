@@ -13,6 +13,10 @@ import javafx.scene.layout.VBox;
 
 import java.sql.SQLException;
 
+/**
+ * This class the the makes the info scene, the scene that appears when clicked on an event.
+ */
+
 public class InfoView extends StackPane {
 
     private Event event;

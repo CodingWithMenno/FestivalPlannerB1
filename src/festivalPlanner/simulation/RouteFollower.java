@@ -3,6 +3,10 @@ package festivalPlanner.simulation;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * This class manages the pathfinding.
+ */
+
 public class RouteFollower {
 
     private int windowHeight;

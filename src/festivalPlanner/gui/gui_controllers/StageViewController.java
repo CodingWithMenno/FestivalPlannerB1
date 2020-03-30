@@ -8,6 +8,10 @@ import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
+/**
+ * This class has logic for the StageView class.
+ */
+
 public class StageViewController {
 
     private ObservableList<String> places;

@@ -11,6 +11,10 @@ import javafx.geometry.Point2D;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * A stage has a name, capacity, surface, is indoor or outdoor, a placement and an amount of first aidkits. This is the class for a stage.
+ */
+
 public class Stage implements Serializable {
 
     private String name;

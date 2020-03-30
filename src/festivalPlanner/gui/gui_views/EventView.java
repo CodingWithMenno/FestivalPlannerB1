@@ -145,7 +145,7 @@ public class EventView extends StackPane {
         listViewStages.setMaxSize(200,320);
 
         /**
-         * this part adds an event.
+         * this part adds an event and checks for doubles.
          */
         addEvent.setOnAction(event -> {
             this.newEvent = null;

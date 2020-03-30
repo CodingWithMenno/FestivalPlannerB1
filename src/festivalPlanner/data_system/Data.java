@@ -9,7 +9,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- * In this class is all data stored. The data consist of artistss, stages and events.
+ * In this class is all data stored. The data consist of artists, stages and events.
  */
 
 public class Data {
@@ -162,6 +162,10 @@ public class Data {
 
         this.events = (IO.readEventFile("resources/SavedFiles/SavedEvents.txt"));
     }
+
+    /**
+     * The two methods below check if the added event is allowed to be added and does that by checking for double bookings on artists or checks if there isnt an event busy already on that stage at that time.
+     */
 
     public boolean checkForDoubles(Event event){
 

@@ -2,6 +2,10 @@ package festivalPlanner.simulation;
 
 import java.util.ArrayList;
 
+/**
+ * This class has info about a position on the grid which is needed for pathfinding.
+ */
+
 public class GridPosition {
 
     private int xPos;

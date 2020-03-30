@@ -2,9 +2,7 @@ package festivalPlanner.gui.gui_views;
 
 import festivalPlanner.data_system.Artist;
 import festivalPlanner.data_system.Data;
-import festivalPlanner.data_system.Event;
 import festivalPlanner.gui.SceneHandler;
-import festivalPlanner.gui.gui_controllers.ArtistViewController;
 import festivalplanner_guiModules.buttons.showButton;
 import festivalplanner_guiModules.inputfields.FPTextArea;
 import festivalplanner_guiModules.inputfields.FPTextField;
@@ -29,7 +27,6 @@ public class ArtistView extends StackPane {
 
     private SceneHandler sceneHandler;
     private MainView mainView;
-    private  ArtistViewController controller;
     private EventView eventView;
     private ObservableList<Artist> artists;
     private Data data;
@@ -131,9 +128,6 @@ public class ArtistView extends StackPane {
 
         showButton show = new showButton("Show", 90, 35);
         place(show, 190, 230);
-
-        open.setOnAction(event -> this.controller.uploadPhoto()
-        );
 
         TextArea biographyField = new FPTextArea("Biography",160,80);
         place(biographyField,-149,165);

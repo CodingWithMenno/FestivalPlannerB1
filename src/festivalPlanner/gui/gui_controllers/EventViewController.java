@@ -31,7 +31,7 @@ public class  EventViewController {
      * this method sets the items for the combobox for the time selection.
      */
     public void setTimes(){
-        for(double i = 0.0; i < 24.0; i++){
+        for(double i = 0.0; i <= 24.0; i++){
             this.times.add(i);
 
         }
