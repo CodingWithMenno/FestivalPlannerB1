@@ -68,7 +68,6 @@ public class Data {
     public void addToEvents(Event event) throws Exception{
         boolean artistAvailable;
 
-        System.out.println(event.HasCoArtist());
         if(event.HasCoArtist()){
           artistAvailable = checkForDoubles(event);
         }else{

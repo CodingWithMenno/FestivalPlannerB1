@@ -215,7 +215,6 @@ public class NPCController {
 
     public void directVisitorToStage(Visitor visitor, String position){
         if(!(visitor.getLastPosition().getX() == getStageCoords(position).getX() && visitor.getLastPosition().getY() == getStageCoords(position).getY())) {
-            System.out.println("2");
             visitor.setPath(routeFollower.routeFinder(position, (int) visitor.getLastPosition().getY(), (int) visitor.getLastPosition().getX()));
         }
     }
