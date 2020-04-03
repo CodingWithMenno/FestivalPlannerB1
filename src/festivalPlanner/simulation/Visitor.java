@@ -28,6 +28,8 @@ public class Visitor implements Updatable{
     private AffineTransform tx = new AffineTransform();
     private boolean openingAnimation = true;
     private int animationCoord= 320;
+    private boolean endingAnimation = false;
+    private boolean isAtEnd = false;
 
     private ArrayList<GridPosition> path = new ArrayList<>();
     private int pathArrayIndex = 1;
@@ -55,8 +57,7 @@ public class Visitor implements Updatable{
 
     @Override
     public void draw(FXGraphics2D g2d) {
-        g2d.drawImage(character,(int)this.position.getX()-6,(int)this.position.getY()-6,26,26,null);
-
+            g2d.drawImage(character, (int) this.position.getX() - 6, (int) this.position.getY() - 6, 26, 26, null);
     }
 
     @Override
@@ -77,6 +78,9 @@ public class Visitor implements Updatable{
                         this.pathArrayIndex++;
                     } else {
                         this.lastPosition = new Point2D.Double(this.path.get(this.pathArrayIndex).getxPos(), this.path.get(this.pathArrayIndex).getyPos());
+                        if(this.endingAnimation){
+                            this.isAtEnd = true;
+                        }
                     }
                 }
 
@@ -161,5 +165,13 @@ public class Visitor implements Updatable{
 
     public void setOpeningAnimation(boolean openingAnimation) {
         this.openingAnimation = openingAnimation;
+    }
+
+    public void setEndingAnimation(boolean endingAnimation) {
+        this.endingAnimation = endingAnimation;
+    }
+
+    public boolean isAtEnd() {
+        return isAtEnd;
     }
 }

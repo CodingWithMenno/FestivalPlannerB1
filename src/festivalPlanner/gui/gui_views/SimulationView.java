@@ -135,56 +135,57 @@ public class SimulationView extends StackPane {
 		
 		getChildren ( ).addAll ( canvas , scrollBar.makehbox ( ) , BackButton );
 		
-		for ( int b = 0 ; b < 4 ; b++ )
-		{
-			for ( int i = 0 ; i < 15 ; i++ )
-			{
-				this.visitors.add ( new Visitor ( new Point2D.Double ( 960 + ( b * 20 ) ,
-                                   760 + ( i * 20 ) ) ) );
-			}
-		}
-		
-		for ( Visitor visitor : this.visitors )
-		{
-			visitor.setOtherVisitors ( this.visitors );
-		}
+		makeVisitors();
 		
 	}
 	
 	public void update ( double deltatime ) {
-		if ( this.scrollBar.getTimeMinutes ( ) == 1440 )
-		{
-			npcController.visitorsToExit ( );
-		}
-		if ( animationCounter < 321 )
-		{
-			animationCounter++;
-		}
-		if ( animationCounter == 320 )
-		{
-			for ( Visitor visitor : this.visitors )
-			{
-				visitor.setOpeningAnimation ( false );
+		if(visitors.size() == 0){
+			makeVisitors();
+			this.scrollBar.setTimex(15);
+			this.animationCounter = 0;
+			this.scrollBar.setOn(false);
+			this.scrollBar.setSpeed(0.0);
+			for(Visitor visitor : visitors){
+				visitor.update(canvas);
 			}
-			this.scrollBar.setSpeed ( 0.015 );
-			this.scrollBar.setOn ( true );
+			this.scrollBar.update();
+		}else {
+
+			if (this.scrollBar.getTimeMinutes() == 1440) {
+				npcController.visitorsToExit();
+				for (Visitor visitor : visitors) {
+					visitor.setEndingAnimation(true);
+				}
+			}
+
+			visitors.removeIf(Visitor::isAtEnd);
+
+			if (animationCounter < 321) {
+				animationCounter++;
+			}
+			if (animationCounter == 320) {
+				for (Visitor visitor : this.visitors) {
+					visitor.setOpeningAnimation(false);
+				}
+				this.scrollBar.setSpeed(0.015);
+				this.scrollBar.setOn(true);
+			}
+			for (Visitor visitor : this.visitors) {
+				visitor.update(this.canvas);
+			}
+
+			this.scrollBar.update();
+			if (this.scrollBar.getTimeMinutes() % 60 == 0) {
+				this.updateNpccontroller = true;
+			}
+			if (this.scrollBar.getTimeMinutes() % 60 == 1 && this.updateNpccontroller) {
+				npcController.update();
+				this.updateNpccontroller = false;
+			}
+
+
 		}
-		for ( Visitor visitor : this.visitors )
-		{
-			visitor.update ( this.canvas );
-		}
-		
-		this.scrollBar.update ( );
-		if ( this.scrollBar.getTimeMinutes ( ) % 60 == 0 )
-		{
-			this.updateNpccontroller = true;
-		}
-		if ( this.scrollBar.getTimeMinutes ( ) % 60 == 1 && this.updateNpccontroller )
-		{
-			npcController.update ( );
-			this.updateNpccontroller = false;
-		}
-		
 	}
 	
 	public void draw ( FXGraphics2D graphics ) {
@@ -255,6 +256,22 @@ public class SimulationView extends StackPane {
 			this.zoomx = 960;
 			this.zoomy = 540;
 			zoomedIn = false;
+		}
+	}
+
+	public void makeVisitors(){
+		for ( int b = 0 ; b < 4 ; b++ )
+		{
+			for ( int i = 0 ; i < 15 ; i++ )
+			{
+				this.visitors.add ( new Visitor ( new Point2D.Double ( 960 + ( b * 20 ) ,
+						760 + ( i * 20 ) ) ) );
+			}
+		}
+
+		for ( Visitor visitor : this.visitors )
+		{
+			visitor.setOtherVisitors ( this.visitors );
 		}
 	}
 }

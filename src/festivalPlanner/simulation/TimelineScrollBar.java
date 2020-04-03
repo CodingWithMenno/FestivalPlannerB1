@@ -211,4 +211,9 @@ public class TimelineScrollBar {
     public void setOn(boolean on) {
         this.on = on;
     }
+
+    public void setTimex(int time){
+        this.timex = time;
+    }
+
 }
