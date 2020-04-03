@@ -144,7 +144,6 @@ public class SimulationView extends StackPane {
 			makeVisitors();
 			this.scrollBar.setTimex(15);
 			this.animationCounter = 0;
-			this.scrollBar.setOn(false);
 			this.scrollBar.setSpeed(0.0);
 			for(Visitor visitor : visitors){
 				visitor.update(canvas);
@@ -154,6 +153,7 @@ public class SimulationView extends StackPane {
 
 			if (this.scrollBar.getTimeMinutes() == 1440) {
 				npcController.visitorsToExit();
+				this.scrollBar.setOn(false);
 				for (Visitor visitor : visitors) {
 					visitor.setEndingAnimation(true);
 				}
