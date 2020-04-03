@@ -160,7 +160,11 @@ public class ArtistView extends StackPane {
          * this part checks for doubles or and adds an artist
          */
         saveArtist.setOnAction(event -> {
-
+        if(artistNameField.getText().equals("") || ageField.getText().equals("") || genreField.getText().equals("")){
+            artistNameField.setText("Error");
+            ageField.setText("Error");
+            genreField.setText("Error");
+            }else {
             int age = 0;
 
             try {
@@ -172,7 +176,7 @@ public class ArtistView extends StackPane {
                         biographyField.getText(),
                         open.getText());
 
-                if(data.getArtists().size() != 0) {
+                if (data.getArtists().size() != 0) {
                     int alreadyExist = 0;
                     int place = 0;
                     for (int i = 0; i < data.getArtists().size(); i++) {
@@ -184,12 +188,12 @@ public class ArtistView extends StackPane {
 
                     if (alreadyExist == 1) {
 
-                        Alert dialog = new Alert(Alert.AlertType.WARNING,"You are about to overwrite the info of "+ artistNameField.getText()+",\n are you sure about that?");
+                        Alert dialog = new Alert(Alert.AlertType.WARNING, "You are about to overwrite the info of " + artistNameField.getText() + ",\n are you sure about that?");
                         dialog.setTitle("Overwriting artist");
                         dialog.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
                         int finalPlace = place;
                         dialog.showAndWait().ifPresent(buttonType -> {
-                            if (buttonType == ButtonType.YES){
+                            if (buttonType == ButtonType.YES) {
                                 data.getArtists().get(finalPlace).setName(artist.getName());
                                 data.getArtists().get(finalPlace).setAge(artist.getAge());
                                 data.getArtists().get(finalPlace).setGenre(artist.getGenre());
@@ -200,23 +204,17 @@ public class ArtistView extends StackPane {
                             data.updateFileIO();
                         });
 
-                    }
-                    else this.data.addToArtists(artist);
+                    } else this.data.addToArtists(artist);
+                } else {
+                    this.data.addToArtists(artist);
                 }
-                else {this.data.addToArtists(artist);}
 
-                }
-            catch(Exception e) {
+            } catch (Exception e) {
                 ageField.setText("Error");
             }
-            artistNameField.setText("");
-            ageField.setText("");
-            genreField.setText("");
-            biographyField.setText("");
-            open.setText("");
 
 
-        });
+        }});
 
         clearButton.setOnAction(event -> {
             artistNameField.setText("");

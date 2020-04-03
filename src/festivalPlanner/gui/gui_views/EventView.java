@@ -213,9 +213,6 @@ public class EventView extends StackPane {
             }
         });
 
-        showButton clearButton = new showButton("Clear All ", 90, 35);
-        place(clearButton,-182,230);
-
         showButton RemoveArtist = new showButton("Remove ", 90, 35);
         place(RemoveArtist,310,230);
 
@@ -223,7 +220,7 @@ public class EventView extends StackPane {
           data.removeEvent(listViewStages.getSelectionModel().getSelectedItem());
         });
 
-        stackPane.getChildren().addAll(title,secondTitle,thirdTitle,mainArtist,coArtist,stage,popularity,listViewStages,Time,mainArtistField,coArtistField,stageField,popularityField,beginTime,endTime,addEvent,RemoveArtist,clearButton,makeLine(),makeLine2());
+        stackPane.getChildren().addAll(title,secondTitle,thirdTitle,mainArtist,coArtist,stage,popularity,listViewStages,Time,mainArtistField,coArtistField,stageField,popularityField,beginTime,endTime,addEvent,RemoveArtist,makeLine(),makeLine2());
 
         return stackPane;
     }
