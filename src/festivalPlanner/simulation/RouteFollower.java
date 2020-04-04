@@ -42,6 +42,11 @@ public class RouteFollower {
 
     }
 
+    /**
+     * This methods builds the map in system memory.
+     * By building the map it sets all the walkable and non-walkable pixels on the screen.
+     * @param pathLayer
+     */
     public void buildRouteMap(ArrayList<Integer> pathLayer){
 
         tileMapGrid = new int[1088/32][];
@@ -95,7 +100,13 @@ public class RouteFollower {
         pathMapGenerator();
     }
 
-
+    /**
+     * pathMapGenerator()
+     *
+     * This method creates heat maps for every possible destination within the map.
+     * Heat maps are stored in Hashmaps.
+     * The Key being the next-best neighbouring (pixel) position and the Value being the current pixel position.
+     */
     private void pathMapGenerator(){
 
         this.northWestPoint = this.twoDArray[322][191];
@@ -223,6 +234,15 @@ public class RouteFollower {
         frontier.clear();
     }
 
+    /**
+     *
+     * This method is called on to find the best possible route from the current pixel position to the destination.
+     *
+     * @param stageCode
+     * @param starty
+     * @param startx
+     * @return
+     */
     public ArrayList<GridPosition> routeFinder(String stageCode, int starty, int startx){
 
         if ( stageCode.equals("Middle")){
@@ -362,124 +382,6 @@ public class RouteFollower {
 
     }
 
-
-//    public ArrayList<GridPosition> calculateRoute(Point2D endPos){
-//
-//       // this.startPosition = new GridPosition(5*32, 8*32);
-//        this.startPosition = this.twoDArray[5*32][8*32];
-//
-//        this.endPosition = this.twoDArray[(int)endPos.getX()][(int)endPos.getY()];
-//
-//        System.out.println(this.startPosition.getyPos() + " "+ this.startPosition.getxPos() + " : "+ this.endPosition.getyPos() + " " + this.endPosition.getxPos());
-//
-//        this.availablePositions.add(this.startPosition);
-//
-//        while(true) {
-//
-//            //GridPosition currentPosition ;
-//
-//            if (this.availablePositions.size() > 0) {
-//
-//                int winningPath = 0;
-//
-//                for (int i = 0; i < this.availablePositions.size(); i++) {
-//                    if (this.availablePositions.get(i).getTotalRouteCost() < this.availablePositions.get(winningPath).getTotalRouteCost()) {
-//                        winningPath = i;
-//                    }
-//                }
-//
-//                GridPosition currentPosition = this.availablePositions.get(winningPath);
-//
-//                if (currentPosition == this.endPosition) {
-//                    System.out.println("Done Finding Path");
-//                    this.foundPath.add(currentPosition);
-//                    break;
-//                }
-//
-////                for ( GridPosition gridPosition : this.availablePositions ){
-////                    if ( gridPosition == currentPosition ){
-////                        this.availablePositions.remove(gridPosition);
-////                    }
-////                }
-//                for ( int i = 0; i < this.availablePositions.size(); i++ ){
-//                    if ( this.availablePositions.get(i) == currentPosition ){
-//                        this.availablePositions.remove(i);
-//                    }
-//                }
-//
-//                this.unavailablePositions.add(currentPosition);
-//
-//                ArrayList<GridPosition> currentNeighbours = currentPosition.getNeighbouringPositions();
-//
-//                for ( GridPosition gridPosition : currentNeighbours ){
-//                    GridPosition neighbour = gridPosition;
-//
-//                    if ( !this.unavailablePositions.contains(neighbour) && !neighbour.isWalkable() ){
-//                        int tempRouteCost = currentPosition.getRouteCost() + heuristic(neighbour, currentPosition);
-//
-//                        boolean newPath = false;
-//
-//                        if ( this.availablePositions.contains(neighbour) ){
-//                            if ( tempRouteCost < neighbour.getRouteCost() ) {
-//                                neighbour.setRouteCost(tempRouteCost);
-//                                newPath = true;
-//                            }
-//                        } else {
-//                            neighbour.setRouteCost( tempRouteCost );
-//                            newPath = true;
-//                            this.availablePositions.add(neighbour);
-//                        }
-//
-//                        if ( newPath ){
-//                            neighbour.setHeuristic(heuristic(neighbour, this.endPosition));
-//                            neighbour.setTotalRouteCost( neighbour.getRouteCost() + neighbour.getHeuristic() );
-//                            neighbour.setPreviousPosition(currentPosition);
-//                        }
-//                    }
-//                }
-//                this.foundPath.add(currentPosition);
-//
-//                //System.out.println(currentPosition.getyPos()+ " " + currentPosition.getxPos() + "\n --------");
-//
-//            }
-//            else {
-//                System.out.println("No Solution Found");
-//                break;
-//            }
-//
-//
-//
-//        }
-//
-//        for ( GridPosition gridPosition : this.foundPath ){
-//            System.out.println(gridPosition.getyPos()+ " " + gridPosition.getxPos() + "\n --------");
-//        }
-//        return this.foundPath;
-//
-//    }
-//
-//    public ArrayList<GridPosition> getFoundPath() {
-//        return foundPath;
-//    }
-//
-//    public void setStartPosition(Point2D StartPos) {
-//
-//        this.startPosition = new GridPosition((int)StartPos.getX(), (int)StartPos.getY());
-//
-//        this.availablePositions.add(this.startPosition);
-//
-//    }
-//
-//    public void setEndPosition(Point2D EndPos) {
-//        this.endPosition = this.twoDArray[(int)EndPos.getX()][(int)EndPos.getY()];
-//    }
-//
-//    private int heuristic( GridPosition neighbour, GridPosition currentPosition ){
-//
-//        double heuristic = Point2D.distance(neighbour.getyPos(), neighbour.getxPos(), currentPosition.getyPos(), currentPosition.getxPos());
-//
-//        return (int) Math.round(heuristic);
-//    }
 
     public int[][] getTileMapGrid() {
         return tileMapGrid;

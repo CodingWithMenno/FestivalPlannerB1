@@ -18,6 +18,12 @@ public class ControllerBar extends HBox {
     private TimeLineViewScrollController timeLineViewScrollController;
     private SceneHandler sceneHandler;
 
+    /**
+     * This is an extension of the JavaFX HBox and is used to display a custom control bar, under the header bar.
+     * In the control bar, the buttons are displayed that change the state of the application.
+     * @param timeLineView
+     * @param sceneHandler
+     */
     public ControllerBar(TimeLineView timeLineView, SceneHandler sceneHandler) {
         this.timeLineView = timeLineView;
         this.sceneHandler = sceneHandler;

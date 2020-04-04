@@ -21,6 +21,11 @@ public class DatabaseConnection {
 
     private String activeUser;
 
+    /**
+     * This Class ensures a database connection to a MySQL database.
+     * This was an extra feature, and is only used at the login screen.
+     * @throws SQLException
+     */
     public DatabaseConnection() throws SQLException {
 
         try {

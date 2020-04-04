@@ -41,6 +41,13 @@ public class GridPosition {
         this.walkable = state;
     }
 
+
+    /**
+     * This method is called on to find all neighbouring pixel positions to a specific given pixel position.
+     * @param gridPosition
+     * @param width
+     * @param height
+     */
     public void setNeighbouringPositions(GridPosition[][] gridPosition, int width, int height ){
 
 //        if ( xPos < height - 1 ){
