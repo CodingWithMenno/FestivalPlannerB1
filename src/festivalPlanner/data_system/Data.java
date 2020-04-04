@@ -110,8 +110,14 @@ public class Data {
         ArrayList<Event> tempEvents = new ArrayList<>();
 
         for ( Event event : this.events ){
-            if ( event.getHeadArtist().getName().equals(artist.getName()) || event.getCoArtist().getName().equals(artist.getName()) ){
-                tempEvents.add(event);
+            if(event.HasCoArtist()) {
+                if (event.getHeadArtist().getName().equals(artist.getName()) || event.getCoArtist().getName().equals(artist.getName())) {
+                    tempEvents.add(event);
+                }
+            }else {
+                if (event.getHeadArtist().getName().equals(artist.getName())) {
+                    tempEvents.add(event);
+                }
             }
         }
 
