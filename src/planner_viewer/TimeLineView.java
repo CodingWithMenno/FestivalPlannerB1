@@ -78,7 +78,6 @@ public class TimeLineView extends StackPane {
         sliderContainer.setMaxSize(2760, 660);
         sliderContainer.setStyle("-fx-background-color: blue");
 
-        //sliderContainer.setAlignment(Pos.TOP_CENTER);
         sliderContainer.getChildren().addAll(new CanvasDrawer(),makeTimeSeparator() );
 
         for (Event event : events){
