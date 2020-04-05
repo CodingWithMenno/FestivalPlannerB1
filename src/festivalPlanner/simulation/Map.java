@@ -124,8 +124,6 @@ public class Map {
 
     public void drawMap(FXGraphics2D graphics){
         graphics.setTransform(new AffineTransform());
-        //graphics.setBackground(Color.white);
-        //graphics.clearRect(0, 0, (int)canvas.getWidth(), (int)canvas.getHeight());
         for(Layer layer : layers){
 
             int i = 0;
@@ -139,15 +137,12 @@ public class Map {
                     i++;
                 }
             }
-            //break;
 
         }
 
         
         
         
-        //System.out.println(this.tiles);
-        //graphics.drawImage(tiles.get(64), 0, 0, null);
 
 
     }

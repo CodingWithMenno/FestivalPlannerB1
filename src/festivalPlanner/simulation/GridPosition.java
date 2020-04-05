@@ -50,31 +50,6 @@ public class GridPosition {
      */
     public void setNeighbouringPositions(GridPosition[][] gridPosition, int width, int height ){
 
-//        if ( xPos < height - 1 ){
-//            this.neighbouringPositions.add(gridPosition[xPos + 1][yPos]);
-//        }
-//        if ( xPos > 0 ){
-//            this.neighbouringPositions.add(gridPosition[xPos - 1][yPos]);
-//        }
-//        if (yPos < width - 1) {
-//            this.neighbouringPositions.add(gridPosition[xPos][yPos + 1]);
-//        }
-//        if (yPos > 0) {
-//            this.neighbouringPositions.add(gridPosition[xPos][yPos - 1]);
-//        }
-//        if (xPos > 0 && yPos > 0) {
-//            this.neighbouringPositions.add(gridPosition[xPos - 1][yPos - 1]);
-//        }
-//        if (xPos < height - 1 && yPos > 0) {
-//            this.neighbouringPositions.add(gridPosition[xPos + 1][yPos - 1]);
-//        }
-//        if (xPos > 0 && yPos < width - 1) {
-//            this.neighbouringPositions.add(gridPosition[xPos - 1][yPos + 1]);
-//        }
-//        if (xPos < height - 1 && yPos < width - 1) {
-//            this.neighbouringPositions.add(gridPosition[xPos + 1][yPos + 1]);
-//        }
-
         if ( yPos < width - 1 ){
             this.neighbouringPositions.add(gridPosition[yPos + 1][xPos]);
         }

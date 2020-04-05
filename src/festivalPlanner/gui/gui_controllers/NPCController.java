@@ -56,8 +56,6 @@ public class NPCController {
            }
        }
 
-//        System.out.println(popularities.toString());
-//        System.out.println(positions.toString());
 
        if(amountofeventrightnow == 0){
            divideOver0Events();

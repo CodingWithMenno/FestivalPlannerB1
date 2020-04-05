@@ -114,10 +114,6 @@ public class TimeLineView extends StackPane {
 
     private Node makeTimeSeparator(){
         GridPane timeSeparator = new GridPane();
-//        hBox.setLayoutX(50);
-//        hBox.setTranslateX(50);
-//        hBox.setLayoutY(4);
-//        hBox.setTranslateY(4);
         timeSeparator.setMaxSize(2760,30);
         timeSeparator.setMinSize(2760,30);
 
@@ -132,7 +128,6 @@ public class TimeLineView extends StackPane {
 
             timeSeparator.addColumn(i,label);
             timeSeparator.getColumnConstraints().add(new ColumnConstraints(115));
-            //timeSeparator.getChildren().add(label);
 
         }
         for(int i = 10; i<24;i++){

@@ -142,7 +142,6 @@ public class StageView extends StackPane {
          * this part checks for doubles or and adds a stage.
          */
         addStage.setOnAction(event -> {
-//            if(!(placementField.getSelectionModel().getSelectedItem() == null)){
 
             int capacityAmount = 0;
             int firstAidKitsAmount = 0;
@@ -211,9 +210,7 @@ public class StageView extends StackPane {
                 CapacityField.setText("Error");
                 firstAidKitsField.setText("Error");
             }
-//            }else {
-//                placementField.invalidInputStyle();
-//            }
+
         });
 
         clearButton.setOnAction(event -> {
