@@ -9,6 +9,12 @@ import javafx.scene.layout.HBox;
 
 public class HeaderBar extends HBox {
 
+    /**
+     * This extension to the JavaFX HBox is used to create a custom, fixed header bar for the application.
+     * The String parameter is the festival name that appears on the top left of the application.
+     * The festival name changes depending on the currently logged in user.
+     * @param festivalName
+     */
     public HeaderBar(String festivalName) {
 
         setMinSize(1280, 40);

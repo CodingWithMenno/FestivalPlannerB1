@@ -3,7 +3,6 @@ package festivalPlanner.gui.gui_views;
 import festivalPlanner.data_system.Data;
 import festivalPlanner.data_system.DatabaseConnection;
 import festivalPlanner.gui.SceneHandler;
-import festivalPlanner.gui.gui_controllers.MainViewController;
 import festivalplanner_guiModules.gui_bars.ControllerBar;
 import festivalplanner_guiModules.gui_bars.HeaderBar;
 import javafx.scene.layout.VBox;

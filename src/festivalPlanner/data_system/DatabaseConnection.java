@@ -21,6 +21,11 @@ public class DatabaseConnection {
 
     private String activeUser;
 
+    /**
+     * This Class ensures a database connection to a MySQL database.
+     * This was an extra feature, and is only used at the login screen.
+     * @throws SQLException
+     */
     public DatabaseConnection() throws SQLException {
 
         try {
@@ -48,7 +53,7 @@ public class DatabaseConnection {
                     databaseReply.getInt(2),
                     databaseReply.getInt(3),
                     databaseReply.getBoolean(4),
-                    databaseReply.getInt(5),
+                    databaseReply.getString(5),
                     databaseReply.getInt(6)));
 
         }
@@ -118,7 +123,6 @@ public class DatabaseConnection {
                 System.err.println("Message: " + e.getMessage());
                 Throwable t = ex.getCause();
                 while (t != null) {
-                    System.out.println("Cause: " + t);
                     t = t.getCause();
                 }
             }

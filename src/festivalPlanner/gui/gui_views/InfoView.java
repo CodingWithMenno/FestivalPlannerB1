@@ -1,9 +1,8 @@
 package festivalPlanner.gui.gui_views;
 
-import festivalPlanner.data_system.Artist;
 import festivalPlanner.data_system.Event;
 import festivalPlanner.gui.SceneHandler;
-import festivalplanner_guiModules.buttons.FPButton;
+import festivalplanner_guiModules.buttons.showButton;
 import festivalplanner_guiModules.text.titles.DynamicTitle;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -13,6 +12,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.sql.SQLException;
+
+/**
+ * This class the the makes the info scene, the scene that appears when clicked on an event.
+ */
 
 public class InfoView extends StackPane {
 
@@ -47,7 +50,7 @@ public class InfoView extends StackPane {
                 "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 20, 0.0 , 2 , 2 );"
         );
 
-        Button BackButton = new FPButton("X", 30, 30);
+        Button BackButton = new showButton("X", 30, 30);
         stackPane.getChildren().add(BackButton);
         BackButton.setOnAction(event -> {
             try {
@@ -71,13 +74,13 @@ public class InfoView extends StackPane {
             stackPane.getChildren().add(artist);
         }
 
-        DynamicTitle time = new DynamicTitle("From " + beginTime + " till " + endTime , 21);
+        DynamicTitle time = new DynamicTitle("From " + beginTime + " till " + endTime +"\n--------------------------------" , 21);
 
-        DynamicTitle stage = new DynamicTitle("Stage: " + event.getStage(), 21);
+        DynamicTitle stage = new DynamicTitle("Stage: " + event.getStage()+"\n--------------------------------", 21);
 
-        DynamicTitle genre = new DynamicTitle("Genre: " + event.getHeadArtist().getGenre(),21);
+        DynamicTitle genre = new DynamicTitle("Genre: " + event.getHeadArtist().getGenre()+"\n--------------------------------",21);
 
-        DynamicTitle description = new DynamicTitle(event.getHeadArtist().getName() + ":\n"+event.getHeadArtist().getDescription(), 17);
+        DynamicTitle description = new DynamicTitle(event.getHeadArtist().getName() + ":\n"+event.getHeadArtist().getDescription()+"\n--------------------------------", 17);
 
         vBox.getChildren().addAll(time,stage,genre,description);
 
@@ -97,7 +100,6 @@ public class InfoView extends StackPane {
 
         vBox.setAlignment(Pos.TOP_LEFT);
         place(vBox,50,125);
-        vBox.setSpacing(20);
 
         stackPane.getChildren().addAll(vBox,makeLine(),makeLine2(),artistPhoto);
         return stackPane;

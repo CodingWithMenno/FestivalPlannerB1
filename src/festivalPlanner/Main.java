@@ -14,12 +14,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(StageManager.class);
-
-
-//
-//        FileIO io = new FileIO();
-//        io.readArtistFile("/C:/Users/Davy/Documents/SavedArtists.txt");
-
     }
 
     @Override

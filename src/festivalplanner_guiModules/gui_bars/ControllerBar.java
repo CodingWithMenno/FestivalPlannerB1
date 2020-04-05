@@ -2,10 +2,8 @@ package festivalplanner_guiModules.gui_bars;
 
 import festivalPlanner.gui.SceneHandler;
 import festivalPlanner.gui.gui_controllers.TimeLineViewScrollController;
-import festivalplanner_guiModules.buttons.FPButton;
+import festivalplanner_guiModules.buttons.showButton;
 import festivalplanner_guiModules.buttons.FPSimulateButton;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -20,6 +18,12 @@ public class ControllerBar extends HBox {
     private TimeLineViewScrollController timeLineViewScrollController;
     private SceneHandler sceneHandler;
 
+    /**
+     * This is an extension of the JavaFX HBox and is used to display a custom control bar, under the header bar.
+     * In the control bar, the buttons are displayed that change the state of the application.
+     * @param timeLineView
+     * @param sceneHandler
+     */
     public ControllerBar(TimeLineView timeLineView, SceneHandler sceneHandler) {
         this.timeLineView = timeLineView;
         this.sceneHandler = sceneHandler;
@@ -43,9 +47,10 @@ public class ControllerBar extends HBox {
         rightSideContainer.setPrefSize(640, 70);
         rightSideContainer.setMinSize(640, 70);
 
-        Button artistButton = new FPButton("Artists", 95, 45);
-        Button stageButton = new FPButton("Stages", 95, 45);
-        Button eventButton = new FPButton("Events", 95, 45);
+        Button artistButton = new showButton("Artists", 95, 45);
+        Button stageButton = new showButton("Stages", 95, 45);
+        Button eventButton = new showButton("Events", 95, 45);
+        Button simulateButton = new FPSimulateButton();
 
         eventButton.setOnAction(event -> {
             this.sceneHandler.toAddEvent();
@@ -59,11 +64,17 @@ public class ControllerBar extends HBox {
             this.sceneHandler.toAddArtist();
         });
 
+        simulateButton.setOnAction(event -> {
+            this.sceneHandler.toSimulationView();
+        });
+
+
+
         rightSideContainer.getChildren().addAll(
                 artistButton,
                 stageButton,
                 eventButton,
-                new FPSimulateButton()
+                simulateButton
         );
 
         return rightSideContainer;
@@ -79,22 +90,22 @@ public class ControllerBar extends HBox {
         leftSideContainer.setPrefSize(640, 70);
         leftSideContainer.setMinSize(640, 70);
 
-        Button rightButton = new FPButton(">", 45, 45);
+        Button rightButton = new showButton(">", 45, 45);
         rightButton.setOnAction(event -> {
             timeLineViewScrollController.shiftToLeft();
         });
 
-        Button leftButton = new FPButton("<", 45, 45);
+        Button leftButton = new showButton("<", 45, 45);
         leftButton.setOnAction(event -> {
             timeLineViewScrollController.shiftToRight();
 
         });
 
         leftSideContainer.getChildren().addAll(
-                new FPButton("View", 95, 45),
+                new showButton("View", 95, 45),
                 leftButton,
                 rightButton
-//                new FPButton(">", 45,45)
+//                new showButton(">", 45,45)
         );
 
         return leftSideContainer;

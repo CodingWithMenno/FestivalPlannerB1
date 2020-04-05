@@ -3,11 +3,10 @@ package festivalPlanner.gui.gui_views;
 import festivalPlanner.data_system.Data;
 import festivalPlanner.data_system.Stage;
 import festivalPlanner.gui.SceneHandler;
-import festivalplanner_guiModules.buttons.FPButton;
+import festivalPlanner.gui.gui_controllers.StageViewController;
+import festivalplanner_guiModules.buttons.showButton;
 import festivalplanner_guiModules.inputfields.*;
 import festivalplanner_guiModules.text.titles.DynamicTitle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -22,17 +21,17 @@ import java.sql.SQLException;
 public class StageView extends StackPane {
 
     private SceneHandler sceneHandler;
-    private MainView mainView;
     private EventView eventView;
     private Data data;
+    public StageViewController controller;
 
 
     public StageView(SceneHandler sceneHandler, EventView eventView, Data data){
         this.sceneHandler = sceneHandler;
-        this.mainView = mainView;
         this.eventView = eventView;
         this.data = data;
-
+        this.controller = new StageViewController(data);
+        this.controller.setPlaces();
 
         setWidth(1280);
         setHeight(800);
@@ -51,7 +50,7 @@ public class StageView extends StackPane {
                 "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 20, 0.0 , 2 , 2 );"
         );
 
-        Button BackButton = new FPButton("X", 30, 30);
+        Button BackButton = new showButton("X", 30, 30);
         stackPane.getChildren().add(BackButton);
         BackButton.setOnAction(event -> {
             try {
@@ -84,8 +83,8 @@ public class StageView extends StackPane {
         DynamicTitle indoor = new DynamicTitle("Indoor", 17);
         place(indoor,-323,30);
 
-        DynamicTitle emergencyExits = new DynamicTitle("Emergency Exits", 17);
-        place(emergencyExits,-286,90);
+        DynamicTitle Placement = new DynamicTitle("Placement", 17);
+        place(Placement,-308,90);
 
         DynamicTitle firstAidKits = new DynamicTitle("First Aid Kits", 17);
         place(firstAidKits,-300,155);
@@ -101,19 +100,20 @@ public class StageView extends StackPane {
         CheckBox indoorField = new FPCheckBox();
         place(indoorField, -153, 30);
 
-        TextField emergencyExitsField = new FPTextField("Amount", 80, 40);
-        place(emergencyExitsField, -153, 90);
+        FPComboBoxString placementField = new FPComboBoxString("Place");
+        place(placementField, -121, 90);
+        placementField.setItems(this.controller.getPlaces());
 
         TextField firstAidKitsField = new FPTextField("Amount", 80, 40);
         place(firstAidKitsField, -153, 155);
 
-        FPButton addStage = new FPButton("Add ", 90, 35);
+        showButton addStage = new showButton("Save ", 90, 35);
         place(addStage, -28, 230);
 
-        FPButton clearButton = new FPButton("Clear All ", 90, 35);
+        showButton clearButton = new showButton("Clear All ", 90, 35);
         place(clearButton, -148, 230);
 
-        FPButton removeStage = new FPButton("Remove ", 90, 35);
+        showButton removeStage = new showButton("Remove ", 90, 35);
         place(removeStage, 310, 230);
 
         ListView<Stage> listViewStages = new ListView<>();
@@ -127,10 +127,10 @@ public class StageView extends StackPane {
         listViewStages.setMinSize(200,320);
         listViewStages.setMaxSize(200,320);
 
-        FPButton show = new FPButton("Edit", 90, 35);
+        showButton show = new showButton("Show", 90, 35);
         place(show, 190, 230);
 
-        stackPane.getChildren().addAll(title, secondTitle, thirdTitle, show, stageName, Capacity, indoor, emergencyExits, firstAidKits, stageNameField, listViewStages, CapacityField, indoorField, emergencyExitsField, firstAidKitsField, addStage , clearButton, removeStage, makeLine(), makeLine2());
+        stackPane.getChildren().addAll(title, secondTitle, thirdTitle, show, stageName, Capacity, indoor, Placement, firstAidKits, stageNameField, listViewStages, CapacityField, indoorField, placementField, firstAidKitsField, addStage , clearButton, removeStage, makeLine(), makeLine2());
 
 
         removeStage.setOnAction(event -> {
@@ -144,18 +144,16 @@ public class StageView extends StackPane {
         addStage.setOnAction(event -> {
 
             int capacityAmount = 0;
-            int emergencyExitsAmount = 0;
             int firstAidKitsAmount = 0;
 
             try {
                 capacityAmount = Integer.parseInt(CapacityField.getText());
-                emergencyExitsAmount = Integer.parseInt(emergencyExitsField.getText());
                 firstAidKitsAmount = Integer.parseInt(firstAidKitsField.getText());
 
                 Stage stage = new Stage(stageNameField.getText(),
                         capacityAmount,
                         indoorField.isSelected(),
-                        emergencyExitsAmount,
+                        placementField.getSelectionModel().getSelectedItem(),
                         firstAidKitsAmount);
 
 
@@ -171,46 +169,61 @@ public class StageView extends StackPane {
 
                     if (alreadyExist == 1) {
 
-                        data.getStages().get(place).setName(stage.getName());
-                        data.getStages().get(place).setCapacity(stage.getCapacity());
-                        data.getStages().get(place).setEmergencyExits(stage.getEmergencyExits());
-                        data.getStages().get(place).setFirstAidKits(stage.getFirstAidKits());
-                        data.getStages().get(place).setIndoor(stage.isIndoor());
-                        data.getStages().get(place).setSurface(stage.getSurface());
+                        Alert dialog = new Alert(Alert.AlertType.WARNING,"You are about to overwrite the info of "+ stageNameField.getText()+",\n are you sure about that?");
+                        dialog.setTitle("Overwriting stage");
+                        dialog.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+                        int finalPlace = place;
+                        int finalPlace1 = place;
+                        dialog.showAndWait().ifPresent(buttonType -> {
+                            if (buttonType == ButtonType.YES) {
 
+                                data.getStages().get(finalPlace1).setName(stage.getName());
+                                data.getStages().get(finalPlace1).setCapacity(stage.getCapacity());
+//                                data.getStages().get(finalPlace1).setPlacement(stage.getPlacement());
+                                data.getStages().get(finalPlace1).setFirstAidKits(stage.getFirstAidKits());
+                                data.getStages().get(finalPlace1).setIndoor(stage.isIndoor());
+                                data.getStages().get(finalPlace1).setSurface(stage.getSurface());
 
+                            }
+                            data.updateFileIO();
+                        });
+
+                    } else if(placementField.getSelectionModel().getSelectedItem() == null){
+                        placementField.invalidInputStyle();
                     } else {
                         this.data.addToStages(stage);
+                        placementField.defaultStyle();
+                        this.controller.setPlaces();
                     }
                 } else {
                     this.data.addToStages(stage);
+                    placementField.defaultStyle();
+                    this.controller.setPlaces();
                 }
 
                 stageNameField.setText("");
                 CapacityField.setText("");
                 indoorField.setSelected(false);
-                emergencyExitsField.setText("");
                 firstAidKitsField.setText("");
 
             } catch (Exception e) {
                 CapacityField.setText("Error");
-                emergencyExitsField.setText("Error");
                 firstAidKitsField.setText("Error");
-            }});
+            }
+
+        });
 
         clearButton.setOnAction(event -> {
             stageNameField.setText("");
             CapacityField.setText("");
             indoorField.setSelected(false);
-            emergencyExitsField.setText("");
             firstAidKitsField.setText("");
-
         });
 
         removeStage.setOnAction(event -> {
 
             data.removeStage(listViewStages.getSelectionModel().getSelectedItem());
-
+            this.controller.setPlaces();
 
         });
 
@@ -221,7 +234,6 @@ public class StageView extends StackPane {
             stageNameField.setText(selected.getName());
             CapacityField.setText(String.valueOf(selected.getCapacity()));
             indoorField.setSelected(selected.isIndoor());
-            emergencyExitsField.setText(String.valueOf(selected.getEmergencyExits()));
             firstAidKitsField.setText(String.valueOf(selected.getFirstAidKits()));
 
 

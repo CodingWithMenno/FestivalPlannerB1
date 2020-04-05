@@ -2,11 +2,8 @@ package festivalPlanner.gui.gui_views;
 
 import festivalPlanner.data_system.Artist;
 import festivalPlanner.data_system.Data;
-import festivalPlanner.data_system.Stage;
 import festivalPlanner.gui.SceneHandler;
-import festivalPlanner.gui.gui_controllers.ArtistViewController;
-import festivalplanner_guiModules.buttons.FPButton;
-import festivalplanner_guiModules.inputfields.FPListView;
+import festivalplanner_guiModules.buttons.showButton;
 import festivalplanner_guiModules.inputfields.FPTextArea;
 import festivalplanner_guiModules.inputfields.FPTextField;
 import festivalplanner_guiModules.text.titles.DynamicTitle;
@@ -19,10 +16,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.image.ImageView;
 
 import java.sql.SQLException;
-import java.util.List;
 
 /**
  * This class opens a new window where you can add new artists.
@@ -32,7 +27,6 @@ public class ArtistView extends StackPane {
 
     private SceneHandler sceneHandler;
     private MainView mainView;
-    private  ArtistViewController controller;
     private EventView eventView;
     private ObservableList<Artist> artists;
     private Data data;
@@ -65,7 +59,7 @@ public class ArtistView extends StackPane {
                 "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 20, 0.0 , 2 , 2 );"
         );
 
-        Button BackButton = new FPButton("X", 30, 30);
+        Button BackButton = new showButton("X", 30, 30);
         stackPane.getChildren().add(BackButton);
         BackButton.setOnAction(event -> {
             try {
@@ -132,19 +126,16 @@ public class ArtistView extends StackPane {
         fpListView.setMinSize(200,320);
         fpListView.setMaxSize(200,320);
 
-        FPButton show = new FPButton("Edit", 90, 35);
+        showButton show = new showButton("Show", 90, 35);
         place(show, 190, 230);
-
-        open.setOnAction(event -> this.controller.uploadPhoto()
-        );
 
         TextArea biographyField = new FPTextArea("Biography",160,80);
         place(biographyField,-149,165);
 
-        FPButton addArtist = new FPButton("Add ", 90, 35);
-        place(addArtist,-61,230);
+        showButton saveArtist = new showButton("Save" , 90, 35);
+        place(saveArtist,-61,230);
 
-        FPButton clearButton = new FPButton("Clear All ", 90, 35);
+        showButton clearButton = new showButton("Clear All ", 90, 35);
         place(clearButton,-181,230);
 
         clearButton.setOnAction(event -> {
@@ -154,11 +145,11 @@ public class ArtistView extends StackPane {
             genreField.clear();
         });
 
-        FPButton removeArtist = new FPButton("Remove ", 90, 35);
+        showButton removeArtist = new showButton("Remove ", 90, 35);
         place(removeArtist,310,230);
 
 
-        stackPane.getChildren().addAll(title,secondTitle,thirdTitle,artistName,artistNameField,Age,fpListView,ageField,Genre,genreField,profileImage,show,biography,biographyField,open,addArtist,clearButton,removeArtist,makeLine(),makeLine2());
+        stackPane.getChildren().addAll(title,secondTitle,thirdTitle,artistName,artistNameField,Age,fpListView,ageField,Genre,genreField,profileImage,show,biography,biographyField,open,saveArtist,clearButton,removeArtist,makeLine(),makeLine2());
 
         removeArtist.setOnAction(event -> {
             data.removeArtist(fpListView.getSelectionModel().getSelectedItem());
@@ -168,8 +159,12 @@ public class ArtistView extends StackPane {
         /**
          * this part checks for doubles or and adds an artist
          */
-        addArtist.setOnAction(event -> {
-
+        saveArtist.setOnAction(event -> {
+        if(artistNameField.getText().equals("") || ageField.getText().equals("") || genreField.getText().equals("")){
+            artistNameField.setText("Error");
+            ageField.setText("Error");
+            genreField.setText("Error");
+            }else {
             int age = 0;
 
             try {
@@ -181,7 +176,7 @@ public class ArtistView extends StackPane {
                         biographyField.getText(),
                         open.getText());
 
-                if(data.getArtists().size() != 0) {
+                if (data.getArtists().size() != 0) {
                     int alreadyExist = 0;
                     int place = 0;
                     for (int i = 0; i < data.getArtists().size(); i++) {
@@ -193,28 +188,33 @@ public class ArtistView extends StackPane {
 
                     if (alreadyExist == 1) {
 
-                        data.getArtists().get(place).setName(artist.getName());
-                        data.getArtists().get(place).setAge(artist.getAge());
-                        data.getArtists().get(place).setGenre(artist.getGenre());
-                        data.getArtists().get(place).setDescription(artist.getDescription());
-                        data.getArtists().get(place).setArtistPhoto(artist.getArtistPhoto());
-                    }
-                    else this.data.addToArtists(artist);
-                }
-                else {this.data.addToArtists(artist);}
+                        Alert dialog = new Alert(Alert.AlertType.WARNING, "You are about to overwrite the info of " + artistNameField.getText() + ",\n are you sure about that?");
+                        dialog.setTitle("Overwriting artist");
+                        dialog.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+                        int finalPlace = place;
+                        dialog.showAndWait().ifPresent(buttonType -> {
+                            if (buttonType == ButtonType.YES) {
+                                data.getArtists().get(finalPlace).setName(artist.getName());
+                                data.getArtists().get(finalPlace).setAge(artist.getAge());
+                                data.getArtists().get(finalPlace).setGenre(artist.getGenre());
+                                data.getArtists().get(finalPlace).setDescription(artist.getDescription());
+                                data.getArtists().get(finalPlace).setArtistPhoto(artist.getArtistPhoto());
 
+                            }
+                            data.updateFileIO();
+                        });
+
+                    } else this.data.addToArtists(artist);
+                } else {
+                    this.data.addToArtists(artist);
                 }
-            catch(Exception e) {
+
+            } catch (Exception e) {
                 ageField.setText("Error");
             }
-            artistNameField.setText("");
-            ageField.setText("");
-            genreField.setText("");
-            biographyField.setText("");
-            open.setText("");
 
 
-        });
+        }});
 
         clearButton.setOnAction(event -> {
             artistNameField.setText("");

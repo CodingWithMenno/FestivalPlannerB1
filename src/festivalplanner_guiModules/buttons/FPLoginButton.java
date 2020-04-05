@@ -43,15 +43,12 @@ public class FPLoginButton extends Button implements FPButtons {
         setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("login tried");
 
                 try {
                     if (databaseConnection.validateUser(username.getText(), password.getText())) {
-                        System.out.println("Success");
 
                         parent.loginSuccessful();
                     } else {
-                        System.out.println("Failed");
                         username.invalidInputStyle();
                         password.invalidInputStyle();
                     }

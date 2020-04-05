@@ -12,6 +12,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Side;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
@@ -63,10 +64,30 @@ public class LoginView extends StackPane {
         signinText.setTranslateY(35);
 
 
+
         FPUsernameField username = new FPUsernameField();
         FPPasswordField password = new FPPasswordField();
 
         FPLoginButton loginButton = new FPLoginButton(this, username, password, databaseConnection);
+
+        setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER){
+                loginButton.actionStyle();
+
+                try {
+                    if (databaseConnection.validateUser(username.getText(), password.getText())) {
+
+                        this.loginSuccessful();
+                    } else {
+                        username.invalidInputStyle();
+                        password.invalidInputStyle();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
 
         loginFields.getChildren().addAll(logo, signinText, username, password, loginButton);
 

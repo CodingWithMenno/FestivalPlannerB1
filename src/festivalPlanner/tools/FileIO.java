@@ -72,7 +72,6 @@ public class FileIO implements Serializable {
 
 
             obj.writeObject(templist);
-            System.out.println("Ik ga writen :)");
 
             obj.close();
             f.close();
@@ -150,7 +149,6 @@ public class FileIO implements Serializable {
             try {
                 templist = (ArrayList<Stage>) obj.readObject();
 
-                System.out.println(templist);
 
                 for (Stage stage : templist) {
                     FileIOStages.add(stage);

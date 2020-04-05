@@ -6,13 +6,10 @@ import festivalPlanner.data_system.Event;
 import festivalPlanner.data_system.Stage;
 import festivalPlanner.gui.SceneHandler;
 
-import festivalPlanner.gui.gui_controllers.ArtistViewController;
 import festivalPlanner.gui.gui_controllers.EventViewController;
-import festivalplanner_guiModules.buttons.FPButton;
+import festivalplanner_guiModules.buttons.showButton;
 import festivalplanner_guiModules.inputfields.*;
 import festivalplanner_guiModules.text.titles.DynamicTitle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -21,7 +18,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 /**
  * This class opens a new window where you can add new events.
@@ -33,6 +29,7 @@ public class EventView extends StackPane {
     private MainView mainView;
     private EventViewController controller;
     private Data data;
+    private Event newEvent;
 
 
     public EventView(SceneHandler sceneHandler, Data data){
@@ -62,7 +59,7 @@ public class EventView extends StackPane {
                         "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 20, 0.0 , 2 , 2 );"
                 );
 
-        Button BackButton = new FPButton("X",30,30);
+        Button BackButton = new showButton("X",30,30);
         stackPane.getChildren().add(BackButton);
         BackButton.setOnAction(event -> {
             try {
@@ -128,12 +125,11 @@ public class EventView extends StackPane {
         place(endTime,-75,155);
         endTime.setItems(controller.getTimes());
         beginTime.setOnAction( e -> {
-            System.out.println("test2");
             endTime.setItems(controller.getEndTimes(beginTime.getSelectionModel().getSelectedItem()));
         });
 
 
-        FPButton addEvent = new FPButton("Add ", 90, 35);
+        showButton addEvent = new showButton("Add ", 90, 35);
         place(addEvent,-71,230);
 
         ListView<Event> listViewStages = new ListView();
@@ -149,76 +145,82 @@ public class EventView extends StackPane {
         listViewStages.setMaxSize(200,320);
 
         /**
-         * this part adds an event.
+         * this part adds an event and checks for doubles.
          */
         addEvent.setOnAction(event -> {
+            this.newEvent = null;
+            if(!(beginTime.getSelectionModel().getSelectedItem() == null || endTime.getSelectionModel().getSelectedItem() == null || popularityField.getSelectionModel().getSelectedItem() == null)) {
+                if (!(coArtistField.getSelectionModel().getSelectedItem() == null)) {
+                    try {
+                        Event event1 = new Event(mainArtistField.getSelectionModel().getSelectedItem(),
+                                coArtistField.getSelectionModel().getSelectedItem(),
+                                stageField.getSelectionModel().getSelectedItem().getName(),
+                                beginTime.getSelectionModel().getSelectedItem(),
+                                endTime.getSelectionModel().getSelectedItem(),
+                                popularityField.getSelectionModel().getSelectedItem());
 
-            try {
-                try {
-                data.addToEvents(new Event(mainArtistField.getSelectionModel().getSelectedItem(),
-                        coArtistField.getSelectionModel().getSelectedItem(),
-                        stageField.getSelectionModel().getSelectedItem().getName(),
-                        beginTime.getSelectionModel().getSelectedItem(),
-                        endTime.getSelectionModel().getSelectedItem(),
-                        popularityField.getSelectionModel().getSelectedItem()));
+                        data.addToEvents(event1);
 
-                    ((FPComboBoxArtist) mainArtistField).defaultStyle();
-                    ((FPComboBoxArtist) coArtistField).defaultStyle();
-                    ((FPComboBoxStage) stageField).defaultStyle();
-                    ((FPComboBoxDouble) beginTime).defaultStyle();
-                    ((FPComboBoxDouble) endTime).defaultStyle();
-                    ((FPComboBoxString) popularityField).defaultStyle();
+                        ((FPComboBoxArtist) mainArtistField).defaultStyle();
+                        ((FPComboBoxArtist) coArtistField).defaultStyle();
+                        ((FPComboBoxStage) stageField).defaultStyle();
+                        ((FPComboBoxDouble) beginTime).defaultStyle();
+                        ((FPComboBoxDouble) endTime).defaultStyle();
+                        ((FPComboBoxString) popularityField).defaultStyle();
 
-            } catch (Exception e){
+                    } catch (Exception e) {
+                        ((FPComboBoxArtist) mainArtistField).invalidInputStyle();
+                        ((FPComboBoxArtist) coArtistField).invalidInputStyle();
+                        ((FPComboBoxStage) stageField).invalidInputStyle();
+                        ((FPComboBoxDouble) beginTime).invalidInputStyle();
+                        ((FPComboBoxDouble) endTime).invalidInputStyle();
+                        ((FPComboBoxString) popularityField).invalidInputStyle();
+
+                    }
+                } else {
+
+                    try {
+                        Event event1 = new Event(mainArtistField.getSelectionModel().getSelectedItem(),
+                                stageField.getSelectionModel().getSelectedItem().getName(),
+                                beginTime.getSelectionModel().getSelectedItem(),
+                                endTime.getSelectionModel().getSelectedItem(),
+                                popularityField.getSelectionModel().getSelectedItem());
+
+                        data.addToEvents(event1);
+
+                        ((FPComboBoxArtist) mainArtistField).defaultStyle();
+                        ((FPComboBoxArtist) coArtistField).defaultStyle();
+                        ((FPComboBoxStage) stageField).defaultStyle();
+                        ((FPComboBoxDouble) beginTime).defaultStyle();
+                        ((FPComboBoxDouble) endTime).defaultStyle();
+                        ((FPComboBoxString) popularityField).defaultStyle();
+
+                    } catch (Exception b) {
+                        ((FPComboBoxArtist) mainArtistField).invalidInputStyle();
+                        ((FPComboBoxStage) stageField).invalidInputStyle();
+                        ((FPComboBoxDouble) beginTime).invalidInputStyle();
+                        ((FPComboBoxDouble) endTime).invalidInputStyle();
+                        ((FPComboBoxString) popularityField).invalidInputStyle();
+                    }
+                }
+
+            }else {
                 ((FPComboBoxArtist) mainArtistField).invalidInputStyle();
-                ((FPComboBoxArtist) coArtistField).invalidInputStyle();
                 ((FPComboBoxStage) stageField).invalidInputStyle();
                 ((FPComboBoxDouble) beginTime).invalidInputStyle();
                 ((FPComboBoxDouble) endTime).invalidInputStyle();
                 ((FPComboBoxString) popularityField).invalidInputStyle();
             }
-
-            } catch (Exception e){
-
-                try {
-                    data.addToEvents(new Event(mainArtistField.getSelectionModel().getSelectedItem(),
-                            stageField.getSelectionModel().getSelectedItem().getName(),
-                            beginTime.getSelectionModel().getSelectedItem(),
-                            endTime.getSelectionModel().getSelectedItem(),
-                            popularityField.getSelectionModel().getSelectedItem()));
-
-                    ((FPComboBoxArtist) mainArtistField).defaultStyle();
-                    ((FPComboBoxStage) stageField).defaultStyle();
-                    ((FPComboBoxDouble) beginTime).defaultStyle();
-                    ((FPComboBoxDouble) endTime).defaultStyle();
-                    ((FPComboBoxString) popularityField).defaultStyle();
-
-                } catch (Exception b){
-                    ((FPComboBoxArtist) mainArtistField).invalidInputStyle();
-                    ((FPComboBoxStage) stageField).invalidInputStyle();
-                    ((FPComboBoxDouble) beginTime).invalidInputStyle();
-                    ((FPComboBoxDouble) endTime).invalidInputStyle();
-                    ((FPComboBoxString) popularityField).invalidInputStyle();
-                }
-            }
-
-
-
-
-
         });
 
-        FPButton clearButton = new FPButton("Clear All ", 90, 35);
-        place(clearButton,-182,230);
-
-        FPButton RemoveArtist = new FPButton("Remove ", 90, 35);
+        showButton RemoveArtist = new showButton("Remove ", 90, 35);
         place(RemoveArtist,310,230);
 
         RemoveArtist.setOnAction(event -> {
           data.removeEvent(listViewStages.getSelectionModel().getSelectedItem());
         });
 
-        stackPane.getChildren().addAll(title,secondTitle,thirdTitle,mainArtist,coArtist,stage,popularity,listViewStages,Time,mainArtistField,coArtistField,stageField,popularityField,beginTime,endTime,addEvent,RemoveArtist,clearButton,makeLine(),makeLine2());
+        stackPane.getChildren().addAll(title,secondTitle,thirdTitle,mainArtist,coArtist,stage,popularity,listViewStages,Time,mainArtistField,coArtistField,stageField,popularityField,beginTime,endTime,addEvent,RemoveArtist,makeLine(),makeLine2());
 
         return stackPane;
     }

@@ -21,10 +21,12 @@ public class Event implements Serializable {
     private double endTime;
     private String popularity;
     private String photoURL;
+    private boolean hasCoArtist;
 
 
 
     public Event(Artist headArtist, String stage, double startTime, double endTime, String popularity) {
+        this.hasCoArtist = false;
         this.headArtist = headArtist;
         this.stage = stage;
         this.startTime = startTime;
@@ -35,6 +37,7 @@ public class Event implements Serializable {
     }
 
     public Event(Artist headArtist, Artist coArtist, String stage, double startTime, double endTime, String popularity) {
+        this.hasCoArtist = true;
         this.headArtist = headArtist;
         this.coArtist = coArtist;
         this.stage = stage;
@@ -65,8 +68,23 @@ public class Event implements Serializable {
         return endTime;
     }
 
-    public String getPopularity() {
-        return popularity;
+    /**
+     *The popularity is a string but to calculate with it, it needs to be converted to a double, that's what the method below is meant for.
+     */
+    public double getPopularity() {
+        if(popularity.equals("0%")){
+            return 0.0;
+        } else if(popularity.equals("100%")){
+            return 100.0;
+        } else {
+            String a = popularity.charAt(0) +""+ popularity.charAt(1)+"";
+            double b = Double.parseDouble(a);
+            return Integer.parseInt(a);
+        }
+    }
+
+    public String getPopularityInString(){
+        return this.popularity;
     }
 
     public String getPhotoURL() {
@@ -77,4 +95,7 @@ public class Event implements Serializable {
         return this.headArtist.getName() +" "+ startTime + " - " + endTime;
     }
 
+    public boolean HasCoArtist() {
+        return hasCoArtist;
+    }
 }

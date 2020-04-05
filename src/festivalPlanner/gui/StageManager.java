@@ -19,14 +19,15 @@ public class StageManager extends Application {
 
     private Stage stage;
 
+
     @Override
     public void start(Stage primaryStage) throws Exception {
+        this.stage = primaryStage;
 
         DatabaseConnection databaseConnection = new DatabaseConnection();
-        SceneHandler sceneHandler = new SceneHandler(this, databaseConnection);
+        SceneHandler sceneHandler = new SceneHandler(this, databaseConnection,stage);
         LoginView loginView = new LoginView(sceneHandler, databaseConnection);
 
-        this.stage = primaryStage;
 
         this.stage.setWidth(1280);
         this.stage.setHeight(800);

@@ -1,13 +1,15 @@
 package festivalPlanner.data_system;
 
+import festivalPlanner.gui.gui_controllers.StageViewController;
 import festivalPlanner.tools.FileIO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
- * In this class is all data stored. The data consist of artistss, stages and events.
+ * In this class is all data stored. The data consist of artists, stages and events.
  */
 
 public class Data {
@@ -48,22 +50,32 @@ public class Data {
         this.stages = IO.readStageFile("resources/SavedFiles/SavedStages.txt");
     }
 
+    public void updateFileIO(){
+        IO.writeArrayListArtist(this.artists, "resources/SavedFiles/SavedArtists.txt");
+        this.artists.clear();
+        this.artists = IO.readArtistFile("resources/SavedFiles/SavedArtists.txt");
+
+        IO.writeArrayListStage(this.stages, "resources/SavedFiles/SavedStages.txt");
+        this.stages.clear();
+        this.stages = IO.readStageFile("resources/SavedFiles/SavedStages.txt");
+
+
+        IO.writeArrayListEvents(this.events, "resources/SavedFiles/SavedEvents.txt");
+        this.events.clear();
+        this.events = (IO.readEventFile("resources/SavedFiles/SavedEvents.txt"));
+    }
+
     public void addToEvents(Event event) throws Exception{
+        boolean artistAvailable;
 
-        boolean artistAvailable = true;
-
-        for ( Event events : this.events){
-            if ( event.getHeadArtist() == events.getHeadArtist() || event.getStage().equals(events.getStage()) ){
-                if ( event.getEndTime() < events.getStartTime() || event.getStartTime() > events.getEndTime() ){
-
-                }
-                else {
-                    artistAvailable = false;
-                }
-            }
+        if(event.HasCoArtist()){
+          artistAvailable = checkForDoubles(event);
+        }else{
+            artistAvailable =  checkForDoubles2(event);
         }
 
         if ( artistAvailable ){
+
             this.events.add(event);
 
             IO.writeArrayListEvents(this.events, "resources/SavedFiles/SavedEvents.txt");
@@ -74,6 +86,7 @@ public class Data {
         }
         else {
             throw new Exception("Artist is booked");
+
         }
 
     }
@@ -93,7 +106,27 @@ public class Data {
     }
 
     public void removeArtist(Artist artist){
-        artists.remove(artist);
+
+        ArrayList<Event> tempEvents = new ArrayList<>();
+
+        for ( Event event : this.events ){
+            if(event.HasCoArtist()) {
+                if (event.getHeadArtist().getName().equals(artist.getName()) || event.getCoArtist().getName().equals(artist.getName())) {
+                    tempEvents.add(event);
+                }
+            }else {
+                if (event.getHeadArtist().getName().equals(artist.getName())) {
+                    tempEvents.add(event);
+                }
+            }
+        }
+
+        for (Event event : tempEvents) {
+            if (this.events.contains(event)){
+                removeEvent(event);
+            }
+        }
+        this.artists.remove(artist);
 
         IO.writeArrayListArtist(this.artists, "resources/SavedFiles/SavedArtists.txt");
 
@@ -102,6 +135,20 @@ public class Data {
     }
 
     public void removeStage(Stage stage){
+
+        ArrayList<Event> tempEvents = new ArrayList<>();
+
+        for ( Event event : this.events ){
+            if ( event.getStage().equals(stage.getName()) ){
+                tempEvents.add(event);
+            }
+        }
+
+        for (Event event : tempEvents) {
+            if (this.events.contains(event)){
+                removeEvent(event);
+            }
+        }
         stages.remove(stage);
 
         IO.writeArrayListStage(this.stages, "resources/SavedFiles/SavedStages.txt");
@@ -119,6 +166,79 @@ public class Data {
         this.events.removeAll();
 
         this.events = (IO.readEventFile("resources/SavedFiles/SavedEvents.txt"));
+    }
+
+    /**
+     * The two methods below check if the added event is allowed to be added and does that by checking for double bookings on artists or checks if there isnt an event busy already on that stage at that time.
+     */
+
+    public boolean checkForDoubles(Event event){
+
+        for ( Event otherEvent : this.events){
+                if(otherEvent.HasCoArtist()){
+
+                    if ( event.getHeadArtist().getName().equals(otherEvent.getHeadArtist().getName()) ||  event.getCoArtist().getName().equals(otherEvent.getCoArtist().getName()) ||
+                            event.getStage().equals(otherEvent.getStage()) || event.getHeadArtist().getName().equals(otherEvent.getCoArtist().getName()) || event.getCoArtist().getName().equals(otherEvent.getHeadArtist().getName())){
+                        if ( event.getEndTime() >= otherEvent.getStartTime() &&  event.getEndTime() <= otherEvent.getEndTime() || event.getStartTime() >= otherEvent.getStartTime()  && event.getStartTime() <= otherEvent.getEndTime()){
+                            return false;
+                        }
+                        else {
+                            return true;
+                        }
+                    }
+
+
+
+                }else {
+
+
+                    if ( event.getHeadArtist().getName().equals(otherEvent.getHeadArtist().getName()) ||
+                            event.getStage().equals(otherEvent.getStage()) || event.getCoArtist().getName().equals(otherEvent.getHeadArtist().getName())){
+                        if ( event.getEndTime() >= otherEvent.getStartTime() &&  event.getEndTime() <= otherEvent.getEndTime() || event.getStartTime() >= otherEvent.getStartTime()  && event.getStartTime() <= otherEvent.getEndTime()){
+                            return false;
+                        }
+                        else {
+                            return true;
+                        }
+                    }
+
+
+
+                }
+
+
+        }
+        return true;
+    }
+
+
+    public boolean checkForDoubles2(Event event){
+        for ( Event otherEvent : this.events){
+
+            if(otherEvent.HasCoArtist()){
+                if ( event.getHeadArtist().getName().equals(otherEvent.getHeadArtist().getName()) ||
+                        event.getStage().equals(otherEvent.getStage()) || event.getHeadArtist().getName().equals(otherEvent.getCoArtist().getName())){
+                    if ( event.getEndTime() >= otherEvent.getStartTime() &&  event.getEndTime() <= otherEvent.getEndTime() || event.getStartTime() >= otherEvent.getStartTime()  && event.getStartTime() <= otherEvent.getEndTime()){
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                }
+
+            }else {
+                if ( event.getHeadArtist().getName().equals(otherEvent.getHeadArtist().getName()) ||
+                        event.getStage().equals(otherEvent.getStage())){
+                    if ( event.getEndTime() >= otherEvent.getStartTime() &&  event.getEndTime() <= otherEvent.getEndTime() || event.getStartTime() >= otherEvent.getStartTime()  && event.getStartTime() <= otherEvent.getEndTime()){
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
 }
